@@ -2,6 +2,7 @@ package es.uji.ei1027.sape.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -36,9 +37,13 @@ public class EmpresaDAO {
 		
 	}
 	
+	public List<Empresa> getEmpresas(){
+		return this.jdbcTemplate.query("SELECT cif, nombre, domicilio, telefonoPrincipal FROM Empresa;", new EmpresaMapper());
+	}
+	
 	public Empresa getEmpresa(String cif){
 		return this.jdbcTemplate.queryForObject("SELECT cif, nombre, domicilio, telefonoPrincipal"
-												+ "FROM Empresa WHERE cif = ?;", new Object[]{cif}, new EmpresaMapper());
+												+ " FROM Empresa WHERE cif = ?;", new Object[]{cif}, new EmpresaMapper());
 	}
 	
 	public void addEmpresa(Empresa e){
@@ -51,7 +56,7 @@ public class EmpresaDAO {
 							e.getNombre(), e.getDomicilio(), e.getTelefonoPrincipal(), e.getCif());
 	}
 	
-	public void deleteEmpresa(Empresa e){
-		this.jdbcTemplate.update("DELETE FROM Empresa WHERE cif=?;", e.getCif());
+	public void deleteEmpresa(String cif){
+		this.jdbcTemplate.update("DELETE FROM Empresa WHERE cif=?;", cif);
 	}
 }

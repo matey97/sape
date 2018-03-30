@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión empresas</title>
+	</head>
+<body>
+	<h1>Listado de empresas</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>CIF</th>
+				<th>Nombre</th>
+				<th>Domicilio</th>
+				<th>Teléfono</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="empresa: ${empresas}">
+				<td th:text="${empresa.cif}"></td>
+				<td th:text="${empresa.nombre}"></td>
+				<td th:text="${empresa.domicilio}"></td>
+				<td th:text="${empresa.telefonoPrincipal}"></td>
+				<td><a th:href="@{/empresa/update/{cif}(cif=${empresa.cif})}">Edita</a></td>
+				<td><a th:href="@{/empresa/delete/{cif}(cif=${empresa.cif})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir empresa</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>
