@@ -59,8 +59,8 @@ public class EmpresaController {
 	}
 	
 	@RequestMapping(value="/delete/{cif}")
-	public String processDelete(@PathVariable String cif) {
-		empresaDao.deleteEmpresa(cif);
+	public String processDelete(@PathVariable String cif, @ModelAttribute("empresa") Empresa empresa) {
+		empresaDao.deleteEmpresa(empresa);
 		return "redirect:../list";
 	}
 }

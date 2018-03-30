@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Actualizar tutor</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva tutor</h2>
+	<form action="#" th:action="@{/tutor/update/{id}}" th:object="${tutor}" method="post">
+		<table>
+		<tr>
+				<td><label>id</label></td>
+				<td><input type="text" th:field="*{id}"/></td>
+			</tr>
+			<tr>
+				<td><label>Nombre</label></td>
+				<td><input type="text" th:field="*{nombre}"/></td>
+			</tr>
+			<tr>
+				<td><label>Departamento</label></td>
+				<td><input type="text" th:field="*{departamento}"/></td>
+			</tr>
+			<tr>
+				<td><label>Despacho</label></td>
+				<td><input type="text" th:field="*{despacho}"/></td>
+			</tr>
+			<tr>
+				<td><label>Email</label></td>
+				<td><input type="text" th:field="*{email}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Actualizar tutor"/></td>
+			</tr>
+			
+		</table>
+	</form>
+</body>
+</html>

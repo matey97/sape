@@ -2,6 +2,7 @@ package es.uji.ei1027.sape.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -30,11 +31,10 @@ public class ProfesorTutorDAO {
 			profesor.setId(rs.getInt("id"));
 			profesor.setNombre(rs.getString("nombre"));
 			profesor.setDepartamento(rs.getString("departamento"));
-			profesor.setDespacho("despacho");
+			profesor.setDespacho(rs.getString("despacho"));
 			profesor.setEmail(rs.getString("email"));
 			return profesor;
-		}
-		
+		}	
 	}
 	
 	public ProfesorTutor getProfesorTutor(int id){
@@ -42,9 +42,15 @@ public class ProfesorTutorDAO {
 								new Object[]{id}, new ProfesorTutorMapper());
 	}
 	
+	public List<ProfesorTutor> getProfesoresTutores(){
+		return this.jdbcTemplate.query("SELECT * FROM ProfesorTutor", new ProfesorTutorMapper());
+	}
+	
 	public void addProfesorTutor(ProfesorTutor p){
-		this.jdbcTemplate.update("INSERT INTO ProfesorTutor(nombre,departamento,despacho,email) values (?,?,?,?);",
+		this.jdbcTemplate.update("INSERT INTO ProfesorTutor(id,nombre,departamento,despacho,email) values (DEFAULT,?,?,?,?);",
 								p.getNombre(), p.getDepartamento(), p.getDespacho(), p.getEmail());
+		List<Integer> id = this.jdbcTemplate.query("SELECT currval(pg_get_serial_sequence('ProfesorTutor', 'id'))", new SerialMapper());
+		p.setId(id.get(0));
 	}
 	
 	public void updateProfesorTutor(ProfesorTutor p){

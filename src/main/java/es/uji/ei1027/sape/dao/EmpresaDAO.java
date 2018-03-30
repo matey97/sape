@@ -56,7 +56,7 @@ public class EmpresaDAO {
 							e.getNombre(), e.getDomicilio(), e.getTelefonoPrincipal(), e.getCif());
 	}
 	
-	public void deleteEmpresa(String cif){
-		this.jdbcTemplate.update("DELETE FROM Empresa WHERE cif=?;", cif);
+	public void deleteEmpresa(Empresa e){
+		this.jdbcTemplate.update("DELETE FROM Empresa WHERE cif=?;", e.getCif());
 	}
 }

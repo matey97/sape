@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión de tutores</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de tutores</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Departamento</th>
+				<th>Despacho</th>
+				<th>Email</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="tutor: ${tutores}">
+				<td th:text="${tutor.id}"></td>
+				<td th:text="${tutor.nombre}"></td>
+				<td th:text="${tutor.departamento}"></td>
+				<td th:text="${tutor.despacho}"></td>
+				<td th:text="${tutor.email}"></td>
+				<td><a th:href="@{/tutor/update/{id}(id=${tutor.id})}">Edita</a></td>
+				<td><a th:href="@{/tutor/delete/{id}(id=${tutor.id})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir tutor</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>
