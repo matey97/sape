@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión estancias</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de estancias</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>CIF empresa</th>
+				<th>Persona Contacto</th>
+				<th>Email contacto</th>
+				<th>Descripción</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="estancia: ${estancias}">
+				<td th:text="${estancia.id}"></td>
+				<td th:text="${estancia.cifEmpresa}"></td>
+				<td th:text="${estancia.contactPerson}"></td>
+				<td th:text="${estancia.mailContactPerson}"></td>
+				<td th:text="${estancia.internshipDescription}"></td>
+				<td><a th:href="@{/estancia/update/{id}(id=${estancia.id})}">Edita</a></td>
+				<td><a th:href="@{/estancia/delete/{id}(id=${estancia.id})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir estancia</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

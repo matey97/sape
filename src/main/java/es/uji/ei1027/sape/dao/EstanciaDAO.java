@@ -2,6 +2,7 @@ package es.uji.ei1027.sape.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -37,14 +38,20 @@ public class EstanciaDAO {
 		
 	}
 	
+	public List<Estancia> getEstancias(){
+		return this.jdbcTemplate.query("SELECT * FROM Estancia;", new EstanciaMapper());
+	}
+	
 	public Estancia getEstancia(int id){
-		return this.jdbcTemplate.queryForObject("SELECT id, cifEmpresa, contactPerson, mailContactPerson, internshipDescription WHERE id=?;",
+		return this.jdbcTemplate.queryForObject("SELECT id, cifEmpresa, contactPerson, mailContactPerson, internshipDescription FROM Estancia WHERE id=?;",
 								new Object[]{id}, new EstanciaMapper());
 	}
 	
 	public void addEstancia(Estancia e){
-		this.jdbcTemplate.update("INSERT INTO Estancia(cifEmpresa, contactPerson, mailContactPerson, internshipDescription) value (?,?,?,?);",
+		this.jdbcTemplate.update("INSERT INTO Estancia(cifEmpresa, contactPerson, mailContactPerson, internshipDescription) values(?,?,?,?);",
 								e.getCifEmpresa(), e.getContactPerson(), e.getMailContactPerson(), e.getInternshipDescription());
+		List<Integer> id = this.jdbcTemplate.query("SELECT currval(pg_get_serial_sequence('Estancia', 'id'))", new SerialMapper());
+		e.setId(id.get(0));
 	}
 	
 	public void updateEstancia(Estancia e){

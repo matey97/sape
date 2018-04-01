@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Añadir estancia</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva estancia</h2>
+	<form action="#" th:action="@{/estancia/add}" th:object="${estancia}" method="post">
+		<table>
+			<tr>
+				<td><label>CIF Empresa</label></td>
+				<td><input type="text" th:field="*{cifEmpresa}"/></td>
+			</tr>
+			<tr>
+				<td><label>Persona contacto</label></td>
+				<td><input type="text" th:field="*{contactPerson}"/></td>
+			</tr>
+			<tr>
+				<td><label>Email contanct</label></td>
+				<td><input type="text" th:field="*{mailContactPerson}"/></td>
+			</tr>
+			<tr>
+				<td><label>Descripción</label></td>
+				<td><input type="text" th:field="*{internshipDescription}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Añadir estancia"/></td>
+			</tr>
+			
+		</table>
+	</form>
+</body>
+</html>
