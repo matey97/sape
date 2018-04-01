@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión estudiantes</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de estudiantes</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Creditos aprobados</th>
+				<th>Nota media</th>
+				<th>Itinerario</th>
+				<th>Nº asignaturas pendientes 4t</th>
+				<th>Semestre estancia</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="estudiante: ${estudiantes}">
+				<td th:text="${estudiante.dni}"></td>
+				<td th:text="${estudiante.nombre}"></td>
+				<td th:text="${estudiante.numeroCreditosAprob}"></td>
+				<td th:text="${estudiante.notaMedia}"></td>
+				<td th:text="${estudiante.itinerario}"></td>
+				<td th:text="${estudiante.numAsignaturasPendientes4t}"></td>
+				<td th:text="${estudiante.semestreInicioEstancia}"></td>
+				<td><a th:href="@{/estudiante/update/{dni}(dni=${estudiante.dni})}">Edita</a></td>
+				<td><a th:href="@{/estudiante/delete/{dni}(dni=${estudiante.dni})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir estudiante</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

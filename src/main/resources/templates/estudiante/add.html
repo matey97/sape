@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Añadir estudiante</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nuevo estudiante</h2>
+	<form action="#" th:action="@{/estudiante/add}" th:object="${estudiante}" method="post">
+		<table>
+			<tr>
+				<td><label>DNI</label></td>
+				<td><input type="text" th:field="*{dni}"/></td>
+			</tr>
+			<tr>
+				<td><label>Nombre</label></td>
+				<td><input type="text" th:field="*{nombre}"/></td>
+			</tr>
+			<tr>
+				<td><label>Nº creditos aprobados</label></td>
+				<td><input type="number" th:field="*{numeroCreditosAprob}"/></td>
+			</tr>
+			<tr>
+				<td><label>Nota media</label></td>
+				<td><input type="number" step="0.01" th:field="*{notaMedia}"/></td>
+			</tr>
+			<tr>
+				<td><label>Itinerario</label></td>
+				<td><input type="text" th:field="*{itinerario}"/></td>
+			</tr>
+			<tr>
+				<td><label>Nº asignaturas pendientes</label></td>
+				<td><input type="number" th:field="*{numAsignaturasPendientes4t}"/></td>
+			</tr>
+			<tr>
+				<td><label>Semestre estancia</label></td>
+				<td><input type="text" th:field="*{semestreInicioEstancia}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Añadir estudiante"/></td>
+			</tr>
+			
+		</table>
+	</form>
+</body>
+</html>

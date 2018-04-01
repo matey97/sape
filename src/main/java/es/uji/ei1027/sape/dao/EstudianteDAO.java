@@ -2,6 +2,7 @@ package es.uji.ei1027.sape.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -37,6 +38,10 @@ public class EstudianteDAO {
 			return estudiante;			
 		}
 		
+	}
+	
+	public List<Estudiante> getEstudiantes(){
+		return this.jdbcTemplate.query("SELECT * FROM Estudiante;", new EstudianteMapper());
 	}
 	
 	public Estudiante getEstudiante(String dni){
