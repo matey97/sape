@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Actualizar tipo estado</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Actualizar estado</h2>
+	<form action="#" th:action="@{/estado/update/{id}}" th:object="${estado}" method="post">
+		<table>
+			<tr>
+				<td><label>id</label></td>
+				<td><input type="text" th:field="*{id}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estado</label></td>
+				<td><input type="text" th:field="*{estado}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Actualizar estado"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

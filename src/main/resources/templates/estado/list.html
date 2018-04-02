@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión tipos de estados</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de tipos de estados</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>Estado</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="estado: ${estados}">
+				<td th:text="${estado.id}"></td>
+				<td th:text="${estado.estado}"></td>
+				<td><a th:href="@{/estado/update/{id}(id=${estado.id})}">Edita</a></td>
+				<td><a th:href="@{/estado/delete/{id}(id=${estado.id})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir estado</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

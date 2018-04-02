@@ -2,6 +2,7 @@ package es.uji.ei1027.sape.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -34,12 +35,18 @@ public class EstadoOfertaDAO {
 		
 	}
 	
+	public List<EstadoOferta> getEstadosOfertas(){
+		return this.jdbcTemplate.query("SELECT * FROM EstadoOferta;", new EstadoOfertaMapper());
+	}
+	
 	public EstadoOferta getEstadoOferta(int id){
 		return this.jdbcTemplate.queryForObject("SELECT id, estado FROM EstadoOferta WHERE id=?;", new Object[]{id}, new EstadoOfertaMapper());
 	}
 	
 	public void addEstadoOferta(EstadoOferta e){
 		this.jdbcTemplate.update("INSERT INTO EstadoOferta(estado) values(?);", e.getEstado());
+		List<Integer> id = this.jdbcTemplate.query("SELECT currval(pg_get_serial_sequence('EstadoOferta', 'id'))", new SerialMapper());
+		e.setId(id.get(0));
 	}
 	
 	public void updateEstadoOferta(EstadoOferta e){

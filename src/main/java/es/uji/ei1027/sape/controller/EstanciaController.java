@@ -30,7 +30,7 @@ public class EstanciaController {
 	}
 	
 	@RequestMapping(value="/add")
-	public String addTutor(Model model) {
+	public String addEstancia(Model model) {
 		model.addAttribute("estancia", new Estancia());
 		return "estancia/add";
 	}
@@ -44,7 +44,7 @@ public class EstanciaController {
 	}
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
-	public String editTutor(Model model, @PathVariable String id) {
+	public String editEstancia(Model model, @PathVariable String id) {
 		model.addAttribute("estancia", estanciaDao.getEstancia(Integer.valueOf(id)));
 		return "estancia/update";
 	}
