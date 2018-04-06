@@ -45,8 +45,8 @@ public class EstadoOfertaDAO {
 	
 	public void addEstadoOferta(EstadoOferta e){
 		this.jdbcTemplate.update("INSERT INTO EstadoOferta(estado) values(?);", e.getEstado());
-		List<Integer> id = this.jdbcTemplate.query("SELECT currval(pg_get_serial_sequence('EstadoOferta', 'id'))", new SerialMapper());
-		e.setId(id.get(0));
+		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('EstadoOferta', 'id'))", Integer.class);
+		e.setId(id);
 	}
 	
 	public void updateEstadoOferta(EstadoOferta e){

@@ -49,8 +49,8 @@ public class ProfesorTutorDAO {
 	public void addProfesorTutor(ProfesorTutor p){
 		this.jdbcTemplate.update("INSERT INTO ProfesorTutor(id,nombre,departamento,despacho,email) values (DEFAULT,?,?,?,?);",
 								p.getNombre(), p.getDepartamento(), p.getDespacho(), p.getEmail());
-		List<Integer> id = this.jdbcTemplate.query("SELECT currval(pg_get_serial_sequence('ProfesorTutor', 'id'))", new SerialMapper());
-		p.setId(id.get(0));
+		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('ProfesorTutor', 'id'))", Integer.class);
+		p.setId(id);
 	}
 	
 	public void updateProfesorTutor(ProfesorTutor p){
