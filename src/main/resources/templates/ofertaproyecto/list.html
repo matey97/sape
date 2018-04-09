@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión ofertas de proyectos</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de ofertas de proyectos</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>Numero</th>
+				<th>Tarea</th>
+				<th>Objetivo</th>
+				<th>Estado</th>
+				<th>Fecha alta</th>
+				<th>Fecha ultimo cambio</th>
+				<th>Itinerario</th>
+				<th>Estancia ID</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="ofertaproyecto: ${ofertaproyectos}">
+				<td th:text="${ofertaproyecto.numero}"></td>
+				<td th:text="${ofertaproyecto.tarea}"></td>
+				<td th:text="${ofertaproyecto.objetivo}"></td>
+				<td th:text="${ofertaproyecto.estado}"></td>
+				<td th:text="${ofertaproyecto.fechaAlta}"></td>
+				<td th:text="${ofertaproyecto.fechaUltimoCambio}"></td>
+				<td th:text="${ofertaproyecto.itinerario}"></td>
+				<td th:text="${ofertaproyecto.idEstancia}"></td>
+				<td><a th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}">Edita</a></td>
+				<td><a th:href="@{/ofertaproyecto/delete/{numero}(numero=${ofertaproyecto.numero})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir oferta proyecto</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

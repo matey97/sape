@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Añadir oferta de proyecto</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva oferta de proyecto</h2>
+	<form action="#" th:action="@{/ofertaproyecto/add}" th:object="${ofertaproyecto}" method="post">
+		<table>
+			<tr>
+				<td><label>numero</label></td>
+				<td><input type="int" th:field="*{numero}"/></td>
+			</tr>
+			<tr>
+				<td><label>Tarea</label></td>
+				<td><input type="text" th:field="*{tarea}"/></td>
+			</tr>
+			<tr>
+				<td><label>Objetivo</label></td>
+				<td><input type="text" th:field="*{objetivo}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estado</label></td>
+				<td><input type="int" th:field="*{estado}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Alta</label></td>
+				<td><input type="text" th:field="*{fechaAlta}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Ultimo Cambio</label></td>
+				<td><input type="text" th:field="*{fechaUltimoCambio}"/></td>
+			</tr>
+			<tr>
+				<td><label>Itinerario</label></td>
+				<td><input type="text" th:field="*{itinerario}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estancia ID</label></td>
+				<td><input type="int" th:field="*{idEstancia}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Añadir oferta proyecto"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
