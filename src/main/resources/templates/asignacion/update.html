@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Actualizar datos de asignacion</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva asignacion</h2>
+	<form action="#" th:action="@{/asignacion/update/{id}}" th:object="${asignacion}" method="post">
+		<table>
+			<tr>
+				<td><label>ID</label></td>
+				<td><input type="text" th:field="*{id}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Propuesta</label></td>
+				<td><input type="text" th:field="*{fechaPropuesta}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Aceptacion</label></td>
+				<td><input type="text" th:field="*{fechaAceptacion}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Rechazo</label></td>
+				<td><input type="text" th:field="*{fechaRechazo}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha Traspaso IGLU</label></td>
+				<td><input type="text" th:field="*{fechaTraspasoIGLU}"/></td>
+			</tr>
+			<tr>
+				<td><label>Peticion</label></td>
+				<td><input type="text" th:field="*{comentarioPetCambio}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estado</label></td>
+				<td><input type="text" th:field="*{estadoAceptadaRechazada}"/></td>
+			</tr>
+			<tr>
+				<td><label>DNI</label></td>
+				<td><input type="text" th:field="*{dni}"/></td>
+			</tr>
+			<tr>
+				<td><label>ID del tutor</label></td>
+				<td><input type="text" th:field="*{idTutor}"/></td>
+			</tr>
+			<tr>
+				<td><label>Numero del proyecto</label></td>
+				<td><input type="int" th:field="*{numeroProyecto}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Actualizar asignacion"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

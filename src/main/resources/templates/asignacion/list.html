@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión asignaciones</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de asignaciones</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>Fecha Propuesta</th>
+				<th>Fecha Aceptacion</th>
+				<th>Fecha Rechazo</th>
+				<th>Fecha Traspaso IGLU</th>
+				<th>Peticion</th>
+				<th>Estado</th>
+				<th>DNI</th>
+				<th>ID del tutor</th>
+				<th>Numero del proyecto</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="asignacion: ${asignacions}">
+				<td th:text="${asignacion.id}"></td>
+				<td th:text="${asignacion.fechaPropuesta}"></td>
+				<td th:text="${asignacion.fechaAceptacion}"></td>
+				<td th:text="${asignacion.fechaRechazo}"></td>
+				<td th:text="${asignacion.fechaTraspasoIGLU}"></td>
+				<td th:text="${asignacion.comentarioPetCambio}"></td>
+				<td th:text="${asignacion.estadoAceptadaRechazada}"></td>
+				<td th:text="${asignacion.dni}"></td>
+				<td th:text="${asignacion.idTutor}"></td>
+				<td th:text="${asignacion.numeroProyecto}"></td>
+				<td><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}">Edita</a></td>
+				<td><a th:href="@{/asignacion/delete/{id}(id=${asignacion.id})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir asignacion</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>
