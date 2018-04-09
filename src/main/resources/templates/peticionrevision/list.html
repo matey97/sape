@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión peticiones de revision</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de peticiones de revision</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>Numero de proyecto</th>
+				<th>Fecha</th>
+				<th>Peticion</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="peticionrevision: ${peticionrevisions}">
+				<td th:text="${peticionrevision.id}"></td>
+				<td th:int="${peticionrevision.numeroProyecto}"></td>
+				<td th:text="${peticionrevision.Fecha}"></td>
+				<td th:text="${peticionrevision.textoPeticion}"></td>
+				<td><a th:href="@{/peticionrevision/update/{id}(id=${peticionrevision.id})}">Edita</a></td>
+				<td><a th:href="@{/peticionrevision/delete/{id}(id=${peticionrevision.id})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir peticion de revision</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

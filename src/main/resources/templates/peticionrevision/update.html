@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Actualizar datos de peticiones de revision</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva peticion de revision</h2>
+	<form action="#" th:action="@{/peticionrevision/update/{id}}" th:object="${peticionrevision}" method="post">
+		<table>
+			<tr>
+				<td><label>ID</label></td>
+				<td><input type="int" th:field="*{id}"/></td>
+			</tr>
+			<tr>
+				<td><label>Numero de proyecto</label></td>
+				<td><input type="int" th:field="*{numeroProyecto}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha</label></td>
+				<td><input type="text" th:field="*{fecha}"/></td>
+			</tr>
+			<tr>
+				<td><label>Peticion</label></td>
+				<td><input type="text" th:field="*{textoPeticion}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Actualizar peticion de revision"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
