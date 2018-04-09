@@ -25,7 +25,7 @@ public class PeticionRevisionController {
 	
 	@RequestMapping("/list")
 	public String listPeticionRevision(Model model) {
-		model.addAttribute("peticionrevision", peticionrevisionDao.getPeticionRevisions());
+		model.addAttribute("peticionrevisions", peticionrevisionDao.getPeticionRevisions());
 		return "peticionrevision/list";
 	}
 	
