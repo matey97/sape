@@ -25,7 +25,7 @@ public class OfertaProyectoController {
 	
 	@RequestMapping("/list")
 	public String listOfertaProyecto(Model model) {
-		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyectos());
+		model.addAttribute("ofertaproyectos", ofertaproyectoDao.getOfertaProyectos());
 		return "ofertaproyecto/list";
 	}
 	
