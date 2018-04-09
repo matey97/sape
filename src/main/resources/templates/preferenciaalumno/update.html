@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Actualizar preferencia</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"       
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva peticion de revision</h2>
+	<form action="#" th:action="@{/peticionrevision/update/{orden}}" th:object="${peticionrevision}" method="post">
+		<table>
+			<tr>
+				<td><label>ID</label></td>
+				<td><input type="int" th:field="*{orden}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha ultimo cambio</label></td>
+				<td><input type="text" th:field="*{fechaUltimoCambio}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estado</label></td>
+				<td><input type="text" th:field="*{estado}"/></td>
+			</tr>
+			<tr>
+				<td><label>Dni</label></td>
+				<td><input type="text" th:field="*{dni}"/></td>
+			</tr>
+			<tr>
+				<td><label>Numero de proyecto</label></td>
+				<td><input type="int" th:field="*{numeroProyecto}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Actualizar preferencia"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

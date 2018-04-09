@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Gestión de preferencias</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h1>Listado de preferencias</h1>
+	<table>
+		<thread>
+			<tr>
+				<th>ID</th>
+				<th>Numero de proyecto</th>
+				<th>Fecha</th>
+				<th>Peticion</th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr th:each="preferenciaalumno: ${preferenciaalumnos}">
+				<td th:int="${preferenciaalumno.orden}"></td>
+				<td th:text="${preferenciaalumno.fechaUltimoCambio}"></td>
+				<td th:text="${preferenciaalumno.estado}"></td>
+				<td th:text="${preferenciaalumno.dni}"></td>
+				<td th:int="${preferenciaalumno.numeroProyecto}"></td>
+				<td><a th:href="@{/preferenciaalumno/update/{orden}(orden=${preferenciaalumno.orden})}">Edita</a></td>
+				<td><a th:href="@{/preferenciaalumno/delete/{orden}(orden=${preferenciaalumno.orden})}">Borra</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="add.html">Añadir preferencia</a><br></br>
+	<a href="/">Página principal</a>
+</body>
+</html>

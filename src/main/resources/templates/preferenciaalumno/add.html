@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Añadir preferencia</title>
+	<link rel="stylesheet"     
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+</head>
+<body>
+	<h2>Nueva preferencia</h2>
+	<form action="#" th:action="@{/preferenciaalumno/add}" th:object="${preferenciaalumno}" method="post">
+		<table>
+			<tr>
+				<td><label>Orden</label></td>
+				<td><input type="int" th:field="*{orden}"/></td>
+			</tr>
+			<tr>
+				<td><label>Fecha ultimo cambio</label></td>
+				<td><input type="text" th:field="*{fechaUltimoCambio}"/></td>
+			</tr>
+			<tr>
+				<td><label>Estado</label></td>
+				<td><input type="text" th:field="*{estado}"/></td>
+			</tr>
+			<tr>
+				<td><label>Dni</label></td>
+				<td><input type="text" th:field="*{dni}"/></td>
+			</tr><tr>
+				<td><label>Numero de proyecto</label></td>
+				<td><input type="int" th:field="*{numeroProyecto}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Añadir preferencia"/></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
