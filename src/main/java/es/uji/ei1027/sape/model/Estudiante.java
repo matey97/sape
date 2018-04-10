@@ -1,5 +1,10 @@
 package es.uji.ei1027.sape.model;
 
+/**
+ * Clase para modelar la información de los estudiantes
+ * @author Miguel
+ *
+ */
 public class Estudiante {
 
 	String dni;

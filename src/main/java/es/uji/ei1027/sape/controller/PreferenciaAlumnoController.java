@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.PreferenciaAlumnoDAO;
 import es.uji.ei1027.sape.model.PreferenciaAlumno;
 
+/**
+ * Controlador para las preferencias de los alumnos
+ * @author Nacho
+ *
+ */
 @Controller
 @RequestMapping("/preferenciaalumno")
 public class PreferenciaAlumnoController {

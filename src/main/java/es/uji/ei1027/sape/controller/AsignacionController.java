@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.AsignacionDAO;
 import es.uji.ei1027.sape.model.Asignacion;
 
+/**
+ * Controlador para las asignaciones
+ * @author Nacho
+ *
+ */
 @Controller
 @RequestMapping("/asignacion")
 public class AsignacionController {

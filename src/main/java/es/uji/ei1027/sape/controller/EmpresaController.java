@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.EmpresaDAO;
 import es.uji.ei1027.sape.model.Empresa;
 
+/**
+ * Controlador para las empresas
+ * @author Miguel
+ *
+ */
 @Controller
 @RequestMapping("/empresa")
 public class EmpresaController {

@@ -2,6 +2,11 @@ package es.uji.ei1027.sape.model;
 
 import java.sql.Date;
 
+/**
+ * Clase para modelar la información de las asignaciones
+ * @author Nacho
+ *
+ */
 public class Asignacion {
 
 	int id;
@@ -15,7 +20,6 @@ public class Asignacion {
 	int idTutor;
 	int numeroProyecto;
 	
-
 	public int getId() {
 		return id;
 	}

@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.Estancia;
 
+/**
+ * DAO de las estancias
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class EstanciaDAO {
 
@@ -47,6 +53,10 @@ public class EstanciaDAO {
 								new Object[]{id}, new EstanciaMapper());
 	}
 	
+	/**
+	 * Inserta una estancia en la BBDD, y como su identificador es de tipo SERIAL, se consulta dicho identificador
+	 * @param e -> Estancia para añadir
+	 */
 	public void addEstancia(Estancia e){
 		this.jdbcTemplate.update("INSERT INTO Estancia(cifEmpresa, contactPerson, mailContactPerson, internshipDescription) values(?,?,?,?);",
 								e.getCifEmpresa(), e.getContactPerson(), e.getMailContactPerson(), e.getInternshipDescription());

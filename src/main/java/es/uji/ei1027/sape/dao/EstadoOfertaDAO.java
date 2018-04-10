@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.EstadoOferta;
 
+/**
+ * DAO de los estados de las ofertas
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class EstadoOfertaDAO {
 
@@ -43,6 +49,10 @@ public class EstadoOfertaDAO {
 		return this.jdbcTemplate.queryForObject("SELECT id, estado FROM EstadoOferta WHERE id=?;", new Object[]{id}, new EstadoOfertaMapper());
 	}
 	
+	/**
+	 * Inserta un estado en la BBDD, y como su identificador es de tipo SERIAL, se consulta dicho identificador
+	 * @param e -> Estado para añadir
+	 */
 	public void addEstadoOferta(EstadoOferta e){
 		this.jdbcTemplate.update("INSERT INTO EstadoOferta(estado) values(?);", e.getEstado());
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('EstadoOferta', 'id'))", Integer.class);

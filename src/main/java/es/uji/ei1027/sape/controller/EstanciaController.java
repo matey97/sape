@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.EstanciaDAO;
 import es.uji.ei1027.sape.model.Estancia;
 
+/**
+ * Controlador para las estancias
+ * @author Miguel
+ *
+ */
 @Controller
 @RequestMapping("/estancia")
 public class EstanciaController {

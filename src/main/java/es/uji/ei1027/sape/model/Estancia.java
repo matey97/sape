@@ -1,5 +1,10 @@
 package es.uji.ei1027.sape.model;
 
+/**
+ * Clase para modelar la información de las estancias
+ * @author Miguel
+ *
+ */
 public class Estancia {
 
 	int id;

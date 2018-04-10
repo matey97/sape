@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.Empresa;
 
+/**
+ * DAO de las empresas
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class EmpresaDAO {
 	

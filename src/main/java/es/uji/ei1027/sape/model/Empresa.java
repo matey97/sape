@@ -1,5 +1,10 @@
 package es.uji.ei1027.sape.model;
 
+/**
+ * Clase para modelar la imformación de las empresas
+ * @author Miguel
+ *
+ */
 public class Empresa {
 
 	String cif;

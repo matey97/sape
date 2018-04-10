@@ -1,5 +1,10 @@
 package es.uji.ei1027.sape.model;
 
+/**
+ * Clase para modelar los distintos estados que una oferta puede tener
+ * @author Miguel
+ *
+ */
 public class EstadoOferta {
 
 	int id;

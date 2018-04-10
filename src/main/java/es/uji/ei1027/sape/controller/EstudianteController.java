@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.EstudianteDAO;
 import es.uji.ei1027.sape.model.Estudiante;
 
+/**
+ * Controlador para los estudiantes
+ * @author Miguel
+ *
+ */
 @Controller
 @RequestMapping("/estudiante")
 public class EstudianteController {

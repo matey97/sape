@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.ProfesorTutor;
 
+/**
+ * DAO para los profesores que tutorizan un proyecto
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class ProfesorTutorDAO {
 
@@ -46,6 +52,10 @@ public class ProfesorTutorDAO {
 		return this.jdbcTemplate.query("SELECT * FROM ProfesorTutor", new ProfesorTutorMapper());
 	}
 	
+	/**
+	 * Inserta un profesor a la BBDD, y como su identificador es de tipo SERIAL, se realiza una consulta para obtenerlo
+	 * @param p -> Profesor a insertar
+	 */
 	public void addProfesorTutor(ProfesorTutor p){
 		this.jdbcTemplate.update("INSERT INTO ProfesorTutor(id,nombre,departamento,despacho,email) values (DEFAULT,?,?,?,?);",
 								p.getNombre(), p.getDepartamento(), p.getDespacho(), p.getEmail());

@@ -2,6 +2,11 @@ package es.uji.ei1027.sape.model;
 
 import java.sql.Date;
 
+/**
+ * Clase para modelar la información de las peticiones de revision de asignaciones
+ * @author Nacho
+ *
+ */
 public class PeticionRevision {
 
 	int id;

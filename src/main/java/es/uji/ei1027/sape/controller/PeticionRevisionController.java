@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.PeticionRevisionDAO;
 import es.uji.ei1027.sape.model.PeticionRevision;
 
+/**
+ * Controlador para las peticiones de revisión de asignaciones
+ * @author Nacho
+ *
+ */
 @Controller
 @RequestMapping("/peticionrevision")
 public class PeticionRevisionController {

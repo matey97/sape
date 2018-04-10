@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.EstadoOfertaDAO;
 import es.uji.ei1027.sape.model.EstadoOferta;
 
+/**
+ * Controlador para los estados de las ofertas
+ * @author Miguel
+ *
+ */
 @Controller
 @RequestMapping("/estado")
 public class EstadoOfertaController {

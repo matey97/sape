@@ -14,6 +14,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.Asignacion;
 
+/**
+ * DAO de las asignaciones de proyectos
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Nacho
+ *
+ */
 @Repository
 public class AsignacionDAO {
 	
@@ -52,6 +58,10 @@ public class AsignacionDAO {
 												+ " WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
 	}
 	
+	/**
+	 * Inserta una asignación en la BBDD, y como la clave primaria de dicha tabla es un SERIAL, se consulta posteriormente el id asignado
+	 * @param a -> Asignación a insertar en la BBDD
+	 */
 	public void addAsignacion(Asignacion a){
 		this.jdbcTemplate.update("INSERT INTO Asignacion(fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto) values (?,?,?,?,?,?,?,?,?);",
 							 a.getFechaPropuesta(), a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto());

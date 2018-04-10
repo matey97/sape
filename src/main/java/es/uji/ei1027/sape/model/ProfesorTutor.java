@@ -1,5 +1,10 @@
 package es.uji.ei1027.sape.model;
 
+/**
+ * Clase para modelar la información de los profesores tutores de proyectos
+ * @author Miguel
+ *
+ */
 public class ProfesorTutor {
 	
 	int id;

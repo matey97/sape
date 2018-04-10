@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.Estudiante;
 
+/**
+ * DAO para los estudiantes
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class EstudianteDAO {
 

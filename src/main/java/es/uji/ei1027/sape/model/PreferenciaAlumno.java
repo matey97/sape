@@ -2,6 +2,11 @@ package es.uji.ei1027.sape.model;
 
 import java.sql.Date;
 
+/**
+ * Clase para modelar la informacion de las preferencias de los alumnos
+ * @author Nacho
+ *
+ */
 public class PreferenciaAlumno {
 
 	int orden;

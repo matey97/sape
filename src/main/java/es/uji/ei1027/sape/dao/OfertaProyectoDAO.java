@@ -14,6 +14,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.OfertaProyecto;
 
+/**
+ * DAO de las ofertas de proyectos
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Nacho
+ *
+ */
 @Repository
 public class OfertaProyectoDAO {
 	

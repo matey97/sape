@@ -15,6 +15,12 @@ import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.PeticionRevision;
 
+/**
+ * DAO de las peticiones de  revision de asignaciones
+ * Operaciones: listado, obtención, inserción, actualización y borrado
+ * @author Miguel
+ *
+ */
 @Repository
 public class PeticionRevisionDAO {
 	
@@ -47,6 +53,10 @@ public class PeticionRevisionDAO {
 												+ " WHERE id = ?;", new Object[]{id}, new PeticionRevisionMapper());
 	}
 	
+	/**
+	 * Inserta una petición en la BBDD, y como su identificador es de tipo SERIAL, se realiza una consulta para obtenerlo
+	 * @param p -> Petición a insertar
+	 */
 	public void addPeticionRevision(PeticionRevision p){
 		this.jdbcTemplate.update("INSERT INTO PeticionRevision(numeroProyecto, fecha, textoPeticion) values (?,?,?);",
 							 p.getNumeroProyecto(), p.getFecha(), p.getTextoPeticion());
