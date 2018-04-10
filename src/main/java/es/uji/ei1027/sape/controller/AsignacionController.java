@@ -19,7 +19,7 @@ public class AsignacionController {
 	private AsignacionDAO asignacionDao;
 	
 	@Autowired
-	public void setAsignacionDao(AsignacionDAO ofertaProyectoDao) {
+	public void setAsignacionDao(AsignacionDAO asignacionDao) {
 		this.asignacionDao = asignacionDao;
 	}
 	
@@ -45,7 +45,7 @@ public class AsignacionController {
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
 	public String editAsignacion(Model model, @PathVariable String id) {
-		model.addAttribute("asignacion", asignacionDao.getAsignacion(id));
+		model.addAttribute("asignacion", asignacionDao.getAsignacion(Integer.valueOf(id)));
 		return "asignacion/update";
 	}
 	

@@ -11,10 +11,6 @@
 	<form action="#" th:action="@{/asignacion/add}" th:object="${asignacion}" method="post">
 		<table>
 			<tr>
-				<td><label>id</label></td>
-				<td><input type="text" th:field="*{id}"/></td>
-			</tr>
-			<tr>
 				<td><label>Fecha Propuesta</label></td>
 				<td><input type="text" th:field="*{fechaPropuesta}"/></td>
 			</tr>
@@ -44,11 +40,11 @@
 			</tr>
 			<tr>
 				<td><label>ID del tutor</label></td>
-				<td><input type="text" th:field="*{idTutor}"/></td>
+				<td><input type="number" th:field="*{idTutor}"/></td>
 			</tr>
 			<tr>
 				<td><label>Numero de proyecto</label></td>
-				<td><input type="text" th:field="*{numeroProyecto}"/></td>
+				<td><input type="number" th:field="*{numeroProyecto}"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Añadir asignacion"/></td>

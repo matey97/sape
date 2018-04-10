@@ -20,7 +20,7 @@ public class OfertaProyectoController {
 	
 	@Autowired
 	public void setOfertaProyectoDao(OfertaProyectoDAO ofertaProyectoDao) {
-		this.ofertaproyectoDao = ofertaproyectoDao;
+		this.ofertaproyectoDao = ofertaProyectoDao;
 	}
 	
 	@RequestMapping("/list")
@@ -44,13 +44,13 @@ public class OfertaProyectoController {
 	}
 	
 	@RequestMapping(value="/update/{numero}", method=RequestMethod.GET)
-	public String editOfertaProyecto(Model model, @PathVariable int numero) {
-		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(numero));
+	public String editOfertaProyecto(Model model, @PathVariable String numero) {
+		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(Integer.valueOf(numero)));
 		return "ofertaproyecto/update";
 	}
 	
 	@RequestMapping(value="/update/{numero}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int numero,
+	public String processUpdateSubmit(@PathVariable String numero,
 									@ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "ofertaproyecto/update";
@@ -59,7 +59,7 @@ public class OfertaProyectoController {
 	}
 	
 	@RequestMapping(value="/delete/{numero}")
-	public String processDelete(@PathVariable int numero, @ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto) {
+	public String processDelete(@PathVariable String numero, @ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto) {
 		ofertaproyectoDao.deleteOfertaProyecto(ofertaproyecto);
 		return "redirect:../list";
 	}

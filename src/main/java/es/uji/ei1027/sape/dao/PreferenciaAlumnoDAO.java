@@ -43,17 +43,17 @@ public class PreferenciaAlumnoDAO {
 	}
 	
 	public PreferenciaAlumno getPreferenciaAlumno(int orden){
-		return this.jdbcTemplate.queryForObject("orden, fechaUltimoCambio, estado, dni, numeroProyecto FROM PreferenciaAlumno"
-												+ "WHERE orden = ?;", new Object[]{orden}, new PreferenciaAlumnoMapper());
+		return this.jdbcTemplate.queryForObject("SELECT orden, fechaUltimoCambio, estado, dni, numeroProyecto FROM PreferenciaAlumno"
+												+ " WHERE orden = ?;", new Object[]{orden}, new PreferenciaAlumnoMapper());
 	}
 	
 	public void addPreferenciaAlumno(PreferenciaAlumno p){
-		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,?,?,?,?);",
+		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto) values (?,?,?,?,?);",
 							p.getOrden(), p.getFechaUltimoCambio(), p.getEstado(), p.getDni(), p.getNumeroProyecto());
 	}
 	
 	public void updatePreferenciaAlumno(PreferenciaAlumno p){
-		this.jdbcTemplate.update("UPDATE PreferenciaAlumno SET fechaUltimoCambio=?, estado=?, dni=?, numeroProyecto=?, fechaUltimoCambio=?, itinerario=?, idEstancia=? WHERE orden=?;",
+		this.jdbcTemplate.update("UPDATE PreferenciaAlumno SET fechaUltimoCambio=?, estado=?, dni=?, numeroProyecto=? WHERE orden=?;",
 				p.getFechaUltimoCambio(), p.getEstado(), p.getDni(), p.getNumeroProyecto(), p.getOrden());
 	}
 	

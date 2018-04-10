@@ -29,7 +29,7 @@ public class AsignacionDAO {
 		@Override
 		public Asignacion mapRow(ResultSet rs, int arg1) throws SQLException {
 			Asignacion asignacion = new Asignacion();
-			asignacion.setId(rs.getString("id"));
+			asignacion.setId(rs.getInt("id"));
 			asignacion.setFechaPropuesta(rs.getDate("fechaPropuesta"));
 			asignacion.setFechaAceptacion(rs.getDate("fechaAceptacion"));
 			asignacion.setFechaRechazo(rs.getDate("fechaRechazo"));
@@ -37,38 +37,30 @@ public class AsignacionDAO {
 			asignacion.setComentarioPetCambio(rs.getString("comentarioPetCambio"));
 			asignacion.setEstadoAceptadaRechazada(rs.getString("estadoAceptadaRechazada"));
 			asignacion.setDni(rs.getString("dni"));
-			asignacion.setIdTutor(rs.getString("idTutor"));
+			asignacion.setIdTutor(rs.getInt("idTutor"));
 			asignacion.setNumeroProyecto(rs.getInt("numeroProyecto"));
 			return asignacion;
 		}
 	}
-	String id;
-	Date fechaPropuesta;
-	Date fechaAceptacion;
-	Date fechaRechazo;
-	Date fechaTraspasoIGLU;
-	String comentarioPetCambio;
-	String estadoAceptadaRechazada;
-	String dni;
-	String idTutor;
-	int numeroProyecto;
 	
 	public List<Asignacion> getAsignacions(){
 		return this.jdbcTemplate.query("SELECT id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto FROM Asignacion;", new AsignacionMapper());
 	}
 	
-	public Asignacion getAsignacion(String id){
-		return this.jdbcTemplate.queryForObject("id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto FROM Asignacion"
-												+ "WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
+	public Asignacion getAsignacion(int id){
+		return this.jdbcTemplate.queryForObject("SELECT id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto FROM Asignacion"
+												+ " WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
 	}
 	
 	public void addAsignacion(Asignacion a){
-		this.jdbcTemplate.update("INSERT INTO Asignacion(id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni) values (?,?,?,?,?,?,?,?,?,?);",
-							a.getId(), a.getFechaPropuesta(), a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto());
+		this.jdbcTemplate.update("INSERT INTO Asignacion(fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto) values (?,?,?,?,?,?,?,?,?);",
+							 a.getFechaPropuesta(), a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto());
+		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('Asignacion', 'id'))", Integer.class);
+		a.setId(id);
 	}
 	
 	public void updateAsignacion(Asignacion a){
-		this.jdbcTemplate.update("UPDATE Asignacion SET fechaPropuesta=?, fechaAceptacion=?, fechaRechazo=?, fechaTraspasoIGLU=?, comentarioPetCambio=?, estadoAceptadaRechazada=?, dni=? WHERE id=?;",
+		this.jdbcTemplate.update("UPDATE Asignacion SET fechaPropuesta=?, fechaAceptacion=?, fechaRechazo=?, fechaTraspasoIGLU=?, comentarioPetCambio=?, estadoAceptadaRechazada=?, dni=?, idTutor=?, numeroProyecto=? WHERE id=?;",
 				a.getFechaPropuesta(), a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto(), a.getId());
 	}
 	

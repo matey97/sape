@@ -46,8 +46,8 @@ public class OfertaProyectoDAO {
 	}
 	
 	public OfertaProyecto getOfertaProyecto(int numero){
-		return this.jdbcTemplate.queryForObject("numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto"
-												+ "WHERE numero = ?;", new Object[]{numero}, new OfertaProyectoMapper());
+		return this.jdbcTemplate.queryForObject("SELECT numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto"
+												+ " WHERE numero = ?;", new Object[]{numero}, new OfertaProyectoMapper());
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){

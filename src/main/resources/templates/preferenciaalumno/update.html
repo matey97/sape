@@ -8,11 +8,11 @@
 </head>
 <body>
 	<h2>Nueva peticion de revision</h2>
-	<form action="#" th:action="@{/peticionrevision/update/{orden}}" th:object="${peticionrevision}" method="post">
+	<form action="#" th:action="@{/preferenciaalumno/update/{orden}}" th:object="${preferenciaalumno}" method="post">
 		<table>
 			<tr>
-				<td><label>ID</label></td>
-				<td><input type="int" th:field="*{orden}"/></td>
+				<td><label>Orden</label></td>
+				<td><input type="number" th:field="*{orden}"/></td>
 			</tr>
 			<tr>
 				<td><label>Fecha ultimo cambio</label></td>
@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<td><label>Numero de proyecto</label></td>
-				<td><input type="int" th:field="*{numeroProyecto}"/></td>
+				<td><input type="number" th:field="*{numeroProyecto}"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Actualizar preferencia"/></td>

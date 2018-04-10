@@ -11,19 +11,20 @@
 	<table>
 		<thread>
 			<tr>
-				<th>ID</th>
+				<th>Orden</th>
+				<th>Fecha ultimo cambio</th>
+				<th>Estado</th>
+				<th>DNI</th>
 				<th>Numero de proyecto</th>
-				<th>Fecha</th>
-				<th>Peticion</th>
 			</tr>
 		</thread>
 		<tbody>
 			<tr th:each="preferenciaalumno: ${preferenciaalumnos}">
-				<td th:int="${preferenciaalumno.orden}"></td>
+				<td th:text="${preferenciaalumno.orden}"></td>
 				<td th:text="${preferenciaalumno.fechaUltimoCambio}"></td>
 				<td th:text="${preferenciaalumno.estado}"></td>
 				<td th:text="${preferenciaalumno.dni}"></td>
-				<td th:int="${preferenciaalumno.numeroProyecto}"></td>
+				<td th:text="${preferenciaalumno.numeroProyecto}"></td>
 				<td><a th:href="@{/preferenciaalumno/update/{orden}(orden=${preferenciaalumno.orden})}">Edita</a></td>
 				<td><a th:href="@{/preferenciaalumno/delete/{orden}(orden=${preferenciaalumno.orden})}">Borra</a></td>
 			</tr>

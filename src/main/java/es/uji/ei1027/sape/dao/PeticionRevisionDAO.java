@@ -30,7 +30,7 @@ public class PeticionRevisionDAO {
 		@Override
 		public PeticionRevision mapRow(ResultSet rs, int arg1) throws SQLException {
 			PeticionRevision peticionrevision = new PeticionRevision();
-			peticionrevision.setId(rs.getString("id"));
+			peticionrevision.setId(rs.getInt("id"));
 			peticionrevision.setNumeroProyecto(rs.getInt("numeroProyecto"));
 			peticionrevision.setFecha(rs.getDate("fecha"));
 			peticionrevision.setTextoPeticion(rs.getString("textoPeticion"));
@@ -43,17 +43,19 @@ public class PeticionRevisionDAO {
 	}
 	
 	public PeticionRevision getPeticionRevision(int id){
-		return this.jdbcTemplate.queryForObject("id, numeroProyecto, fecha, textoPeticion FROM PeticionRevision"
-												+ "WHERE id = ?;", new Object[]{id}, new PeticionRevisionMapper());
+		return this.jdbcTemplate.queryForObject("SELECT id, numeroProyecto, fecha, textoPeticion FROM PeticionRevision"
+												+ " WHERE id = ?;", new Object[]{id}, new PeticionRevisionMapper());
 	}
 	
 	public void addPeticionRevision(PeticionRevision p){
-		this.jdbcTemplate.update("INSERT INTO PeticionRevision(id, numeroProyecto, fecha, textoPeticion) values (?,?,?,?);",
-							p.getId(), p.getNumeroProyecto(), p.getFecha(), p.getTextoPeticion());
+		this.jdbcTemplate.update("INSERT INTO PeticionRevision(numeroProyecto, fecha, textoPeticion) values (?,?,?);",
+							 p.getNumeroProyecto(), p.getFecha(), p.getTextoPeticion());
+		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('PeticionRevision', 'id'))", Integer.class);
+		p.setId(id);
 	}
 	
 	public void updatePeticionRevision(PeticionRevision p){
-		this.jdbcTemplate.update("UPDATE PeticionRevision SET numeroProyecto=?, objetivo=?, estado=?, fecha=?, fechaUltimoCambio=?, textoPeticion=?, idEstancia=? WHERE id=?;",
+		this.jdbcTemplate.update("UPDATE PeticionRevision SET numeroProyecto=?, fecha=?, textoPeticion=? WHERE id=?;",
 				p.getNumeroProyecto(), p.getFecha(), p.getTextoPeticion(), p.getId());
 	}
 	

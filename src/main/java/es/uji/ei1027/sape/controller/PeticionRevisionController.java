@@ -19,7 +19,7 @@ public class PeticionRevisionController {
 	private PeticionRevisionDAO peticionrevisionDao;
 	
 	@Autowired
-	public void setPeticionRevisionDao(PeticionRevisionDAO ofertaProyectoDao) {
+	public void setPeticionRevisionDao(PeticionRevisionDAO peticionrevisionDao) {
 		this.peticionrevisionDao = peticionrevisionDao;
 	}
 	
@@ -45,7 +45,7 @@ public class PeticionRevisionController {
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
 	public String editPeticionRevision(Model model, @PathVariable String id) {
-		model.addAttribute("peticionrevision", peticionrevisionDao.getPeticionRevision(id));
+		model.addAttribute("peticionrevision", peticionrevisionDao.getPeticionRevision(Integer.valueOf(id)));
 		return "peticionrevision/update";
 	}
 	

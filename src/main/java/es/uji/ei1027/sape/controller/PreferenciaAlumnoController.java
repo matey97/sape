@@ -44,13 +44,13 @@ public class PreferenciaAlumnoController {
 	}
 	
 	@RequestMapping(value="/update/{orden}", method=RequestMethod.GET)
-	public String editPreferenciaAlumno(Model model, @PathVariable int orden) {
-		model.addAttribute("preferenciaalumno", preferenciaalumnoDao.getPreferenciaAlumno(orden));
+	public String editPreferenciaAlumno(Model model, @PathVariable String orden) {
+		model.addAttribute("preferenciaalumno", preferenciaalumnoDao.getPreferenciaAlumno(Integer.valueOf(orden)));
 		return "preferenciaalumno/update";
 	}
 	
 	@RequestMapping(value="/update/{orden}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int orden,
+	public String processUpdateSubmit(@PathVariable String orden,
 									@ModelAttribute("preferenciaalumno") PreferenciaAlumno preferenciaalumno, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "preferenciaalumno/update";
@@ -59,7 +59,7 @@ public class PreferenciaAlumnoController {
 	}
 	
 	@RequestMapping(value="/delete/{orden}")
-	public String processDelete(@PathVariable int orden, @ModelAttribute("preferenciaalumno") PreferenciaAlumno preferenciaalumno) {
+	public String processDelete(@PathVariable String orden, @ModelAttribute("preferenciaalumno") PreferenciaAlumno preferenciaalumno) {
 		preferenciaalumnoDao.deletePreferenciaAlumno(preferenciaalumno);
 		return "redirect:../list";
 	}

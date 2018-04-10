@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Asignacion {
 
-	String id;
+	int id;
 	Date fechaPropuesta;
 	Date fechaAceptacion;
 	Date fechaRechazo;
@@ -12,15 +12,15 @@ public class Asignacion {
 	String comentarioPetCambio;
 	String estadoAceptadaRechazada;
 	String dni;
-	String idTutor;
+	int idTutor;
 	int numeroProyecto;
 	
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -82,11 +82,11 @@ public class Asignacion {
 		this.dni = dni;
 	}
 
-	public String getIdTutor() {
+	public int getIdTutor() {
 		return idTutor;
 	}
 
-	public void setIdTutor(String idTutor) {
+	public void setIdTutor(int idTutor) {
 		this.idTutor = idTutor;
 	}
 

@@ -20,7 +20,7 @@
 		<tbody>
 			<tr th:each="peticionrevision: ${peticionrevisions}">
 				<td th:text="${peticionrevision.id}"></td>
-				<td th:int="${peticionrevision.numeroProyecto}"></td>
+				<td th:text="${peticionrevision.numeroProyecto}"></td>
 				<td th:text="${peticionrevision.Fecha}"></td>
 				<td th:text="${peticionrevision.textoPeticion}"></td>
 				<td><a th:href="@{/peticionrevision/update/{id}(id=${peticionrevision.id})}">Edita</a></td>
