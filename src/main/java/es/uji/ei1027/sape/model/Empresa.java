@@ -10,6 +10,7 @@ public class Empresa {
 	String cif;
 	String nombre;
 	String domicilio;
+	String poblacion;
 	String telefonoPrincipal;
 	
 	public String getCif() {
@@ -30,6 +31,12 @@ public class Empresa {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
+	public String getPoblacion() {
+		return poblacion;
+	}
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
 	public String getTelefonoPrincipal() {
 		return telefonoPrincipal;
 	}
@@ -39,9 +46,10 @@ public class Empresa {
 	
 	@Override
 	public String toString() {
-		return "Empresa [cif=" + cif + ", nombre=" + nombre + ", domicilio=" + domicilio + ", telefonoPrincipal="
-				+ telefonoPrincipal + "]";
+		return "Empresa [cif=" + cif + ", nombre=" + nombre + ", domicilio=" + domicilio + ", poblacion=" + poblacion
+				+ ", telefonoPrincipal=" + telefonoPrincipal + "]";
 	}
+	
 	
 	
 	

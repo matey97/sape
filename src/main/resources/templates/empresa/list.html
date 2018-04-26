@@ -22,6 +22,7 @@
 				<td th:text="${empresa.cif}"></td>
 				<td th:text="${empresa.nombre}"></td>
 				<td th:text="${empresa.domicilio}"></td>
+				<td th:text="${empresa.poblacion}"></td>
 				<td th:text="${empresa.telefonoPrincipal}"></td>
 				<td><a th:href="@{/empresa/update/{cif}(cif=${empresa.cif})}">Edita</a></td>
 				<td><a th:href="@{/empresa/delete/{cif}(cif=${empresa.cif})}">Borra</a></td>

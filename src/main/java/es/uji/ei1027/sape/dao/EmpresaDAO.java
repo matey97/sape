@@ -37,6 +37,7 @@ public class EmpresaDAO {
 			empresa.setCif(rs.getString("cif"));
 			empresa.setNombre(rs.getString("nombre"));
 			empresa.setDomicilio(rs.getString("domicilio"));
+			empresa.setPoblacion(rs.getString("poblacion"));
 			empresa.setTelefonoPrincipal(rs.getString("telefonoPrincipal"));
 			return empresa;
 		}
@@ -44,22 +45,22 @@ public class EmpresaDAO {
 	}
 	
 	public List<Empresa> getEmpresas(){
-		return this.jdbcTemplate.query("SELECT cif, nombre, domicilio, telefonoPrincipal FROM Empresa;", new EmpresaMapper());
+		return this.jdbcTemplate.query("SELECT cif, nombre, domicilio, poblacion, telefonoPrincipal FROM Empresa;", new EmpresaMapper());
 	}
 	
 	public Empresa getEmpresa(String cif){
-		return this.jdbcTemplate.queryForObject("SELECT cif, nombre, domicilio, telefonoPrincipal"
+		return this.jdbcTemplate.queryForObject("SELECT cif, nombre, domicilio, poblacion, telefonoPrincipal"
 												+ " FROM Empresa WHERE cif = ?;", new Object[]{cif}, new EmpresaMapper());
 	}
 	
 	public void addEmpresa(Empresa e){
-		this.jdbcTemplate.update("INSERT INTO Empresa(cif, nombre, domicilio, telefonoPrincipal) values (?,?,?,?);",
-							e.getCif(), e.getNombre(), e.getDomicilio(), e.getTelefonoPrincipal());
+		this.jdbcTemplate.update("INSERT INTO Empresa(cif, nombre, domicilio, poblacion, telefonoPrincipal) values (?,?,?,?,?);",
+							e.getCif(), e.getNombre(), e.getDomicilio(), e.getPoblacion(), e.getTelefonoPrincipal());
 	}
 	
 	public void updateEmpresa(Empresa e){
-		this.jdbcTemplate.update("UPDATE Empresa SET nombre=?, domicilio=?, telefonoPrincipal=? WHERE cif=?;",
-							e.getNombre(), e.getDomicilio(), e.getTelefonoPrincipal(), e.getCif());
+		this.jdbcTemplate.update("UPDATE Empresa SET nombre=?, domicilio=?, poblacion=? telefonoPrincipal=? WHERE cif=?;",
+							e.getNombre(), e.getDomicilio(), e.getPoblacion(), e.getTelefonoPrincipal(), e.getCif());
 	}
 	
 	public void deleteEmpresa(Empresa e){

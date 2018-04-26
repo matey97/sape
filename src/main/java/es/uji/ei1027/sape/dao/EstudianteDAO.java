@@ -41,6 +41,7 @@ public class EstudianteDAO {
 			estudiante.setItinerario(rs.getString("itinerario"));
 			estudiante.setNumAsignaturasPendientes4t(rs.getInt("numAsignaturasPendientes4t"));
 			estudiante.setSemestreInicioEstancia(rs.getString("semestreInicioEstancia"));
+			estudiante.setBloqueado(rs.getBoolean("bloqueado"));
 			return estudiante;			
 		}
 		
@@ -51,18 +52,18 @@ public class EstudianteDAO {
 	}
 	
 	public Estudiante getEstudiante(String dni){
-		return this.jdbcTemplate.queryForObject("SELECT dni, nombre, numeroCreditosAprob, notaMedia, itinerario, numAsignaturasPendientes4t, semestreInicioEstancia "
+		return this.jdbcTemplate.queryForObject("SELECT dni, nombre, numeroCreditosAprob, notaMedia, itinerario, numAsignaturasPendientes4t, semestreInicioEstancia, bloqueado "
 												+ "FROM Estudiante WHERE dni=?;", new Object[]{dni}, new EstudianteMapper());
 	}
 	
 	public void addEstudiante(Estudiante e){
-		this.jdbcTemplate.update("INSERT INTO Estudiante(dni, nombre, numeroCreditosAprob, notaMedia, itinerario, numAsignaturasPendientes4t, semestreInicioEstancia) "
-										+ "values(?,?,?,?,?,?,?);", e.getDni(), e.getNombre(), e.getNumeroCreditosAprob(), e.getNotaMedia(), e.getItinerario(), e.getNumAsignaturasPendientes4t(), e.getSemestreInicioEstancia());
+		this.jdbcTemplate.update("INSERT INTO Estudiante(dni, nombre, numeroCreditosAprob, notaMedia, itinerario, numAsignaturasPendientes4t, semestreInicioEstancia, bloqueado) "
+										+ "values(?,?,?,?,?,?,?,?);", e.getDni(), e.getNombre(), e.getNumeroCreditosAprob(), e.getNotaMedia(), e.getItinerario(), e.getNumAsignaturasPendientes4t(), e.getSemestreInicioEstancia(),e.isBloqueado());
 	}
 	
 	public void updateEstudiante(Estudiante e){
-		this.jdbcTemplate.update("UPDATE Estudiante SET nombre=?, numeroCreditosAprob=?, notaMedia=?, itinerario=?, numAsignaturasPendientes4t=?, semestreInicioEstancia=? WHERE dni=?;",
-									e.getNombre(), e.getNumeroCreditosAprob(), e.getNotaMedia(), e.getItinerario(), e.getNumAsignaturasPendientes4t(), e.getSemestreInicioEstancia(), e.getDni());
+		this.jdbcTemplate.update("UPDATE Estudiante SET nombre=?, numeroCreditosAprob=?, notaMedia=?, itinerario=?, numAsignaturasPendientes4t=?, semestreInicioEstancia=? bloquado=? WHERE dni=?;",
+									e.getNombre(), e.getNumeroCreditosAprob(), e.getNotaMedia(), e.getItinerario(), e.getNumAsignaturasPendientes4t(), e.getSemestreInicioEstancia(), e.isBloqueado(), e.getDni());
 	}
 	
 	public void deleteEstudiante(Estudiante e){

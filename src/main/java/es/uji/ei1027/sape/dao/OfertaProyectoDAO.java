@@ -57,8 +57,10 @@ public class OfertaProyectoDAO {
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){
-		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,?,?,?,?);",
-							o.getNumero(), o.getTarea(), o.getObjetivo(), o.getEstado(), o.getFechaAlta(), o.getFechaUltimoCambio(), o.getItinerario(), o.getIdEstancia());
+		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,?,?,?);",
+							 o.getTarea(), o.getObjetivo(), o.getEstado(), o.getFechaAlta(), o.getFechaUltimoCambio(), o.getItinerario(), o.getIdEstancia());
+		int numero = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('OfertaProyecto', 'numero'))", Integer.class);
+		o.setNumero(numero);;
 	}
 	
 	public void updateOfertaProyecto(OfertaProyecto o){

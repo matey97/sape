@@ -14,6 +14,7 @@ public class Estudiante {
 	String itinerario;
 	int numAsignaturasPendientes4t;
 	String semestreInicioEstancia;
+	boolean bloqueado;
 	
 	public String getDni() {
 		return dni;
@@ -57,13 +58,21 @@ public class Estudiante {
 	public void setSemestreInicioEstancia(String semestreInicioEstancia) {
 		this.semestreInicioEstancia = semestreInicioEstancia;
 	}
+	public boolean isBloqueado() {
+		return bloqueado;
+	}
+	public void setBloqueado(boolean bloqueado) {
+		this.bloqueado = bloqueado;
+	}
 	
 	@Override
 	public String toString() {
 		return "Estudiante [dni=" + dni + ", nombre=" + nombre + ", numeroCreditosAprob=" + numeroCreditosAprob
 				+ ", notaMedia=" + notaMedia + ", itinerario=" + itinerario + ", numAsignaturasPendientes4t="
-				+ numAsignaturasPendientes4t + ", semestreInicioEstancia=" + semestreInicioEstancia + "]";
+				+ numAsignaturasPendientes4t + ", semestreInicioEstancia=" + semestreInicioEstancia + ", bloqueado="
+				+ bloqueado + "]";
 	}
+	
 	
 	
 }

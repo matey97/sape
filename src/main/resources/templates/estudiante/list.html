@@ -29,6 +29,7 @@
 				<td th:text="${estudiante.itinerario}"></td>
 				<td th:text="${estudiante.numAsignaturasPendientes4t}"></td>
 				<td th:text="${estudiante.semestreInicioEstancia}"></td>
+				<td th:text="${estudiante.bloqueado}"></td>
 				<td><a th:href="@{/estudiante/update/{dni}(dni=${estudiante.dni})}">Edita</a></td>
 				<td><a th:href="@{/estudiante/delete/{dni}(dni=${estudiante.dni})}">Borra</a></td>
 			</tr>
