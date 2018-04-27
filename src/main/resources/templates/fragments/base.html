@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="UTF-8"/>
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"/>
+
+<!-- app css  -->
+<link th:href="@{/css/sape.css}" href="/css/sape.css"
+    rel="stylesheet"/>
+
+<title layout:title-pattern="$CONTENT_TITLE">SAPE</title>
+</head>
+
+<body class="container">
+    <header class="page-header" style="text-align:center">
+        <h1>Sistema de soporte a la gestión de la Asignación de Proyectos en Empresas para la realitzación de estancias en prácticas i trabajo final de grado de Ingeniería en Informática</h1>
+    </header>
+    <div th:replace="fragments/nav"></div>
+    <div th:replace="fragments/logininfo"></div>
+    <div layout:fragment="content"></div>
+    <footer>
+        <hr>
+        <p class="text-muted">EI1027 - Disseny i Implementació de
+            Sistemes d'Informació</p>
+    </footer>
+</body>
+</html>

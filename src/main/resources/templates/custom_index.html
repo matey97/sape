@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>SAPE</title>
+   <meta charset="UTF-8" />
+   <link rel="stylesheet"      
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+   <link rel="stylesheet" type="text/css" href="/css/sape.css"
+                                    th:href="@{/css/sape.css}"/>
+</head>
+<body>
+<div layout:fragment="content" th:object="${session}">
+	<p th:if="*{user.type == 1}">
+		Soy estudiante
+	</p>
+	<p th:if="*{user.type == 2}">
+		Soy BTC
+	</p>
+	<p th:if="*{user.type == 3}">
+		Soy DCC
+	</p>
+</div>
+	
+</body>
+</html>

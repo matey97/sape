@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+   <link rel="stylesheet"      
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+   <link rel="stylesheet" type="text/css" href="/css/sape.css"
+                                    th:href="@{/css/sape.css}"/>
+<title>Login</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2 style="text-align:center">Acceso</h2>
+    <form id="formulario" action="#" th:action="@{/login}" 
+          th:object="${user}" method="post">
+          <div class="form-group row">
+          	<label class="col-sm-5 col-form-label">Nombre de usuario:</label>
+          	<div class="col-sm-5">
+          		<input class="form-control" type="text" th:field="*{username}"/>
+          		<div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+          	</div>
+          </div>
+          
+          <div class="form-group row">
+          	<label class="col-sm-5 col-form-label">Contraseña:</label>
+          	<div class="col-sm-5">
+          		<input class="form-control" type="password" th:field="*{password}"/>
+          		<div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+          	</div>
+          </div>    
+        <input type="submit" value="Acceder" class="btn btn-primary"/>
+    </form>
+</div>
+</body>
+</html>
