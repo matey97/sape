@@ -3,18 +3,20 @@
 body {
    font-family: Helvetica, Arial, sans-serif; 
    background-color: white;
+   
 }
 
 /* Capçalera de nivell 1 */
 h1 {
    font-size: x-large; 
-   color: orange;
+   color: rgb(40,0,113);
+   text-align:center
 }
 
 /* Capçalera de nivell 2 */
 h2 {
    font-size: large; 
-   color: blue;
+   color: rgb(40,0,113);
 }
 
 /* Classe CSS error */
@@ -38,6 +40,6 @@ h2 {
 #formulario{
     margin: 0 auto;
     text-align: center;
-    width: 500px;
+    width:500px
     
 }

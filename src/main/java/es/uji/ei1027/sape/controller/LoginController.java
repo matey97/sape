@@ -45,7 +45,12 @@ public class LoginController {
         if (url != null){
         	return "redirect:"+url;
         }
-        return "redirect:custom_index";
+
+        if (user.getType() == 1)
+        	return "estudiante/index";
+        if (user.getType() == 2)
+        	return "btc/index";
+        return "dcc/index";
     }
     
     @RequestMapping("/custom_index")

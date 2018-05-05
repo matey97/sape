@@ -16,21 +16,20 @@
 <!-- app css  -->
 <link th:href="@{/css/sape.css}" href="/css/sape.css"
     rel="stylesheet"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 <title layout:title-pattern="$CONTENT_TITLE">SAPE</title>
 </head>
 
 <body class="container">
-    <header class="page-header" style="text-align:center">
-        <h1>Sistema de soporte a la gestión de la Asignación de Proyectos en Empresas para la realitzación de estancias en prácticas i trabajo final de grado de Ingeniería en Informática</h1>
-    </header>
     <div th:replace="fragments/nav"></div>
-    <div th:replace="fragments/logininfo"></div>
     <div layout:fragment="content"></div>
-    <footer>
-        <hr>
-        <p class="text-muted">EI1027 - Disseny i Implementació de
+    
+   <div class="jumbotron text-center" style="margin-bottom:0">
+  	<p>EI1027 - Disseny i Implementació de
             Sistemes d'Informació</p>
-    </footer>
+	</div>
 </body>
 </html>
