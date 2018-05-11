@@ -56,6 +56,11 @@ public class OfertaProyectoDAO {
 												+ " WHERE numero = ?;", new Object[]{numero}, new OfertaProyectoMapper());
 	}
 	
+	public List<OfertaProyecto> getOfertasEmpresa(String cif) {
+		return this.jdbcTemplate.query("SELECT numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
+									"FROM OfertaProyecto JOIN Estancia JOIN Empresa WHERE Empresa.cif = ?", new Object[]{cif}, new OfertaProyectoMapper());
+	}
+	
 	public void addOfertaProyecto(OfertaProyecto o){
 		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,?,?,?);",
 							 o.getTarea(), o.getObjetivo(), o.getEstado(), o.getFechaAlta(), o.getFechaUltimoCambio(), o.getItinerario(), o.getIdEstancia());

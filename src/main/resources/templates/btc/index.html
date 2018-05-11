@@ -2,7 +2,8 @@
 <html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
    <title>SAPE</title>
-   <meta charset="UTF-8" />
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet"      
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
    <link rel="stylesheet" type="text/css" href="/css/sape.css"
@@ -10,7 +11,21 @@
 </head>
 <body>
 <div layout:fragment="content" th:object="${session}">
-	Soy btc
+	<br>
+	<h1>Hola BTC, bienvenido/a al SAPE</h1>
+	<hr>
+	<p align="justify">
+		Bievenido/a al Sistema de soporte a la gestión de la Asignación de Proyectos en Empresas para 
+		la realitzación de estancias en prácticas i trabajo final de grado de Ingeniería en Informática
+		 (SAPE). Podrás realizar las siguientes acciones:
+	</p>
+	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
+  		<a href="/empresa/list" th:href="@{/empresa/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver información de empresas</a>
+  		<a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" class="list-group-item list-group-item-action list-group-item-dark">Gestionar las ofertas de empresas</a>
+  		<a href="/" th:href="@{/}" class="list-group-item list-group-item-action list-group-item-dark">Ver preferencias las preferencias de estudiantes</a>
+  		<a href="/" th:href="@{/}" class="list-group-item list-group-item-action list-group-item-dark">Gestionar asignaciones de proyectos</a>
+	</div>
+	<hr>
 </div>
 	
 </body>

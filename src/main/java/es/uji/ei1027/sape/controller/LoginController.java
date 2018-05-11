@@ -53,10 +53,10 @@ public class LoginController {
         return "dcc/index";
     }
     
-    @RequestMapping("/custom_index")
-    public String customIndex(Model model){
-    	return "custom_index";
-    }
+//    @RequestMapping("/custom_index")
+//    public String customIndex(Model model){
+//    	return "custom_index";
+//    }
 
     @RequestMapping("/logout") 
     public String logout(HttpSession session) {

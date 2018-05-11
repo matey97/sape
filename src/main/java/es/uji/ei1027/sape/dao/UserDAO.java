@@ -17,10 +17,10 @@ public class UserDAO {
 		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 		
 	    UserDetails user = new UserDetails(); 
-	    user.setUsername("al341802"); 
-	    user.setPassword(passwordEncryptor.encryptPassword("al341802")); 
+	    user.setUsername("student"); 
+	    user.setPassword(passwordEncryptor.encryptPassword("student")); 
 	    user.setType(UserDetails.STUDENT);
-	    knownUsers.put("al341802", user);
+	    knownUsers.put("student", user);
 	      
 	    user = new UserDetails(); 
 	    user.setUsername("btc"); 

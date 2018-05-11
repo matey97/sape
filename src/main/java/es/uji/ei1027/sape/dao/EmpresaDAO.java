@@ -37,7 +37,7 @@ public class EmpresaDAO {
 			empresa.setCif(rs.getString("cif"));
 			empresa.setNombre(rs.getString("nombre"));
 			empresa.setDomicilio(rs.getString("domicilio"));
-			empresa.setPoblacion(rs.getString("poblacion"));
+			empresa.setPoblacion(rs.getString("población"));
 			empresa.setTelefonoPrincipal(rs.getString("telefonoPrincipal"));
 			return empresa;
 		}
@@ -45,7 +45,7 @@ public class EmpresaDAO {
 	}
 	
 	public List<Empresa> getEmpresas(){
-		return this.jdbcTemplate.query("SELECT cif, nombre, domicilio, poblacion, telefonoPrincipal FROM Empresa;", new EmpresaMapper());
+		return this.jdbcTemplate.query("SELECT cif, nombre, domicilio, población, telefonoPrincipal FROM Empresa;", new EmpresaMapper());
 	}
 	
 	public Empresa getEmpresa(String cif){

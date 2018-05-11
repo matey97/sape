@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.OfertaProyectoDAO;
 import es.uji.ei1027.sape.model.OfertaProyecto;
+import es.uji.ei1027.services.OfertaProyectoService;
 
 /**
  * Controlador para las ofertas de proyectos
@@ -22,16 +23,29 @@ import es.uji.ei1027.sape.model.OfertaProyecto;
 public class OfertaProyectoController {
 
 	private OfertaProyectoDAO ofertaproyectoDao;
+	private OfertaProyectoService ofertaproyectoService;
 	
 	@Autowired
 	public void setOfertaProyectoDao(OfertaProyectoDAO ofertaProyectoDao) {
 		this.ofertaproyectoDao = ofertaProyectoDao;
 	}
 	
+	@Autowired
+	public void setOfertaProyectoService(OfertaProyectoService ofertaProyectoService) {
+		this.ofertaproyectoService = ofertaProyectoService;
+	}
+	
 	@RequestMapping("/list")
 	public String listOfertaProyecto(Model model) {
 		model.addAttribute("ofertaproyectos", ofertaproyectoDao.getOfertaProyectos());
 		return "ofertaproyecto/list";
+	}
+	
+	@RequestMapping("/list/{cif}")
+	public String listOfertaEmpresa(Model model, @PathVariable String cif) {
+		model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasDeEmpresa(cif));
+		model.addAttribute("cifEmpresa", cif);
+		return "ofertaproyecot/list";
 	}
 	
 	@RequestMapping(value="/add")
