@@ -57,13 +57,13 @@ public class OfertaProyectoDAO {
 	}
 	
 	public List<OfertaProyecto> getOfertasEmpresa(String cif) {
-		return this.jdbcTemplate.query("SELECT numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
-									"FROM OfertaProyecto JOIN Estancia JOIN Empresa WHERE Empresa.cif = ?", new Object[]{cif}, new OfertaProyectoMapper());
+		return this.jdbcTemplate.query("SELECT DISTINCT numero, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
+									"FROM OfertaProyecto AS o JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE e.cif = ?;", new Object[]{cif}, new OfertaProyectoMapper());
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){
-		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,?,?,?);",
-							 o.getTarea(), o.getObjetivo(), o.getEstado(), o.getFechaAlta(), o.getFechaUltimoCambio(), o.getItinerario(), o.getIdEstancia());
+		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,now(),null,?,?);",
+							 o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia());
 		int numero = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('OfertaProyecto', 'numero'))", Integer.class);
 		o.setNumero(numero);;
 	}

@@ -10,12 +10,15 @@
 </head>
 <body>
 <div layout:fragment="content">
+	
+	<br>
 	<h1 th:if="*{cif == null}">Listado de ofertas de proyectos</h1>
-	<h1 th:unless="*{cif == null}">Listado de ofertas de empresa <span th:text="cif"></span></h1>
-	<div style="text-align:center" th:if="${#lists.isEmpty(ofertas)}">
+	<h1 th:unless="*{cif == null}">Listado de ofertas de empresa <span th:text="*{cif}"></span></h1>
+	<div style="text-align:center" th:if="${#lists.isEmpty(ofertaproyectos)}">
    		<h2>No hay ofertas en la base de datos</h2>
     </div>
-	<table th:unless="${#lists.isEmpty(empresas)}" class="table table-striped">
+    <hr>
+	<table th:unless="${#lists.isEmpty(ofertaproyectos)}" class="table table-striped">
 		<thread>
 			<tr>
 				<th>Numero</th>

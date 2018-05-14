@@ -45,7 +45,7 @@ public class OfertaProyectoController {
 	public String listOfertaEmpresa(Model model, @PathVariable String cif) {
 		model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasDeEmpresa(cif));
 		model.addAttribute("cifEmpresa", cif);
-		return "ofertaproyecot/list";
+		return "ofertaproyecto/list";
 	}
 	
 	@RequestMapping(value="/add")

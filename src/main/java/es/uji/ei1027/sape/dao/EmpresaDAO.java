@@ -54,7 +54,7 @@ public class EmpresaDAO {
 	}
 	
 	public void addEmpresa(Empresa e){
-		this.jdbcTemplate.update("INSERT INTO Empresa(cif, nombre, domicilio, poblacion, telefonoPrincipal) values (?,?,?,?,?);",
+		this.jdbcTemplate.update("INSERT INTO Empresa(cif, nombre, domicilio, población, telefonoPrincipal) values (?,?,?,?,?);",
 							e.getCif(), e.getNombre(), e.getDomicilio(), e.getPoblacion(), e.getTelefonoPrincipal());
 	}
 	

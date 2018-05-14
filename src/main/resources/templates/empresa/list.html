@@ -10,16 +10,19 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<br>
 	<h1>Listado de empresas</h1>
 	<div style="text-align:center" th:if="${#lists.isEmpty(empresas)}">
    		<h2>No hay empresas en la base de datos</h2>
     </div>
+    <hr>
 	<table th:unless="${#lists.isEmpty(empresas)}" class="table table-striped">
 		<thread>
 			<tr>
 				<th>CIF</th>
 				<th>Nombre</th>
 				<th>Domicilio</th>
+				<th>Población</th>
 				<th>Teléfono</th>
 			</tr>
 		</thread>

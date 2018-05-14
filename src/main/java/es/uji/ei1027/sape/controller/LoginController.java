@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.uji.ei1027.sape.dao.DataInsertDAO;
 import es.uji.ei1027.sape.dao.UserDAO;
 import es.uji.ei1027.sape.model.UserDetails;
 
@@ -17,6 +18,15 @@ import es.uji.ei1027.sape.model.UserDetails;
 public class LoginController {
 	@Autowired
     private UserDAO userDao;
+	
+	@Autowired
+	private DataInsertDAO dataInsertDao;
+	
+	@RequestMapping("/start")
+	public String start(Model model) {
+		dataInsertDao.inserts();
+		return "redirect:/login";
+	}
 	
     @RequestMapping("/login")
     public String login(Model model) {
