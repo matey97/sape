@@ -2,28 +2,49 @@
 
 <html lang="en">
 <head>
-<!-- Required meta tags -->
-<meta charset="UTF-8"/>
-<meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<!-- Required meta tags -->
+	<meta charset="UTF-8"/>
+	<meta name="viewport"
+	    content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous"/>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	    crossorigin="anonymous"/>
 
-<!-- app css  -->
-<link th:href="@{/css/sape.css}" href="/css/sape.css"
-    rel="stylesheet"/>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+	<!-- app css  -->
+	<link th:href="@{/css/sape.css}" href="/css/sape.css"
+	    rel="stylesheet"/>
+    
+    <!-- Scripts varios -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ 	
+	
+	<link href="/bootstrap-sortable.css" rel="stylesheet" type="text/css">
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script> 
+	<script src="/bootstrap-sortable.js"></script> 
+	
+	<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+	</script>
+
+	
 
 <title layout:title-pattern="$CONTENT_TITLE">SAPE</title>
 </head>
 
-<body class="container">
+<body class="container" style="margin:0 auto">
     <div th:replace="fragments/nav"></div>
     <div layout:fragment="content"></div>
     

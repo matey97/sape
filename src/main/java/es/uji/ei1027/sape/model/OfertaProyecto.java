@@ -12,7 +12,7 @@ public class OfertaProyecto {
 	int numero;
 	String tarea;
 	String objetivo;
-	int estado;
+	String estado;
 	Date fechaAlta;
 	Date fechaUltimoCambio;
 	String itinerario;
@@ -42,11 +42,11 @@ public class OfertaProyecto {
 		this.objetivo = objetivo;
 	}
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

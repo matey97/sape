@@ -2,11 +2,7 @@
 <html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
    <title>Empresas</title>
-   <meta charset="UTF-8" />
-   <link rel="stylesheet"      
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-   <link rel="stylesheet" type="text/css" href="/css/sape.css"
-                                    th:href="@{/css/sape.css}"/>
+   
 </head>
 <body>
 <div layout:fragment="content">
@@ -16,17 +12,43 @@
    		<h2>No hay empresas en la base de datos</h2>
     </div>
     <hr>
-	<table th:unless="${#lists.isEmpty(empresas)}" class="table table-striped">
-		<thread>
+    <div class="row">
+    <div class="col-sm-7">
+     <div class="card">
+	    <div class="card-header">
+	      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+	        Haz click para una pequeña descripción de uso
+	      </a>
+	    </div>
+	    <div id="collapseOne" class="collapse" data-parent="#accordion">
+	      <div class="card-body">
+	        <ul>
+	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
+	        	<li>Pulsa sobre la cabecera Nombre/Población para ordenar alfabeticamente</li>
+	        	<li>Pulsa el botón <i>Ver Ofertas</i> para ver las ofertas de la empresa</li>
+	        </ul>
+	      </div>
+	    </div>
+  	</div>
+   </div>
+    <div class="col-sm-5">
+    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+   </div>
+   </div>
+  
+  	<hr>
+    <div class="table-responsive">
+	<table th:unless="${#lists.isEmpty(empresas)}" class="table table-striped table-bordered sortable">
+		<thead class="thead-dark">
 			<tr>
-				<th>CIF</th>
+				<th data-defaultsort="disabled">CIF</th>
 				<th>Nombre</th>
-				<th>Domicilio</th>
+				<th data-defaultsort="disabled">Domicilio</th>
 				<th>Población</th>
-				<th>Teléfono</th>
+				<th data-defaultsort="disabled">Teléfono</th>
 			</tr>
-		</thread>
-		<tbody>
+		</thead>
+		<tbody id="myTable">
 			<tr th:each="empresa: ${empresas}">
 				<td th:text="${empresa.cif}"></td>
 				<td th:text="${empresa.nombre}"></td>
@@ -37,6 +59,8 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </div>
+
 </body>
 </html>

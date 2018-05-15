@@ -99,7 +99,7 @@ public class DataInsertDAO {
 			OfertaProyecto o = new OfertaProyecto();
 			o.setTarea(oferta[0]);
 			o.setObjetivo(oferta[1]);
-			o.setEstado(Integer.valueOf(oferta[2]));
+			o.setEstado(oferta[2]);
 			o.setItinerario(oferta[3]);
 			o.setIdEstancia(Integer.valueOf(oferta[4]));
 			ofertaDAO.addOfertaProyecto(o);
