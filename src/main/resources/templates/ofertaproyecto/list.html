@@ -4,6 +4,14 @@
    <title>Ofertas</title>
 </head>
 <body>
+<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item" th:unless="*{cif == null}"><a  href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li class="breadcrumb-item active" th:if="*{cif == null}">Ofertas</li>
+	  <li class="breadcrumb-item active" th:unless="*{cif == null}"><span th:text="*{cif}"></span>
+	</ul>
+</div>
 <div layout:fragment="content">
 	
 	<br>
@@ -26,7 +34,7 @@
 	        <ul>
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Puedes pulsar sobre algunas cabeceras para ordenar alfabeticamente</li>
-	        	<li>Pulsa el botón <i>Actualizar estado</i> para cambiar el estado de una oferta</li>
+	        	<li>Pulsa el botón <i>Gestionar</i> para acceder a la gestión oferta</li>
 	        </ul>
 	      </div>
 	    </div>
@@ -57,7 +65,7 @@
 				<td th:text="${ofertaproyecto.fechaAlta}"></td>
 				<td th:text="${ofertaproyecto.fechaUltimoCambio}"></td>
 				<td th:text="${ofertaproyecto.itinerario}"></td>
-				<td><a th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-primary">Actualizar estado</a></td>
+				<td><a th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
 			</tr>
 		</tbody>
 	</table>

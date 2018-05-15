@@ -5,6 +5,13 @@
    
 </head>
 <body>
+<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index">Página principal</a></li>
+	  <li class="breadcrumb-item active">Empresas</li>
+	  
+	</ul>
+</div>
 <div layout:fragment="content">
 	<br>
 	<h1>Listado de empresas</h1>
@@ -25,7 +32,7 @@
 	        <ul>
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Pulsa sobre la cabecera Nombre/Población para ordenar alfabeticamente</li>
-	        	<li>Pulsa el botón <i>Ver Ofertas</i> para ver las ofertas de la empresa</li>
+	        	<li>Pulsa el botón <i>Ofertas</i> para ver las ofertas de la empresa</li>
 	        </ul>
 	      </div>
 	    </div>
@@ -55,7 +62,7 @@
 				<td th:text="${empresa.domicilio}"></td>
 				<td th:text="${empresa.poblacion}"></td>
 				<td th:text="${empresa.telefonoPrincipal}"></td>
-				<td><a th:href="@{/ofertaproyecto/list/{cif}(cif=${empresa.cif})}" class="btn btn-primary">Ver ofertas</a></td>
+				<td><a th:href="@{/ofertaproyecto/list/{cif}(cif=${empresa.cif})}" class="btn btn-dark">Ofertas</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,13 +1,12 @@
+<div>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
-	<a class="navbar-brand" href="#">SAPE</a>
+	<a class="navbar-brand" href="/custom_index" th:href="@{/custom_index}">SAPE</a>
 	<div class="navbar-collapse expand" th:object="${session}">   
 	    <ul th:if="*{user.type == 1}"class="navbar-nav mr-auto">
-	    	<li class="nav-item"><a class="nav-link" href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Ofertas</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Asignación</a></li>
 	    </ul>
 	    <ul th:if="*{user.type == 2 || user.type == 3}"class="navbar-nav mr-auto">
-	    	<li class="nav-item"><a class="nav-link" href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/empresa/list" th:href="@{/empresa/list}">Empresas</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Estudiantes</a></li>
@@ -23,3 +22,5 @@
     	</div>
  	</div>	
 </nav>
+<div layout:fragment="pagination"></div>
+</div>
