@@ -2,6 +2,8 @@ package es.uji.ei1027.sape.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,8 @@ public class OfertaProyectoController {
 	}
 	
 	@RequestMapping("/list")
-	public String listOfertaProyecto(Model model) {
+	public String listOfertaProyecto(Model model, HttpSession session) {
+		session.setAttribute("result", null);
 		model.addAttribute("ofertaproyectos", ofertaproyectoDao.getOfertaProyectos());
 		return "ofertaproyecto/list";
 	}
@@ -71,11 +74,15 @@ public class OfertaProyectoController {
 	}
 	
 	@RequestMapping(value="/update/{numero}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String numero,
-									@ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
+	public String processUpdateSubmit(@ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto, BindingResult bindingResult, HttpSession session) {
+		session.setAttribute("result", null);
+		if (bindingResult.hasErrors()) {
+			session.setAttribute("result", "bad");
 			return "ofertaproyecto/update";
+		}
+		
 		ofertaproyectoDao.updateOfertaProyecto(ofertaproyecto);
+		session.setAttribute("result", "ok");
 		return "redirect:../list";
 	}
 	

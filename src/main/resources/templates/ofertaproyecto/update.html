@@ -1,51 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
    <title>Actualizar datos de oferta de proyecto</title>
-   <meta charset="UTF-8" />
-   <link rel="stylesheet"       
-     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+
 </head>
 <body>
-	<h2>Nueva oferta de proyecto</h2>
-	<form action="#" th:action="@{/ofertaproyecto/update/{numero}}" th:object="${ofertaproyecto}" method="post">
-		<table>
-			<tr>
-				<td><label>Numero</label></td>
-				<td><input type="number" th:field="*{numero}"/></td>
-			</tr>
-			<tr>
-				<td><label>Tarea</label></td>
-				<td><input type="text" th:field="*{tarea}"/></td>
-			</tr>
-			<tr>
-				<td><label>Objetivo</label></td>
-				<td><input type="text" th:field="*{objetivo}"/></td>
-			</tr>
-			<tr>
-				<td><label>Estado</label></td>
-				<td><input type="number" th:field="*{estado}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Alta</label></td>
-				<td><input type="text" th:field="*{fechaAlta}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Ultimo Cambio</label></td>
-				<td><input type="text" th:field="*{fechaUltimoCambio}"/></td>
-			</tr>
-			<tr>
-				<td><label>Itinerario</label></td>
-				<td><input type="text" th:field="*{itinerario}"/></td>
-			</tr>
-			<tr>
-				<td><label>Estancia ID</label></td>
-				<td><input type="number" th:field="*{idEstancia}"/></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Actualizar oferta de proyecto"/></td>
-			</tr>
-		</table>
+	<div layout:fragment="pagination" th:object="${ofertaproyecto}">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li class="breadcrumb-item active" th:unless="*{numero == null}"><span th:text="*{numero}"></span>
+	</ul> 	
+	</div>
+	<div layout:fragment="content" th:object="${session}">
+	<div class="card" style="width:500px;margin:0 auto">
+	<div class="card-body">
+		<h2 class="card-title"  style="text-align:center">Datos de la oferta</h2>
+		<div  th:if="*{result == 'bad'}" class="alert alert-danger alert-dismissible fade show">
+    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Ups!</strong> Algo ha ido mal.
+   		</div>
+		<form class="card-body" action="#" th:action="@{/ofertaproyecto/update/{numero}}"  th:object="${ofertaproyecto}" method="post">
+			<div class="form-group">
+				<label>Número:</label>
+				<input class="form-control" type="text" th:field="*{numero}"  readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Tarea:</label>
+				<input class="form-control" type="text" th:field="*{tarea}"/>
+			</div>
+			<div class="form-group">
+				<label>Objetivo:</label>
+				<textarea class="form-control" type="text" th:field="*{objetivo}"></textarea>
+			</div>
+			<div class="form-group">
+				<label>Estado:</label>
+				<select class="form-control" th:field="*{estado}">
+					<option value="1">Sin definir</option>
+					<option value="2">Introducida</option>
+					<option value="3">Pendiente de revisión</option>
+					<option value="4">Aceptada</option>
+					<option value="5">Rechazada</option>
+					<option value="6">Visible para alumnos</option>
+					<option value="7">Asignada</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Fecha de alta:</label>
+				<input class="form-control" type="text" th:field="*{fechaAlta}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha de último cambio:</label>
+				<input class="form-control" type="text" th:field="*{fechaUltimoCambio}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Itinerario:</label>
+				<select class="form-control" type="text" th:field="*{itinerario}">
+					<option value="Software">Ingeniería de Software</option>
+					<option value="Sistemas">Sistemas de Información</option>
+					<option value="Tecnologias">Tecnologías de la comunicación</option>
+					<option value="Computadores">Ingeniería de Computadores</option>
+				</select>
+			</div>
+			<div style="text-align:right">
+			 <button style="text-align:rigth" type="submit" class="btn btn-primary">Actualizar</button>
+			</div>
 	</form>
+	</div>
+	</div>
+	<br>
+	</div>
 </body>
 </html>

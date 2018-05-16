@@ -7,12 +7,12 @@
 <div layout:fragment="pagination">
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
-	  <li class="breadcrumb-item" th:unless="*{cif == null}"><a  href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li class="breadcrumb-item" th:unless="*{cif == null}"><a  href="/empresa/list" th:href="@{/empresa/list}">Empresas</a></li>
 	  <li class="breadcrumb-item active" th:if="*{cif == null}">Ofertas</li>
 	  <li class="breadcrumb-item active" th:unless="*{cif == null}"><span th:text="*{cif}"></span>
 	</ul>
 </div>
-<div layout:fragment="content">
+<div layout:fragment="content" th:object="${session}">
 	
 	<br>
 	<h1 th:if="*{cif == null}">Listado de ofertas de proyectos</h1>
@@ -21,6 +21,11 @@
    		<h2>No hay ofertas en la base de datos</h2>
     </div>
     <hr>
+    <div th:if="*{result == 'ok'}" class="alert alert-success alert-dismissible fade show">
+    	<button type="button" class="close" data-dismiss="alert">&times;</button>
+  		<strong>Éxito!</strong> Los datos han sido modificados correctamente.
+    </div>
+    
     <div class="row">
     <div class="col-sm-7">
      <div class="card">

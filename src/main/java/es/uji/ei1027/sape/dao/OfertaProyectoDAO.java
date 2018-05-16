@@ -69,8 +69,8 @@ public class OfertaProyectoDAO {
 	}
 	
 	public void updateOfertaProyecto(OfertaProyecto o){
-		this.jdbcTemplate.update("UPDATE OfertaProyecto SET tarea=?, objetivo=?, estado=?, fechaAlta=?, fechaUltimoCambio=?, itinerario=?, idEstancia=? WHERE numero=?;",
-				o.getTarea(), o.getObjetivo(), o.getEstado(), o.getFechaAlta(), o.getFechaUltimoCambio(), o.getItinerario(), o.getIdEstancia(), o.getNumero());
+		this.jdbcTemplate.update("UPDATE OfertaProyecto SET tarea=?, objetivo=?, estado=?,fechaUltimoCambio=now(), itinerario=?, idEstancia=? WHERE numero=?;",
+				o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia(), o.getNumero());
 	}
 	
 	public void deleteOfertaProyecto(OfertaProyecto o){
