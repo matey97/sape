@@ -1,9 +1,17 @@
 package es.uji.ei1027.sape.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import es.uji.ei1027.sape.model.UserDetails;
@@ -11,41 +19,44 @@ import es.uji.ei1027.sape.model.UserDetails;
 @Repository
 public class UserDAO {
 	
-	final Map<String, UserDetails> knownUsers = new HashMap<String, UserDetails>();
+	private final BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+	private JdbcTemplate jdbcTemplate;
 	
-	public UserDAO(){
-		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+	        this.jdbcTemplate = new JdbcTemplate(dataSource); 
+	}
+	
+	public static final class UserMapper implements RowMapper<UserDetails>{
+
+		@Override
+		public UserDetails mapRow(ResultSet rs, int arg1) throws SQLException {
+			UserDetails u = new UserDetails();
+			u.setUsername(rs.getString("usuario"));
+			u.setPassword(rs.getString("password"));
+			u.setDni(rs.getString("dniEstudiante"));
+			u.setType(rs.getInt("tipo"));
+			return u;
+		}
 		
-	    UserDetails user = new UserDetails(); 
-	    user.setUsername("student"); 
-	    user.setPassword(passwordEncryptor.encryptPassword("student")); 
-	    user.setType(UserDetails.STUDENT);
-	    knownUsers.put("student", user);
-	      
-	    user = new UserDetails(); 
-	    user.setUsername("btc"); 
-	    user.setPassword(passwordEncryptor.encryptPassword("btc")); 
-	    user.setType(UserDetails.BTC);
-	    knownUsers.put("btc", user);
-	    
-	    user = new UserDetails(); 
-	    user.setUsername("dcc"); 
-	    user.setPassword(passwordEncryptor.encryptPassword("dcc")); 
-	    user.setType(UserDetails.DCC);
-	    knownUsers.put("dcc", user);
 	}
 	
 	public UserDetails loadUserByUsername(String username, String password){
-		UserDetails user = knownUsers.get(username.trim());
-		if (user == null)
-			return null;
-		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor(); 
-		if (passwordEncryptor.checkPassword(password, user.getPassword())) {
-			return user; 
-        } 
-		else {
+		UserDetails user;
+		try {
+			user = this.jdbcTemplate.queryForObject("SELECT * FROM Usuario WHERE usuario=?;", new Object[] {username.trim()}, new UserMapper());
+		}catch(EmptyResultDataAccessException e) {
 			return null;
 		}
+		if (passwordEncryptor.checkPassword(password, user.getPassword()))
+			return user; 
+		else
+			return null;
+	}
+	
+	public void addUser(UserDetails u) {
+		this.jdbcTemplate.update("INSERT INTO Usuario (usuario, password, dniEstudiante, tipo) values (?,?,?,?)",
+				u.getUsername(), passwordEncryptor.encryptPassword(u.getPassword()), u.getDni(), u.getType());
 	}
 	
 }

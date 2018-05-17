@@ -6,6 +6,7 @@ public class UserDetails {
 	
 	String username;
 	String password;
+	String dni;
 	int type;
 	
 	public String getUsername(){
@@ -24,6 +25,14 @@ public class UserDetails {
 		this.password = password;
 	}
 	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
 	public int getType(){
 		return this.type;
 	}

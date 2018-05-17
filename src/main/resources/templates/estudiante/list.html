@@ -1,41 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-	<meta charset="UTF-8" />
-	<title>Gestión estudiantes</title>
-	<link rel="stylesheet"     
-	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+	<title>Estudiantes</title>
+
 </head>
 <body>
+<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index">Página principal</a></li>
+	  <li class="breadcrumb-item active">Estudiantes</li>
+	</ul>
+<div layout:fragment="content">
+	<br>
 	<h1>Listado de estudiantes</h1>
-	<table>
-		<thread>
+	<div style="text-align:center" th:if="${#lists.isEmpty(estudiantes)}">
+   		<h2>No hay estudiantes en la base de datos</h2>
+    </div>
+    <hr>
+    <div class="row">
+    <div class="col-sm-7">
+     <div class="card">
+	    <div class="card-header">
+	      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+	        Haz click para una pequeña descripción de uso
+	      </a>
+	    </div>
+	    <div id="collapseOne" class="collapse" data-parent="#accordion">
+	      <div class="card-body">
+	        <ul>
+	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
+	        	<li>Por defecto, los estudiantes se ordenan por nota media</li>
+	        	<li>Pulsa sobre la cabecera DNI/Itinerario/Semestre para ordenar alfabeticamente</li>
+	        	<li>Pulsa el botón <i>Preferencias</i> para ver las preferencias de un estudiante</li>
+	        	<li>Pulsa el botón <i>Desbloquear</i> para ver permitir que el estudiante pueda modificar sus preferencias</li>
+	        </ul>
+	      </div>
+	    </div>
+  	</div>
+   </div>
+    <div class="col-sm-5">
+    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+   </div>
+   </div>
+  
+  	<hr>
+    <div class="table-responsive">
+	<table th:unless="${#lists.isEmpty(estudiantes)}" class="table table-striped table-bordered sortable">
+		<thead class="thead-dark">
 			<tr>
 				<th>DNI</th>
-				<th>Nombre</th>
-				<th>Creditos aprobados</th>
-				<th>Nota media</th>
+				<th data-defaultsort="disabled">Nombre</th>
+				<th data-defaultsort="desc">Nota media</th>
 				<th>Itinerario</th>
-				<th>Nº asignaturas pendientes 4t</th>
 				<th>Semestre estancia</th>
 			</tr>
-		</thread>
-		<tbody>
+		</thead>
+		<tbody id="myTable">
 			<tr th:each="estudiante: ${estudiantes}">
 				<td th:text="${estudiante.dni}"></td>
 				<td th:text="${estudiante.nombre}"></td>
-				<td th:text="${estudiante.numeroCreditosAprob}"></td>
 				<td th:text="${estudiante.notaMedia}"></td>
 				<td th:text="${estudiante.itinerario}"></td>
-				<td th:text="${estudiante.numAsignaturasPendientes4t}"></td>
 				<td th:text="${estudiante.semestreInicioEstancia}"></td>
-				<td th:text="${estudiante.bloqueado}"></td>
-				<td><a th:href="@{/estudiante/update/{dni}(dni=${estudiante.dni})}">Edita</a></td>
-				<td><a th:href="@{/estudiante/delete/{dni}(dni=${estudiante.dni})}">Borra</a></td>
+				<td><a th:href="@{/preferencias/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Preferencias</a></td>
+				<td><a th:if="*{estudiante.bloqueado}" th:href="@{/}" class="btn btn-dark">Desbloquear</a>
 			</tr>
 		</tbody>
 	</table>
-	<a href="add.html">Añadir estudiante</a><br></br>
-	<a href="/">Página principal</a>
+	</div>
+</div>
 </body>
 </html>

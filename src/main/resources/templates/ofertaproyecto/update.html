@@ -20,7 +20,7 @@
     		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Ups!</strong> Algo ha ido mal.
    		</div>
-		<form class="card-body" action="#" th:action="@{/ofertaproyecto/update/{numero}}"  th:object="${ofertaproyecto}" method="post">
+		<form class="card-body" action="#" th:action="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}"  th:object="${ofertaproyecto}" method="post">
 			<div class="form-group">
 				<label>Número:</label>
 				<input class="form-control" type="text" th:field="*{numero}"  readonly="readonly"/>
@@ -61,6 +61,10 @@
 					<option value="Tecnologias">Tecnologías de la comunicación</option>
 					<option value="Computadores">Ingeniería de Computadores</option>
 				</select>
+			</div>
+			<div class="form-group">
+				<label>Id estancia</label>
+				<input class="form-control" type="text" th:field="*{idEstancia}" readonly="readonly"/>
 			</div>
 			<div style="text-align:right">
 			 <button style="text-align:rigth" type="submit" class="btn btn-primary">Actualizar</button>
