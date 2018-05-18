@@ -1,46 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-	<meta charset="UTF-8" />
-	<title>Gestión asignaciones</title>
-	<link rel="stylesheet"     
-	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+	<title>Asignaciones</title>
+
 </head>
 <body>
+<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item"><a th:href="@{/asignacion/index}">Asignaciones</a></li>
+	  <li class="breadcrumb-item active">Listado de Asignaciones</li>
+	</ul>
+</div>
+<div layout:fragment="content">
+	<br>
 	<h1>Listado de asignaciones</h1>
-	<table>
-		<thread>
+	<div style="text-align:center" th:if="${#lists.isEmpty(asignaciones)}">
+   		<h2>No hay asignaciones en la base de datos</h2>
+    </div>
+    <hr>
+    <div class="row">
+    <div class="col-sm-7">
+     <div class="card">
+	    <div class="card-header">
+	      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+	        Haz click para una pequeña descripción de uso
+	      </a>
+	    </div>
+	    <div id="collapseOne" class="collapse" data-parent="#accordion">
+	      <div class="card-body">
+	        <ul>
+	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
+	        	<li>Haz click sobre una cabecera para ordenar alfabeticamente dicha columna, si está disponible</li>
+	        	<li>Pulsa el botón <i>Modificar</i> para modificar la asignacion</li>
+	        	<li>Pulsa el botón <i>Anular</i> para anular la asignacion</li>
+	        </ul>
+	      </div>
+	    </div>
+  	</div>
+   </div>
+    <div class="col-sm-5">
+    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+   </div>
+   </div>
+  
+  	<hr>
+    <div class="table-responsive">
+	<table th:unless="${#lists.isEmpty(asignaciones)}" class="table table-striped table-bordered sortable">
+		<thead class="thead-dark">
 			<tr>
-				<th>ID</th>
+				<th>DNI</th>
+				<th>ID del tutor</th>
+				<th>Numero del proyecto</th>
 				<th>Fecha Propuesta</th>
 				<th>Fecha Aceptacion</th>
 				<th>Fecha Rechazo</th>
 				<th>Fecha Traspaso IGLU</th>
 				<th>Peticion</th>
 				<th>Estado</th>
-				<th>DNI</th>
-				<th>ID del tutor</th>
-				<th>Numero del proyecto</th>
 			</tr>
-		</thread>
-		<tbody>
-			<tr th:each="asignacion: ${asignacions}">
-				<td th:text="${asignacion.id}"></td>
+		</thead>
+		<tbody id="myTable">
+			<tr th:each="asignacion: ${asignaciones}">
+				<td th:text="${asignacion.dni}"></td>
+				<td th:text="${asignacion.idTutor}"></td>
+				<td th:text="${asignacion.numeroProyecto}"></td>
 				<td th:text="${asignacion.fechaPropuesta}"></td>
 				<td th:text="${asignacion.fechaAceptacion}"></td>
 				<td th:text="${asignacion.fechaRechazo}"></td>
 				<td th:text="${asignacion.fechaTraspasoIGLU}"></td>
 				<td th:text="${asignacion.comentarioPetCambio}"></td>
 				<td th:text="${asignacion.estadoAceptadaRechazada}"></td>
-				<td th:text="${asignacion.dni}"></td>
-				<td th:text="${asignacion.idTutor}"></td>
-				<td th:text="${asignacion.numeroProyecto}"></td>
-				<td><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}">Edita</a></td>
-				<td><a th:href="@{/asignacion/delete/{id}(id=${asignacion.id})}">Borra</a></td>
+				<td><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}">Modificar</a></td>
+				<td><a th:href="@{/asignacion/delete/{id}(id=${asignacion.id})}">Anular</a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="add.html">Añadir asignacion</a><br></br>
-	<a href="/">Página principal</a>
+	</div>
+</div>
 </body>
 </html>

@@ -10,6 +10,7 @@
 	  <li class="breadcrumb-item"><a href="/custom_index">Página principal</a></li>
 	  <li class="breadcrumb-item active">Estudiantes</li>
 	</ul>
+</div>
 <div layout:fragment="content">
 	<br>
 	<h1>Listado de estudiantes</h1>
@@ -64,6 +65,7 @@
 				<td th:text="${estudiante.semestreInicioEstancia}"></td>
 				<td><a th:href="@{/preferencias/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Preferencias</a></td>
 				<td><a th:if="*{estudiante.bloqueado}" th:href="@{/}" class="btn btn-dark">Desbloquear</a>
+				<td th:unless="*{estudiante.bloqueado}">Bloqueado</td>
 			</tr>
 		</tbody>
 	</table>

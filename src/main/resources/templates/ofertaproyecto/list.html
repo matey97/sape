@@ -7,9 +7,7 @@
 <div layout:fragment="pagination">
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
-	  <li class="breadcrumb-item" th:unless="*{cif == null}"><a  href="/empresa/list" th:href="@{/empresa/list}">Empresas</a></li>
-	  <li class="breadcrumb-item active" th:if="*{cif == null}">Ofertas</li>
-	  <li class="breadcrumb-item active" th:unless="*{cif == null}"><span th:text="*{cif}"></span>
+	  <li class="breadcrumb-item active">Asignaciones</li>
 	</ul>
 </div>
 <div layout:fragment="content" th:object="${session}">
@@ -40,13 +38,15 @@
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Puedes pulsar sobre algunas cabeceras para ordenar alfabeticamente</li>
 	        	<li>Pulsa el botón <i>Gestionar</i> para acceder a la gestión oferta</li>
+	        	<li>Pulsa el botón <i>Visibilizar</i> para hacer visibles las ofertas aceptadas</li>
 	        </ul>
 	      </div>
 	    </div>
   	</div>
    </div>
     <div class="col-sm-5">
-    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda"><br>
+    	
    </div>
    </div>
     <hr>
@@ -60,6 +60,7 @@
 				<th>Fecha alta</th>
 				<th>Fecha ultimo cambio</th>
 				<th>Itinerario</th>
+				<th><a th:href="@{/}" class="btn btn-warning" >Visibilizar</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
@@ -70,7 +71,7 @@
 				<td th:text="${ofertaproyecto.fechaAlta}"></td>
 				<td th:text="${ofertaproyecto.fechaUltimoCambio}"></td>
 				<td th:text="${ofertaproyecto.itinerario}"></td>
-				<td><a th:href="@{/ofertaproyecto/update/{numero}}" class="btn btn-dark">Gestionar</a></td>
+				<td><a th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
 			</tr>
 		</tbody>
 	</table>

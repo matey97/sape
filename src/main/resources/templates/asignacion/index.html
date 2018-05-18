@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Asignaciones</title>
+</head>
+<body>
+<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item active">Asignaciones</li>
+	</ul>
+</div>
+<div layout:fragment="content" th:object="${session}">
+	<br>
+	<h1>Asignaciones</h1>
+	<hr>
+	<p align="justify">
+		Como BTC puedes crear asignaciones seleccionando la opción <i>Crear asignación</i> y consultarlas con la opción <i>Consultar asignación</i>.
+		Al consultar las asignaciónes podrás modificarlas o anularlas.
+	</p>
+	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
+  		<a href="/asignacion/add" th:href="@{/asignacion/add}" class="list-group-item list-group-item-action list-group-item-dark">Crear asignación</a>
+  		<a href="/asignacion/list" th:href="@{/asignacion/list}" class="list-group-item list-group-item-action list-group-item-dark">Consultar asignaciones</a>
+	</div>
+	<hr>
+</div>
+	
+</body>
+</html>

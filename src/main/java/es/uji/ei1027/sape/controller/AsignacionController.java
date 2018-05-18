@@ -1,5 +1,7 @@
 package es.uji.ei1027.sape.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.AsignacionDAO;
 import es.uji.ei1027.sape.model.Asignacion;
+import es.uji.ei1027.sape.model.UserDetails;
 
 /**
  * Controlador para las asignaciones
@@ -26,6 +29,14 @@ public class AsignacionController {
 	@Autowired
 	public void setAsignacionDao(AsignacionDAO asignacionDao) {
 		this.asignacionDao = asignacionDao;
+	}
+	
+	@RequestMapping("/index")
+	public String indexAsignacion(Model model, HttpSession session){
+		UserDetails user = (UserDetails)session.getAttribute("user");
+		if (user.getType() == 3)
+			return "redirect:/list";
+		return "asignacion/index";
 	}
 	
 	@RequestMapping("/list")
