@@ -19,8 +19,6 @@ public class IndexController {
 		}
 		if (user.getType() == UserDetails.STUDENT)
 			return "estudiante/index";
-		if (user.getType() == UserDetails.BTC)
-			return "btc/index";
-		return "dcc/index";
+		return "btc/index"; //BTC and DCC share index
 	}
 }

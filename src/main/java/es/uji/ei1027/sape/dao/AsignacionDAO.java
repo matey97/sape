@@ -58,6 +58,10 @@ public class AsignacionDAO {
 												+ " WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
 	}
 	
+	public List<Asignacion> getAsignacionByDni(String dni){
+		return this.jdbcTemplate.query("SELECT * FROM Asignacion WHERE dni=?;", new Object[] {dni},new AsignacionMapper());
+	}
+	
 	/**
 	 * Inserta una asignación en la BBDD, y como la clave primaria de dicha tabla es un SERIAL, se consulta posteriormente el id asignado
 	 * @param a -> Asignación a insertar en la BBDD

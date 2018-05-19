@@ -9,17 +9,20 @@
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a th:href="@{/custom_index}">Página principal</a></li>
 	  <li class="breadcrumb-item"><a th:href="@{/asignacion/index}">Asignaciones</a></li>
-	  <li class="breadcrumb-item active">Listado de Asignaciones</li>
+	  <li th:if="*{dni == null}"class="breadcrumb-item active">Listado de Asignaciones</li>
+	  <li th:unless="*{dni == null}"class="breadcrumb-item "><a th:href="@{/asignacion/list}">Listado de Asignaciones</a></li>
+	  <li th:unless="*{dni == null}"class="breadcrumb-item active"><span th:text="*{dni}"></span></li>
 	</ul>
 </div>
 <div layout:fragment="content">
 	<br>
-	<h1>Listado de asignaciones</h1>
+	<h1 th:if="*{dni == null}">Listado de asignaciones</h1>
+	<h1 th:unless="*{dni == null}">Listado de asignaciones del alumno <span th:text="*{dni}"></span></h1>
 	<div style="text-align:center" th:if="${#lists.isEmpty(asignaciones)}">
    		<h2>No hay asignaciones en la base de datos</h2>
     </div>
     <hr>
-    <div class="row">
+    <div th:unless="${#lists.isEmpty(asignaciones)}" class="row">
     <div class="col-sm-7">
      <div class="card">
 	    <div class="card-header">
@@ -40,7 +43,8 @@
   	</div>
    </div>
     <div class="col-sm-5">
-    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+     <input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda"> 
+    	
    </div>
    </div>
   

@@ -18,7 +18,7 @@
    		<h2>No hay estudiantes en la base de datos</h2>
     </div>
     <hr>
-    <div class="row">
+    <div th:unless="${#lists.isEmpty(estudiantes)}" class="row">
     <div class="col-sm-7">
      <div class="card">
 	    <div class="card-header">
@@ -33,7 +33,7 @@
 	        	<li>Por defecto, los estudiantes se ordenan por nota media</li>
 	        	<li>Pulsa sobre la cabecera DNI/Itinerario/Semestre para ordenar alfabeticamente</li>
 	        	<li>Pulsa el botón <i>Preferencias</i> para ver las preferencias de un estudiante</li>
-	        	<li>Pulsa el botón <i>Desbloquear</i> para ver permitir que el estudiante pueda modificar sus preferencias</li>
+	        	<li>Pulsa el botón <i>Asignaciones</i> para ver las asignaciones del estudiante</li>
 	        </ul>
 	      </div>
 	    </div>
@@ -64,8 +64,7 @@
 				<td th:text="${estudiante.itinerario}"></td>
 				<td th:text="${estudiante.semestreInicioEstancia}"></td>
 				<td><a th:href="@{/preferencias/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Preferencias</a></td>
-				<td><a th:if="*{estudiante.bloqueado}" th:href="@{/}" class="btn btn-dark">Desbloquear</a>
-				<td th:unless="*{estudiante.bloqueado}">Bloqueado</td>
+				<td><a th:href="@{/asignacion/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Asignaciones</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -4,6 +4,7 @@
 	<div class="navbar-collapse expand" th:object="${session}">   
 	    <ul th:if="*{user.type == 1}"class="navbar-nav mr-auto">
 	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Ofertas</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Preferencias</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Asignación</a></li>
 	    </ul>
 	    <ul th:if="*{user.type == 2 || user.type == 3}"class="navbar-nav mr-auto">
@@ -13,7 +14,7 @@
 	    	<li class="nav-item"><a class="nav-link" href="/asignacion/index" th:href="@{/asignacion/index}">Asignaciones</a></li>
 	    </ul>
 	    <div class="dropdown show">
-		      <a class="btn btn-secondary dropdown-toggle" href="#"  th:href="@{#}" data-toggle="dropdown">
+		      <a class="btn btn-secondary dropdown-toggle" href="#"  th:href="@{#}" data-toggle="dropdown" style="text-transform:uppercase">
 		         <span th:text="*{user.username}">
 		      </a>
 		      <div class="dropdown-menu">

@@ -35,13 +35,20 @@ public class AsignacionController {
 	public String indexAsignacion(Model model, HttpSession session){
 		UserDetails user = (UserDetails)session.getAttribute("user");
 		if (user.getType() == 3)
-			return "redirect:/list";
+			return "redirect:/asignacion/list";
 		return "asignacion/index";
 	}
 	
 	@RequestMapping("/list")
 	public String listAsignacion(Model model) {
-		model.addAttribute("asignacions", asignacionDao.getAsignacions());
+		model.addAttribute("asignaciones", asignacionDao.getAsignacions());
+		return "asignacion/list";
+	}
+	
+	@RequestMapping("/list/{dni}")
+	public String listAsignacionByDni(Model model, @PathVariable String dni) {
+		model.addAttribute("asignaciones", asignacionDao.getAsignacionByDni(dni));
+		model.addAttribute("dni", dni);
 		return "asignacion/list";
 	}
 	

@@ -9,18 +9,19 @@
 </div>
 <div layout:fragment="content" th:object="${session}">
 	<br>
-	<h1>Hola BTC, bienvenido/a al SAPE</h1>
+	<h1>Hola <span th:if="*{user.type == 2}">BTC</span><span th:unless="*{user.type == 2}">DCC</span>, bienvenido/a al SAPE</h1>
 	<hr>
 	<p align="justify">
 		Bievenido/a al Sistema de soporte a la gestión de la Asignación de Proyectos en Empresas para 
 		la realitzación de estancias en prácticas i trabajo final de grado de Ingeniería en Informática
-		 (SAPE). Podrás realizar las siguientes acciones:
+		 (SAPE). Podrás realizar las siguientes acciones (mantén el ratón sobre una opción para más información):
 	</p>
 	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
-  		<a href="/empresa/list" th:href="@{/empresa/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver información de empresas</a>
-  		<a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" class="list-group-item list-group-item-action list-group-item-dark">Gestionar las ofertas de empresas</a>
-  		<a href="/estudiante/list" th:href="@{/estudiante/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver las preferencias de estudiantes</a>
-  		<a href="/asignacion/index" th:href="@{/asignacion/index}" class="list-group-item list-group-item-action list-group-item-dark">Gestionar asignaciones de proyectos</a>
+  		<a href="/empresa/list" th:href="@{/empresa/list}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás ver las empresas y las ofertas que han realizado">Ver información de empresas</a>
+  		<a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás ver un listado de todas las ofertas además de gestionarlas">Gestionar las ofertas de empresas</a>
+  		<a href="/estudiante/list" th:href="@{/estudiante/list}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás ver un listado de los estudiantes y ver sus preferencias y asignaciones">Listado de estudiantes</a>
+  		<a th:if="*{user.type == 2}"href="/asignacion/index" th:href="@{/asignacion/index}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás crear, consultar, modificar y cancelar asignaciones">Gestionar asignaciones de proyectos</a>
+  		<a th:if="*{user.type == 3}" href="/asignacion/index" th:href="@{/asignacion/index}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás ver un listado de asignaciones">Ver asignaciones de proyectos</a>
 	</div>
 	<hr>
 </div>

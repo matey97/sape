@@ -7,7 +7,9 @@
 <div layout:fragment="pagination">
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
-	  <li class="breadcrumb-item active">Asignaciones</li>
+	  <li th:if="*{cifEmpresa == null}" class="breadcrumb-item active">Ofertas</li>
+	  <li th:unless="*{cifEmpresa == null}" class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li th:unless="*{cifEmpresa == null}" class="breadcrumb-item active"><span th:text="*{cifEmpresa}"></li>
 	</ul>
 </div>
 <div layout:fragment="content" th:object="${session}">
@@ -24,7 +26,7 @@
   		<strong>Éxito!</strong> Los datos han sido modificados correctamente.
     </div>
     
-    <div class="row">
+    <div  th:unless="${#lists.isEmpty(ofertaproyectos)}" class="row">
     <div class="col-sm-7">
      <div class="card">
 	    <div class="card-header">
@@ -38,15 +40,14 @@
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Puedes pulsar sobre algunas cabeceras para ordenar alfabeticamente</li>
 	        	<li>Pulsa el botón <i>Gestionar</i> para acceder a la gestión oferta</li>
-	        	<li>Pulsa el botón <i>Visibilizar</i> para hacer visibles las ofertas aceptadas</li>
+	        	<li th:if="*{user.type == 2}">Pulsa el botón <i>Visibilizar</i> para hacer visibles las ofertas aceptadas</li>
 	        </ul>
 	      </div>
 	    </div>
   	</div>
    </div>
-    <div class="col-sm-5">
-    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda"><br>
-    	
+    <div class="col-sm-5">	
+    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
    </div>
    </div>
     <hr>
@@ -60,7 +61,7 @@
 				<th>Fecha alta</th>
 				<th>Fecha ultimo cambio</th>
 				<th>Itinerario</th>
-				<th><a th:href="@{/}" class="btn btn-warning" >Visibilizar</a></th>
+				<th th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/}" class="btn btn-warning">Visibilizar</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
