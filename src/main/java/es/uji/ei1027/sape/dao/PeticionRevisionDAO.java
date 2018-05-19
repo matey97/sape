@@ -58,8 +58,8 @@ public class PeticionRevisionDAO {
 	 * @param p -> Petición a insertar
 	 */
 	public void addPeticionRevision(PeticionRevision p){
-		this.jdbcTemplate.update("INSERT INTO PeticionRevision(numeroProyecto, fecha, textoPeticion) values (?,?,?);",
-							 p.getNumeroProyecto(), p.getFecha(), p.getTextoPeticion());
+		this.jdbcTemplate.update("INSERT INTO PeticionRevision(numeroProyecto, fecha, textoPeticion) values (?,now(),?);",
+							 p.getNumeroProyecto(), p.getTextoPeticion());
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('PeticionRevision', 'id'))", Integer.class);
 		p.setId(id);
 	}

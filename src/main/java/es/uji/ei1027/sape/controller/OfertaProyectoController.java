@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.OfertaProyectoDAO;
 import es.uji.ei1027.sape.model.OfertaProyecto;
+import es.uji.ei1027.sape.model.PeticionRevision;
 import es.uji.ei1027.services.OfertaProyectoService;
 
 /**
