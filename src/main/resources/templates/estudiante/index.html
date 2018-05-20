@@ -9,8 +9,26 @@
                                     th:href="@{/css/sape.css}"/>
 </head>
 <body>
+<div layout:fragment="pagination">
+
+</div>
 <div layout:fragment="content" th:object="${session}">
 	Soy estudiante
+	<br>
+	<h1>Hola <span th:text="*{user.username}"></span>, bienvenido/a al SAPE</h1>
+	<hr>
+	<p align="justify">
+		Bievenido/a al Sistema de soporte a la gestión de la Asignación de Proyectos en Empresas para 
+		la realitzación de estancias en prácticas i trabajo final de grado de Ingeniería en Informática
+		 (SAPE). Podrás realizar las siguientes acciones:
+	</p>
+	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
+  		<a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver las ofertas de proyectos</a>
+  		<a href="/preferenciaalumno/list" th:href="@{/preferenciaalumno/list}" class="list-group-item list-group-item-action list-group-item-dark">Elegir preferencias</a>
+  		<a href="/asignacion/list" th:href="@{/asignacion/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver tu asignacion</a>
+  		<a href="/" th:href="@{/}" class="list-group-item list-group-item-action list-group-item-dark">Pagina principal</a>
+	</div>
+	<hr>
 </div>
 	
 </body>
