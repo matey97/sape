@@ -9,14 +9,14 @@ body {
 /* Capçalera de nivell 1 */
 h1 {
    font-size: x-large; 
-   color: rgb(40,0,113);
+   color: rgb(0,56,101);
    text-align:center
 }
 
 /* Capçalera de nivell 2 */
 h2 {
    font-size: large; 
-   color: rgb(40,0,113);
+   color: rgb(0,56,101);
 }
 
 /* Classe CSS error */
@@ -42,4 +42,8 @@ h2 {
     text-align: center;
     width:500px
     
+}
+
+#navfont{
+	color:white;
 }

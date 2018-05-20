@@ -1,17 +1,17 @@
 <div>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand" href="/custom_index" th:href="@{/custom_index}">SAPE</a>
+	<a class="navbar-brand" href="/custom_index" th:href="@{/custom_index}"><b>SAPE</b></a>
 	<div class="navbar-collapse expand" th:object="${session}">   
 	    <ul th:if="*{user.type == 1}"class="navbar-nav mr-auto">
-	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Ofertas</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Preferencias</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}">Asignación</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}" id="navfont">Ofertas</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}" id="navfont" >Preferencias</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/" th:href="@{/}" id="navfont">Asignación</a></li>
 	    </ul>
 	    <ul th:if="*{user.type == 2 || user.type == 3}"class="navbar-nav mr-auto">
-	    	<li class="nav-item"><a class="nav-link" href="/empresa/list" th:href="@{/empresa/list}">Empresas</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/estudiante/list" th:href="@{/estudiante/list}">Estudiantes</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/asignacion/index" th:href="@{/asignacion/index}">Asignaciones</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/empresa/list" th:href="@{/empresa/list}" id="navfont">Empresas</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" id="navfont">Ofertas</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/estudiante/list" th:href="@{/estudiante/list}" id="navfont">Estudiantes</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/asignacion/index" th:href="@{/asignacion/index}" id="navfont">Asignaciones</a></li>
 	    </ul>
 	    <div class="dropdown"  style="margin-right:60px">
 		      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" style="text-transform:uppercase">
