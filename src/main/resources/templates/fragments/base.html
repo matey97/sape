@@ -15,8 +15,10 @@
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
 	<!-- app css  -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link th:href="@{/css/sape.css}" href="/css/sape.css"
 	    rel="stylesheet"/>
+	    
     
     <!-- Scripts varios -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -46,7 +48,7 @@
 <title layout:title-pattern="$CONTENT_TITLE">SAPE</title>
 </head>
 
-<body class="container" style="margin:0 auto">
+<body class="container" style="margin:0 auto;margin-top:80px">
     <div th:replace="fragments/nav"></div>
     <div layout:fragment="content"></div>
     
