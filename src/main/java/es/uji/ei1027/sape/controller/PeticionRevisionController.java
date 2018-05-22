@@ -1,5 +1,7 @@
 package es.uji.ei1027.sape.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,18 +36,24 @@ public class PeticionRevisionController {
 		return "peticionrevision/list";
 	}
 	
-	@RequestMapping(value="/add")
-	public String addPeticionRevision(Model model) {
-		model.addAttribute("peticionrevision", new PeticionRevision());
+	@RequestMapping(value="/add/{numeroproyecto}")
+	public String addPeticionRevision(Model model, @PathVariable("numeroproyecto") String numero) {
+		PeticionRevision peticion = new PeticionRevision();
+		peticion.setNumeroProyecto(Integer.valueOf(numero));
+		model.addAttribute("peticionrevision", peticion);
 		return "peticionrevision/add";
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("peticionrevision") PeticionRevision peticionrevision, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
+	@RequestMapping(value="/add/{numeroproyecto}", method=RequestMethod.POST)
+	public String processAddSubmit(@ModelAttribute("peticionrevision") PeticionRevision peticionrevision, BindingResult bindingResult, HttpSession session) {
+		session.setAttribute("result", null);
+		if (bindingResult.hasErrors()) {
+			session.setAttribute("result", "bad");
 			return "peticionrevision/add";
+		}
 		peticionrevisionDao.addPeticionRevision(peticionrevision);
-		return "redirect:list.html";
+		session.setAttribute("result", "ok");
+		return "redirect:/ofertaproyecto/update/"+peticionrevision.getNumeroProyecto();
 	}
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)

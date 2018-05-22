@@ -1,31 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-	<meta charset="UTF-8"/>
-	<title>Añadir peticion de revision</title>
-	<link rel="stylesheet"     
-	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+   <title>Peticion de revision</title>
+
 </head>
 <body>
-	<h2>Nueva oferta de proyecto</h2>
-	<form action="#" th:action="@{/peticionrevision/add}" th:object="${peticionrevision}" method="post">
-		<table>
-			<tr>
-				<td><label>Numero del proyecto</label></td>
-				<td><input type="number" th:field="*{numeroProyecto}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha</label></td>
-				<td><input type="text" th:field="*{fecha}"/></td>
-			</tr>
-			<tr>
-				<td><label>Peticion	</label></td>
-				<td><input type="text" th:field="*{textoPeticion}"/></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Añadir peticion de revision"/></td>
-			</tr>
-		</table>
-	</form>
+	<div layout:fragment="pagination" th:object="${peticionrevision}">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li class="breadcrumb-item" th:unless="*{numeroProyecto == null}"><a href="/ofertaproyecto/update/{numero}" th:href="@{/ofertaproyecto/update/{numero}(numero=${peticionrevision.numeroProyecto})}"><span th:text="*{numeroProyecto}"></span></a>
+	  <li class="breadcrumb-item active">Petición de revisión</li>
+	</ul> 	
+	</div>
+	
+	<div layout:fragment="content" th:object="${session}">
+	
+	<div class="card" style="width:500px;margin:0 auto">
+	<div class="card-body">
+		<h2 class="card-title"  style="text-align:center">Petición de revisión</h2>
+		<div  th:if="*{result == 'bad'}" class="alert alert-danger alert-dismissible fade show">
+    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Ups!</strong> Algo ha ido mal.
+   		</div>
+		<form class="card-body" action="/peticionrevision/add/{numeroproyecto}" th:action="@{/peticionrevision/add/{numeroproyecto}(numeroproyecto=${peticionrevision.numeroProyecto})}"  th:object="${peticionrevision}" method="post">
+			<div class="form-group">
+				<label>Número:</label>
+				<input class="form-control" type="text" th:field="*{numeroProyecto}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Peticion:</label>
+				<textarea class="form-control" rows="7" type="text" th:field="*{textoPeticion}"></textarea>
+			</div>
+			<hr>
+			<div style="text-align:center;color:white">
+			 <button type="submit" class="btn btn-primary">Enviar</button>		 
+			</div>		
+		</form>
+	</div>
+	</div>
+	<br>
+	</div>
+	
+	
 </body>
 </html>
