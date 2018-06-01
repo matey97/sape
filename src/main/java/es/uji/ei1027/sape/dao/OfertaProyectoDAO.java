@@ -36,41 +36,42 @@ public class OfertaProyectoDAO {
 		public OfertaProyecto mapRow(ResultSet rs, int arg1) throws SQLException {
 			OfertaProyecto ofertaproyecto = new OfertaProyecto();
 			ofertaproyecto.setNumero(rs.getInt("numero"));
-			ofertaproyecto.setTarea(rs.getString("tarea"));
+			ofertaproyecto.setTitulo(rs.getString("titulo"));
 			ofertaproyecto.setObjetivo(rs.getString("objetivo"));
 			ofertaproyecto.setEstado(rs.getString("estado"));
 			ofertaproyecto.setFechaAlta(rs.getDate("fechaAlta"));
 			ofertaproyecto.setFechaUltimoCambio(rs.getDate("fechaUltimoCambio"));
 			ofertaproyecto.setItinerario(rs.getString("itinerario"));
 			ofertaproyecto.setIdEstancia(rs.getInt("idEstancia"));
+			ofertaproyecto.setTarea(rs.getString("tarea"));
 			return ofertaproyecto;
 		}
 	}
 	
 	public List<OfertaProyecto> getOfertaProyectos(){
-		return this.jdbcTemplate.query("SELECT numero, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id);", new OfertaProyectoMapper());
+		return this.jdbcTemplate.query("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id);", new OfertaProyectoMapper());
 	}
 	
 	public OfertaProyecto getOfertaProyecto(int numero){
-		return this.jdbcTemplate.queryForObject("SELECT numero, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id)"
+		return this.jdbcTemplate.queryForObject("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id)"
 												+ " WHERE numero = ?;", new Object[]{numero}, new OfertaProyectoMapper());
 	}
 	
 	public List<OfertaProyecto> getOfertasEmpresa(String cif) {
-		return this.jdbcTemplate.query("SELECT DISTINCT numero, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
+		return this.jdbcTemplate.query("SELECT DISTINCT numero,titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
 									"FROM EstadoOferta As eo JOIN OfertaProyecto AS o ON(eo.id = o.estado) JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE e.cif = ?;", new Object[]{cif}, new OfertaProyectoMapper());
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){
-		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,now(),null,?,?);",
-							 o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia());
+		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(titulo, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,now(),null,?,?);",
+							 o.getTitulo(),o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia());
 		int numero = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('OfertaProyecto', 'numero'))", Integer.class);
 		o.setNumero(numero);;
 	}
 	
 	public void updateOfertaProyecto(OfertaProyecto o){
-		this.jdbcTemplate.update("UPDATE OfertaProyecto SET tarea=?, objetivo=?, estado=?,fechaUltimoCambio=now(), itinerario=?, idEstancia=? WHERE numero=?;",
-				o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia(), o.getNumero());
+		this.jdbcTemplate.update("UPDATE OfertaProyecto SET titulo=?, tarea=?, objetivo=?, estado=?,fechaUltimoCambio=now(), itinerario=?, idEstancia=? WHERE numero=?;",
+				o.getTitulo() ,o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia(), o.getNumero());
 	}
 	
 	public void deleteOfertaProyecto(OfertaProyecto o){

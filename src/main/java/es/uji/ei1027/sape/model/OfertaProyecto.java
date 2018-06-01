@@ -10,6 +10,7 @@ import java.sql.Date;
 public class OfertaProyecto {
 
 	int numero;
+	String titulo;
 	String tarea;
 	String objetivo;
 	String estado;
@@ -24,6 +25,14 @@ public class OfertaProyecto {
 	
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getTarea() {
