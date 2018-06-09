@@ -48,6 +48,7 @@ public class OfertaProyectoDAO {
 		}
 	}
 	
+	
 	public List<OfertaProyecto> getOfertaProyectos(){
 		return this.jdbcTemplate.query("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id);", new OfertaProyectoMapper());
 	}
@@ -66,7 +67,7 @@ public class OfertaProyectoDAO {
 		this.jdbcTemplate.update("INSERT INTO OfertaProyecto(titulo, tarea, objetivo, estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia) values (?,?,?,?,now(),null,?,?);",
 							 o.getTitulo(),o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia());
 		int numero = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('OfertaProyecto', 'numero'))", Integer.class);
-		o.setNumero(numero);;
+		o.setNumero(numero);
 	}
 	
 	public void updateOfertaProyecto(OfertaProyecto o){

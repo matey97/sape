@@ -9,11 +9,21 @@ import java.sql.Date;
  */
 public class PreferenciaAlumno {
 
+	int id;
 	int orden;
 	Date fechaUltimoCambio;
 	String estado;
 	String dni;
 	int numeroProyecto;
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getOrden() {
 		return orden;
