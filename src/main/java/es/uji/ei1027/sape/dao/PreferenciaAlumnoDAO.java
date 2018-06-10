@@ -40,7 +40,7 @@ public class PreferenciaAlumnoDAO {
 			preferenciaalumno.setFechaUltimoCambio(rs.getDate("fechaUltimoCambio"));
 			preferenciaalumno.setEstado(rs.getString("estado"));
 			preferenciaalumno.setDni(rs.getString("dni"));
-			preferenciaalumno.setTituloProyecto(rs.getString("tituloProyecto"));
+			preferenciaalumno.setTituloProyecto(rs.getString("titulo"));
 			return preferenciaalumno;
 		}
 	}

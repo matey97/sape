@@ -1,5 +1,7 @@
 package es.uji.ei1027.sape.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.PreferenciaAlumnoDAO;
 import es.uji.ei1027.sape.model.PreferenciaAlumno;
+import es.uji.ei1027.sape.model.UserDetails;
 
 /**
  * Controlador para las preferencias de los alumnos
@@ -29,8 +32,8 @@ public class PreferenciaAlumnoController {
 	}
 	
 	@RequestMapping("/list")
-	public String listPreferenciaAlumnos(Model model) {
-		model.addAttribute("preferenciaalumnos", preferenciaalumnoDao.getPreferenciaAlumnos());
+	public String listPreferenciaAlumnos(Model model, HttpSession session) {
+		model.addAttribute("preferenciaalumno", preferenciaalumnoDao.getPreferenciasAlumno(((UserDetails)session.getAttribute("user")).getDni()));
 		return "preferenciaalumno/list";
 	}
 	
@@ -53,6 +56,16 @@ public class PreferenciaAlumnoController {
 			return "preferenciaalumno/add";
 		preferenciaalumnoDao.addPreferenciaAlumno(preferenciaalumno);
 		return "redirect:list.html";
+	}
+	
+	@RequestMapping("/add/{titulo}")
+	public String addPreferenciaAlumno(Model model, @PathVariable("titulo") String titulo, HttpSession session) {
+		PreferenciaAlumno pref = new PreferenciaAlumno();
+		pref.setTituloProyecto(titulo);
+		pref.setDni(((UserDetails)session.getAttribute("user")).getDni());
+		preferenciaalumnoDao.addPreferenciaAlumno(pref);
+		session.setAttribute("result", "ok");
+		return "redirect:/ofertaproyecto/list";
 	}
 	
 	@RequestMapping(value="/update/{orden}", method=RequestMethod.GET)
