@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Actualizar datos de oferta de proyecto</title>
+
+</head>
+<body>
+	<div layout:fragment="pagination" th:object="${ofertaproyecto}">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li class="breadcrumb-item active"><span th:text="${numeroOferta}"></span>
+	</ul> 	
+	</div>
+	<div layout:fragment="content" th:object="${session}">
+	
+	<div class="card" style="width:500px;margin:0 auto">
+	<div class="card-body">
+		<h2 class="card-title"  style="text-align:center">Datos de la oferta</h2>
+		
+		<div class="card-body" th:object="${ofertaproyecto}">
+			<div class="form-group">
+				<label>Número:</label>
+				<input class="form-control" type="text" th:field="*{numero}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Titulo:</label>
+				<input class="form-control" type="text" th:field="*{titulo}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Tarea:</label>
+				<input class="form-control" type="text" th:field="*{tarea}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Objetivo:</label>
+				<textarea class="form-control" rows="7" type="text" th:field="*{objetivo}" readonly="readonly"></textarea>
+			</div>
+			<div class="form-group">
+				<label>Estado:</label>
+				<input class="form-control" th:field="*{estado}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha de alta:</label>
+				<input class="form-control" type="text" th:field="*{fechaAlta}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha de último cambio:</label>
+				<input class="form-control" type="text" th:field="*{fechaUltimoCambio}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Itinerario:</label>
+				<input class="form-control" type="text" th:field="*{itinerario}" readonly="readonly">
+			</div>
+			<div class="form-group">
+				<label>Empresa</label>
+				<input class="form-control" type="text" th:field="*{empresa}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Ciudad</label>
+				<input class="form-control" type="text" th:field="*{ciudad}" readonly="readonly"/>
+			</div>
+			<hr>
+			<div style="text-align:center;color:white">
+			 <a  href="/" th:href="@{/}" class="btn btn-primary">Añadir a preferencias</a>
+			</div>
+			
+	</div>
+	</div>
+	</div>
+	<br>
+	</div>
+	
+	
+</body>
+</html>

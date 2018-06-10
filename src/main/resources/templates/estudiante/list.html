@@ -63,7 +63,7 @@
 				<td th:text="${estudiante.notaMedia}"></td>
 				<td th:text="${estudiante.itinerario}"></td>
 				<td th:text="${estudiante.semestreInicioEstancia}"></td>
-				<td><a th:href="@{/preferencias/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Preferencias</a></td>
+				<td><a th:href="@{/preferenciaalumno/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Preferencias</a></td>
 				<td><a th:href="@{/asignacion/list/{dni}(dni=${estudiante.dni})}" class="btn btn-dark">Asignaciones</a></td>
 			</tr>
 		</tbody>

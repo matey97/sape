@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.uji.ei1027.sape.dao.OfertaProyectoDAO;
 import es.uji.ei1027.sape.model.OfertaProyecto;
 import es.uji.ei1027.sape.model.PeticionRevision;
+import es.uji.ei1027.sape.model.UserDetails;
 import es.uji.ei1027.services.OfertaProyectoService;
 
 /**
@@ -43,15 +44,27 @@ public class OfertaProyectoController {
 	@RequestMapping("/list")
 	public String listOfertaProyecto(Model model, HttpSession session) {
 		session.setAttribute("result", null);
-		model.addAttribute("ofertaproyectos", ofertaproyectoDao.getOfertaProyectos());
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		if (user.getDni() != null) {
+			model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasParaEstudiante(user.getDni()));
+		}else {
+			model.addAttribute("ofertaproyectos", ofertaproyectoDao.getOfertaProyectos());
+		}
 		return "ofertaproyecto/list";
 	}
 	
 	@RequestMapping("/list/{cif}")
 	public String listOfertaEmpresa(Model model, @PathVariable String cif) {
 		model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasDeEmpresa(cif));
-		model.addAttribute("cifEmpresa", cif);
+		model.addAttribute("cif", cif);
 		return "ofertaproyecto/list";
+	}
+	
+	@RequestMapping("/{numeroOferta}")
+	public String detallesOfertaEmpresa(Model model, @PathVariable String numeroOferta) {
+		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(Integer.valueOf(numeroOferta)));
+		model.addAttribute("numeroOferta", numeroOferta);
+		return "ofertaproyecto/detalle";
 	}
 	
 	@RequestMapping(value="/add")

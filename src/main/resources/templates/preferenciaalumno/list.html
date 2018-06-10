@@ -1,36 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-	<meta charset="UTF-8" />
-	<title>Gestión de preferencias</title>
-	<link rel="stylesheet"     
-	    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+	
+	<title>Preferencias</title>
+	
 </head>
-<body>
-	<h1>Listado de preferencias</h1>
-	<table>
-		<thread>
+<body th:object="${session}">
+	<div layout:fragment="pagination" >
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li th:if="*{user.type == 1}"class="breadcrumb-item active">Preferencias</li>
+	  <li th:unless="*{user.type == 1}" class="breadcrumb-item"><a href="/estudiante/list" th:href="@{/estudiante/list}">Estudiantes</a></li>
+	  <li th:unless="*{user.type == 1}" class="breadcrumb-item active"><span style="text-transform:capitalize" th:text="${dni}"></span></li>
+	</ul>
+	</div>
+	
+	<div layout:fragment="content">
+		<br>
+		<h1 th:if="*{user.type == 1}">Listado de tus preferencias</h1>
+		<h1 th:unless="*{user.type == 1}">Listado de preferencias de <span style="text-transform:capitalize" th:text="${dni}"></span></h1>
+		<div style="text-align:center" th:if="${#lists.isEmpty(preferenciaalumno)}">
+	   		<h2>No hay preferencias seleccionadas</h2>
+	    </div>
+	    <hr>
+	
+	
+		<div  th:unless="${#lists.isEmpty(preferenciaalumno)}" class="row">
+	    <div class="col-sm-7">
+	     <div class="card">
+		    <div class="card-header">
+		      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+		        Haz click para una pequeña descripción de uso
+		      </a>
+		    </div>
+		    <div id="collapseOne" class="collapse" data-parent="#accordion"  th:object="${session}">
+		      <div class="card-body">
+		        <ul>
+		        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
+		        	<li>Puedes pulsar sobre algunas cabeceras para ordenar alfabeticamente</li>
+		        	<li th:if="*{user.type == 2}">Pulsa el botón <i>Crear asignación</i> para asignar una oferta al alumno</li>
+		        </ul>
+		      </div>
+		    </div>
+	  	</div>
+	   </div>
+	   <div class="col-sm-5">	
+	    	<input class="form-control" id="myInput" type="text" placeholder="Introduce tu búsqueda">
+	   </div>
+	   </div>
+	   <hr>
+	   
+	   <div class="table-responsive">
+		<table th:unless="${#lists.isEmpty(preferenciaalumno)}" class="table table-striped table-bordered sortable">
+		<thead class="thead-dark">
 			<tr>
-				<th>Orden</th>
-				<th>Fecha ultimo cambio</th>
+				<th data-defaultsort="asc">Orden</th>
+				<th>Titulo de Proyecto</th>
 				<th>Estado</th>
-				<th>DNI</th>
-				<th>Numero de proyecto</th>
+				<th>Fecha de cambio</th>
+				<th th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/}" class="btn btn-primary">Crear asignación</a></th>
 			</tr>
-		</thread>
-		<tbody>
-			<tr th:each="preferenciaalumno: ${preferenciaalumnos}">
-				<td th:text="${preferenciaalumno.orden}"></td>
-				<td th:text="${preferenciaalumno.fechaUltimoCambio}"></td>
-				<td th:text="${preferenciaalumno.estado}"></td>
-				<td th:text="${preferenciaalumno.dni}"></td>
-				<td th:text="${preferenciaalumno.numeroProyecto}"></td>
-				<td><a th:href="@{/preferenciaalumno/update/{orden}(orden=${preferenciaalumno.orden})}">Edita</a></td>
-				<td><a th:href="@{/preferenciaalumno/delete/{orden}(orden=${preferenciaalumno.orden})}">Borra</a></td>
+		</thead>
+		<tbody id="myTable">
+			<tr th:each="preferencia: ${preferenciaalumno}">
+				<td th:text="${preferencia.orden}"></td>
+				<td th:text="${preferencia.tituloProyecto}"></td>
+				<td th:text="${preferencia.estado}"></td>
+				<td th:text="${preferencia.fechaUltimoCambio}"></td>
 			</tr>
 		</tbody>
-	</table>
-	<a href="add.html">Añadir preferencia</a><br></br>
-	<a href="/">Página principal</a>
+		</table>
+		</div>
+	</div>
 </body>
 </html>

@@ -35,13 +35,13 @@ public class DataInsertDAO {
 													{"J8637345C", "Luis Miguel Macias Guitart", "lmiguel@gmail.com", "Capacitar vortals de classe mundial"},
 													{"J8637345C", "Luis Miguel Macias Guitart", "lmiguel@gmail.com", "Capacitar vortals de classe mundial"}};
 	
-	private String[][] ofertas = new String[][] {{"Organització de la tercera generació","Objetivo...","2","Tecnologías de la Comunicación","1"},
-												{"Iniciativa direccional implementada","Objetivo...","2","Ingeniería de Software","2"},
+	private String[][] ofertas = new String[][] {{"Organització de la tercera generació","Objetivo...","2","Tecnologías de la Información","1"},
+												{"Iniciativa direccional implementada","Objetivo...","2","Ingeniería del Software","2"},
 												{"Funció dinàmica orientada a l'equip","Objetivo...","2","Ingeniería de computadores","3"},
 												{"Existència contextualitzada d'intel·ligència artificial","Objetivo...","2","Sistemas de Información","4"},
-												{"Orquestració asíncrona preventiva","Objetivo...","2","Tecnologías de la Comunicación","5"},
+												{"Orquestració asíncrona preventiva","Objetivo...","2","Tecnologías de la Información","5"},
 												{"Aplicació sistèmica autònoma","Objetivo...","2","Ingeniería de computadores","6"},
-												{"Força de treball coherent distribuïda","Objetivo...","2","Ingeniería de Software","7"}};
+												{"Força de treball coherent distribuïda","Objetivo...","2","Ingeniería del Software","7"}};
 												
 	private String[] estados = new String[] {"Sin Definir",
 												"Introducida",

@@ -7,12 +7,12 @@
 <div layout:fragment="pagination">
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
-	  <li th:if="*{cifEmpresa == null}" class="breadcrumb-item active">Ofertas</li>
-	  <li th:unless="*{cifEmpresa == null}" class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
-	  <li th:unless="*{cifEmpresa == null}" class="breadcrumb-item active"><span th:text="*{cifEmpresa}"></li>
+	  <li th:if="*{cif == null}" class="breadcrumb-item active">Ofertas</li>
+	  <li th:unless="*{cif == null}" class="breadcrumb-item"><a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}">Ofertas</a></li>
+	  <li th:unless="*{cif == null}" class="breadcrumb-item active"><span th:text="*{cif}"></span></li>
 	</ul>
 </div>
-<div layout:fragment="content" th:object="${session}">
+<div layout:fragment="content">
 	
 	<br>
 	<h1 th:if="*{cif == null}">Listado de ofertas de proyectos</h1>
@@ -21,7 +21,7 @@
    		<h2>No hay ofertas en la base de datos</h2>
     </div>
     <hr>
-    <div th:if="*{result == 'ok' and cif == null}" class="alert alert-success alert-dismissible fade show">
+    <div th:if="*{result == 'ok'}" class="alert alert-success alert-dismissible fade show">
     	<button type="button" class="close" data-dismiss="alert">&times;</button>
   		<strong>Éxito!</strong> Los datos han sido modificados correctamente.
     </div>
@@ -34,13 +34,13 @@
 	        Haz click para una pequeña descripción de uso
 	      </a>
 	    </div>
-	    <div id="collapseOne" class="collapse" data-parent="#accordion">
+	    <div id="collapseOne" class="collapse" data-parent="#accordion"  th:object="${session}">
 	      <div class="card-body">
 	        <ul>
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Puedes pulsar sobre algunas cabeceras para ordenar alfabeticamente</li>
-	        	<li th:if="*{cif == null}">Pulsa el botón <i>Gestionar</i> para acceder a la gestión oferta</li>
-	        	<li th:unless="*{cif == null}">Selecciona solo 5 ofertas.</li>
+	        	<li th:if="*{user.type == 1}">Pulsa en <i>Detalles</i> para ver mñas información de la oferta</li>
+	        	<li th:unless="*{user.type == 1}">Pulsa el botón <i>Gestionar</i> para acceder a la gestión oferta</li>
 	        	<li th:if="*{user.type == 2}">Pulsa el botón <i>Visibilizar</i> para hacer visibles las ofertas aceptadas</li>
 	        </ul>
 	      </div>
@@ -52,55 +52,28 @@
    </div>
    </div>
     <hr>
-    <div th:if="*{cif == null}" class="table-responsive">
+    <div class="table-responsive"  th:object="${session}">
 	<table th:unless="${#lists.isEmpty(ofertaproyectos)}" class="table table-striped table-bordered sortable">
 		<thead class="thead-dark">
 			<tr>
-				<th data-defaultsort="disabled">Tarea</th>
-				<th>Estado</th>
-				<th>Fecha alta</th>
-				<th>Fecha ultimo cambio</th>
-				<th>Itinerario</th>
+				<th data-defaultsort="disabled">Titulo</th>
+				<th th:unless="*{user.type == 1}">Estado</th>
+				<th>Empresa</th>
+				<th>Ciudad</th>
+				<th th:unless="*{user.type == 1}">Itinerario</th>
 				<th th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/}" class="btn btn-warning">Visibilizar</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
 			<tr th:each="ofertaproyecto: ${ofertaproyectos}">
-				<td th:text="${ofertaproyecto.tarea}"></td>
-				<td th:text="${ofertaproyecto.estado}"></td>
-				<td th:text="${ofertaproyecto.fechaAlta}"></td>
-				<td th:text="${ofertaproyecto.fechaUltimoCambio}"></td>
-				<td th:text="${ofertaproyecto.itinerario}"></td>
-				<td><a th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
+				<td th:text="${ofertaproyecto.titulo}"></td>
+				<td th:unless="*{user.type == 1}" th:text="${ofertaproyecto.estado}"></td>
+				<td th:text="${ofertaproyecto.empresa}"></td>
+				<td th:text="${ofertaproyecto.ciudad}"></td>
+				<td th:unless="*{user.type == 1}" th:text="${ofertaproyecto.itinerario}"></td>
+				<td th:unless="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
+				<td style="text-align:center" th:if="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Detalles</a></td>
 			</tr>
-		</tbody>
-	</table>
-	</div>
-	<div th:unless="*{cif == null}" class="table-responsive">
-	<table th:unless="${#lists.isEmpty(ofertaproyectos)}" class="table table-striped table-bordered sortable">
-		<thead class="thead-dark">
-			<tr>
-				<th data-defaultsort="disabled">Seleccionar Tarea</th>
-				<th>Estado</th>
-				<th>Fecha alta</th>
-				<th>Fecha ultimo cambio</th>
-				<th>Itinerario</th>
-				<th>Orden</th>
-			</tr>
-		</thead>
-		<tbody id="myTable">
-			<form th:each="ofertaproyecto: ${ofertaproyectos}">
-			<tr>
-				<td th:text="${ofertaproyecto.tarea}"></td>
-				<td th:text="${ofertaproyecto.estado}"></td>
-				<td th:text="${ofertaproyecto.fechaAlta}"></td>
-				<td th:text="${ofertaproyecto.fechaUltimoCambio}"></td>
-				<td th:text="${ofertaproyecto.itinerario}"></td>
-				<input type="hidden" value="test">      
-				<td><a th:href="@{/preferenciaalumno/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Seleccionar</a></td>
-			</tr>
-			</form>
-			
 		</tbody>
 	</table>
 	</div>

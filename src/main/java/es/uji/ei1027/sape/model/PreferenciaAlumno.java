@@ -14,7 +14,7 @@ public class PreferenciaAlumno {
 	Date fechaUltimoCambio;
 	String estado;
 	String dni;
-	int numeroProyecto;
+	String tituloProyecto;
 
 	
 	public int getId() {
@@ -57,17 +57,17 @@ public class PreferenciaAlumno {
 		this.dni = dni;
 	}
 
-	public int getNumeroProyecto() {
-		return numeroProyecto;
+	public String getTituloProyecto() {
+		return tituloProyecto;
 	}
 
-	public void setNumeroProyecto(int numeroProyecto) {
-		this.numeroProyecto = numeroProyecto;
+	public void setTituloProyecto(String tituloProyecto) {
+		this.tituloProyecto = tituloProyecto;
 	}
 
 	@Override
 	public String toString() {
 		return "PreferenciaAlumno [orden=" + orden + ", fechaUltimoCambio=" + fechaUltimoCambio + ", estado=" + estado + ", dni=" + dni + ", numeroProyecto=" 
-				+ numeroProyecto + "]";
+				+ tituloProyecto + "]";
 	}
 }

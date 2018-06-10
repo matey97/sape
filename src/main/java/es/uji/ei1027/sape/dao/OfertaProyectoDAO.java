@@ -44,23 +44,32 @@ public class OfertaProyectoDAO {
 			ofertaproyecto.setItinerario(rs.getString("itinerario"));
 			ofertaproyecto.setIdEstancia(rs.getInt("idEstancia"));
 			ofertaproyecto.setTarea(rs.getString("tarea"));
+			ofertaproyecto.setEmpresa(rs.getString("nombre"));
+			ofertaproyecto.setCiudad(rs.getString("población"));
 			return ofertaproyecto;
 		}
 	}
 	
 	
 	public List<OfertaProyecto> getOfertaProyectos(){
-		return this.jdbcTemplate.query("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id);", new OfertaProyectoMapper());
+		return this.jdbcTemplate.query("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia, nombre, población " +
+				"FROM Empresa AS e JOIN Estancia AS es ON(e.cif = es.cifEmpresa) JOIN OfertaProyecto AS o ON(es.id = o.idEstancia) JOIN EstadoOferta AS eo ON(o.estado = eo.id)", new OfertaProyectoMapper());
 	}
 	
 	public OfertaProyecto getOfertaProyecto(int numero){
-		return this.jdbcTemplate.queryForObject("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia FROM OfertaProyecto AS o JOIN EstadoOferta AS eo ON(o.estado = eo.id)"
+		return this.jdbcTemplate.queryForObject("SELECT numero, titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia, nombre, población " +
+						"FROM Empresa AS e JOIN Estancia AS es ON(e.cif = es.cifEmpresa) JOIN OfertaProyecto AS o ON(es.id = o.idEstancia) JOIN EstadoOferta AS eo ON(o.estado = eo.id)"
 												+ " WHERE numero = ?;", new Object[]{numero}, new OfertaProyectoMapper());
 	}
 	
 	public List<OfertaProyecto> getOfertasEmpresa(String cif) {
-		return this.jdbcTemplate.query("SELECT DISTINCT numero,titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia "+
+		return this.jdbcTemplate.query("SELECT DISTINCT numero,titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia, e.nombre, e.población "+
 									"FROM EstadoOferta As eo JOIN OfertaProyecto AS o ON(eo.id = o.estado) JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE e.cif = ?;", new Object[]{cif}, new OfertaProyectoMapper());
+	}
+	
+	public List<OfertaProyecto> getOfertasItinerario(String itinerario){
+		return this.jdbcTemplate.query("SELECT DISTINCT numero,titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia, e.nombre, e.población "+
+				"FROM EstadoOferta As eo JOIN OfertaProyecto AS o ON(eo.id = o.estado) JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE lower(itinerario) = ?;", new Object[]{itinerario}, new OfertaProyectoMapper());
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){

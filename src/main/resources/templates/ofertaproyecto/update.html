@@ -31,6 +31,10 @@
 				<input class="form-control" type="text" th:field="*{numero}" readonly="readonly"/>
 			</div>
 			<div class="form-group">
+				<label>Titulo:</label>
+				<input class="form-control" type="text" th:field="*{titulo}"/>
+			</div>
+			<div class="form-group">
 				<label>Tarea:</label>
 				<input class="form-control" type="text" th:field="*{tarea}"/>
 			</div>
@@ -41,11 +45,11 @@
 			<div class="form-group">
 				<label>Estado:</label>
 				<select class="form-control" th:field="*{estado}">
-					<option value="1">Sin definir</option>
-					<option value="2">Introducida</option>
-					<option value="3">Pendiente de revisión</option>
-					<option value="4">Aceptada</option>
-					<option value="5">Rechazada</option>
+					<option value="Sin Definir">Sin definir</option>
+					<option value="Introducida">Introducida</option>
+					<option value="Pendiente revision">Pendiente de revisión</option>
+					<option value="Aceptada">Aceptada</option>
+					<option value="Rechazada">Rechazada</option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -59,22 +63,25 @@
 			<div class="form-group">
 				<label>Itinerario:</label>
 				<select class="form-control" type="text" th:field="*{itinerario}">
-					<option value="Software">Ingeniería de Software</option>
-					<option value="Sistemas">Sistemas de Información</option>
-					<option value="Tecnologias">Tecnologías de la comunicación</option>
-					<option value="Computadores">Ingeniería de Computadores</option>
+					<option value="Ingeniería del Software">Ingeniería del Software</option>
+					<option value="Sistemas de Información">Sistemas de Información</option>
+					<option value="Tecnologías de la Información">Tecnologías de la información</option>
+					<option value="Ingeniería de computadores">Ingeniería de Computadores</option>
 				</select>
 			</div>
 			<div class="form-group">
-				<label>Id estancia</label>
-				<input class="form-control" type="text" th:field="*{idEstancia}" readonly="readonly"/>
+				<label>Empresa</label>
+				<input class="form-control" type="text" th:field="*{empresa}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Ciudad</label>
+				<input class="form-control" type="text" th:field="*{ciudad}" readonly="readonly"/>
 			</div>
 			<hr>
 			<div style="text-align:center;color:white">
 			 <button type="submit" class="btn btn-primary">Actualizar</button>
-			 <a href="/peticionrevision/add/{numeroProyecto}" th:href="@{/peticionrevision/add/{numeroProyecto}(numeroProyecto=${ofertaproyecto.numero})}" class="btn btn-danger">Petición revisión</a>
-			 <a class="btn btn-primary">Hacer visible</a>
-			 
+			 <a th:if="${session.user.type == 2}" href="/peticionrevision/add/{numeroProyecto}" th:href="@{/peticionrevision/add/{numeroProyecto}(numeroProyecto=${ofertaproyecto.numero})}" class="btn btn-danger">Petición revisión</a>
+			 <a th:if="${session.user.type == 2}" class="btn btn-primary">Hacer visible</a>
 			</div>
 			
 	</form>

@@ -29,8 +29,15 @@ public class PreferenciaAlumnoController {
 	}
 	
 	@RequestMapping("/list")
-	public String listPreferenciaAlumno(Model model) {
+	public String listPreferenciaAlumnos(Model model) {
 		model.addAttribute("preferenciaalumnos", preferenciaalumnoDao.getPreferenciaAlumnos());
+		return "preferenciaalumno/list";
+	}
+	
+	@RequestMapping("/list/{dni}")
+	public String listPreferenciaAlumno(Model model, @PathVariable String dni) {
+		model.addAttribute("preferenciaalumno", preferenciaalumnoDao.getPreferenciasAlumno(dni));
+		model.addAttribute("dni", dni);
 		return "preferenciaalumno/list";
 	}
 	
