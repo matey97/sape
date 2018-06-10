@@ -69,7 +69,7 @@ public class OfertaProyectoDAO {
 	
 	public List<OfertaProyecto> getOfertasItinerario(String itinerario){
 		return this.jdbcTemplate.query("SELECT DISTINCT numero,titulo, tarea, objetivo, eo.estado, fechaAlta, fechaUltimoCambio, itinerario, idEstancia, e.nombre, e.población "+
-				"FROM EstadoOferta As eo JOIN OfertaProyecto AS o ON(eo.id = o.estado) JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE lower(itinerario) = ?;", new Object[]{itinerario}, new OfertaProyectoMapper());
+				"FROM EstadoOferta As eo JOIN OfertaProyecto AS o ON(eo.id = o.estado) JOIN Estancia AS es ON (o.idEstancia = es.id) JOIN Empresa AS e ON (e.cif = es.cifEmpresa) WHERE lower(itinerario) = ? AND eo.estado = 'Visible a alumnos';", new Object[]{itinerario}, new OfertaProyectoMapper());
 	}
 	
 	public void addOfertaProyecto(OfertaProyecto o){
@@ -80,8 +80,9 @@ public class OfertaProyectoDAO {
 	}
 	
 	public void updateOfertaProyecto(OfertaProyecto o){
+		int estado = this.jdbcTemplate.queryForObject("SELECT id FROM EstadoOferta WHERE estado = ?;", Integer.class, o.getEstado());
 		this.jdbcTemplate.update("UPDATE OfertaProyecto SET titulo=?, tarea=?, objetivo=?, estado=?,fechaUltimoCambio=now(), itinerario=?, idEstancia=? WHERE numero=?;",
-				o.getTitulo() ,o.getTarea(), o.getObjetivo(), o.getEstado(), o.getItinerario(), o.getIdEstancia(), o.getNumero());
+				o.getTitulo() ,o.getTarea(), o.getObjetivo(), estado, o.getItinerario(), o.getIdEstancia(), o.getNumero());
 	}
 	
 	public void deleteOfertaProyecto(OfertaProyecto o){
