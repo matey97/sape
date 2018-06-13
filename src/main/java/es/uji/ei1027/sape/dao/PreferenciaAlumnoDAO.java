@@ -61,8 +61,8 @@ public class PreferenciaAlumnoDAO {
 	
 	public void addPreferenciaAlumno(PreferenciaAlumno p){
 		int numero = this.jdbcTemplate.queryForObject("SELECT numero FROM OfertaProyecto WHERE titulo = ?;", Integer.class, p.getTituloProyecto());
-		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto) values (?,?,?,?,?);",
-							p.getOrden(), p.getFechaUltimoCambio(), p.getEstado(), p.getDni(), numero);
+		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto) values (?,?,'abierta',?,?);",
+							p.getOrden(), p.getFechaUltimoCambio(), p.getDni(), numero);
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('PreferenciaAlumno', 'id'))", Integer.class);
 		p.setId(id);;
 	}

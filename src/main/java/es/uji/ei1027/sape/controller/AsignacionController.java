@@ -52,8 +52,8 @@ public class AsignacionController {
 		return "asignacion/list";
 	}
 	
-	@RequestMapping(value="/add")
-	public String addAsignacion(Model model) {
+	@RequestMapping(value="/add/{dni}")
+	public String addAsignacion(Model model, @PathVariable String dni) {
 		model.addAttribute("asignacion", new Asignacion());
 		return "asignacion/add";
 	}

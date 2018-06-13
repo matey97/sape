@@ -62,7 +62,7 @@
 				<th>Titulo de Proyecto</th>
 				<th>Estado</th>
 				<th>Fecha de cambio</th>
-				<th style="text-align:center" th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/}" class="btn btn-primary">Crear asignación</a></th>
+				<th style="text-align:center" th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/asignacion/add/{dni}(dni=${dni})}" class="btn btn-primary">Crear asignación</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
