@@ -59,6 +59,11 @@ public class PreferenciaAlumnoDAO {
 				+ " WHERE dni = ?;", new Object[]{dni}, new PreferenciaAlumnoMapper());
 	}
 	
+	public List<PreferenciaAlumno> getPreferenciasFinalesAlumno(String dni){
+		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, op.titulo FROM OfertaProyecto as op JOIN PreferenciaAlumno as pa ON(pa.numeroProyecto = op.numero)"
+				+ " WHERE dni = ? AND (orden BETWEEN 1 AND 5) AND op.estado = 6 ORDER BY orden ASC;", new Object[]{dni}, new PreferenciaAlumnoMapper());
+	}
+	
 	public void addPreferenciaAlumno(PreferenciaAlumno p){
 		int numero = this.jdbcTemplate.queryForObject("SELECT numero FROM OfertaProyecto WHERE titulo = ?;", Integer.class, p.getTituloProyecto());
 		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto) values (?,?,'abierta',?,?);",

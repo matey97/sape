@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.AsignacionDAO;
+import es.uji.ei1027.sape.dao.PreferenciaAlumnoDAO;
+import es.uji.ei1027.sape.dao.ProfesorTutorDAO;
 import es.uji.ei1027.sape.model.Asignacion;
 import es.uji.ei1027.sape.model.UserDetails;
 
@@ -25,10 +27,22 @@ import es.uji.ei1027.sape.model.UserDetails;
 public class AsignacionController {
 
 	private AsignacionDAO asignacionDao;
+	private PreferenciaAlumnoDAO preferenciaalumnoDao;
+	private ProfesorTutorDAO tutorDao;
 	
 	@Autowired
 	public void setAsignacionDao(AsignacionDAO asignacionDao) {
 		this.asignacionDao = asignacionDao;
+	}
+	
+	@Autowired
+	public void setPreferenciaAlumnoDao(PreferenciaAlumnoDAO preferenciaalumnoDao) {
+		this.preferenciaalumnoDao = preferenciaalumnoDao;
+	}
+	
+	@Autowired
+	public void setProfesorTutorDao(ProfesorTutorDAO tutorDao) {
+		this.tutorDao = tutorDao;
 	}
 	
 	@RequestMapping("/index")
@@ -54,7 +68,12 @@ public class AsignacionController {
 	
 	@RequestMapping(value="/add/{dni}")
 	public String addAsignacion(Model model, @PathVariable String dni) {
-		model.addAttribute("asignacion", new Asignacion());
+		Asignacion a = new Asignacion();
+		a.setDni(dni);
+		model.addAttribute("asignacion", a);
+		model.addAttribute("dni", dni);
+		model.addAttribute("preferencias", preferenciaalumnoDao.getPreferenciasFinalesAlumno(dni));
+		model.addAttribute("tutores", tutorDao.getProfesoresTutores());
 		return "asignacion/add";
 	}
 	
