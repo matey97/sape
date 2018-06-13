@@ -15,12 +15,14 @@
 	<h1>Asignaciones</h1>
 	<hr>
 	<p align="justify">
-		Como BTC puedes crear asignaciones seleccionando la opción <i>Crear asignación</i> y consultarlas con la opción <i>Consultar asignación</i>.
+		Como BTC puedes crear asignaciones seleccionando la opción <i>Crear asignación</i> y consultarlas con la opción <i>Gestionar asignaciones</i>.
 		Al consultar las asignaciónes podrás modificarlas o anularlas.
 	</p>
 	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
-  		<a href="/asignacion/add" th:href="@{/asignacion/add}" class="list-group-item list-group-item-action list-group-item-dark">Crear asignación</a>
-  		<a href="/asignacion/list" th:href="@{/asignacion/list}" class="list-group-item list-group-item-action list-group-item-dark">Consultar asignaciones</a>
+  		<a href="/estudiante/list" th:href="@{/estudiante/list}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Seleccionarás un alumno para asignarle una oferta y un tutor">
+  		Crear asignación<hr> <font size=2><b>Se te redirigirá al listado de estudiantes para que compruebes las preferencias del alumno que quieres asignar si lo necesitas.</b></font>
+  		</a>
+  		<a href="/asignacion/list" th:href="@{/asignacion/list}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="tooltip" title="Podrás consultar, modificar y anular asignaciones">Gestionar asignaciones</a>
 	</div>
 	<hr>
 </div>

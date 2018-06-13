@@ -88,4 +88,8 @@ public class OfertaProyectoDAO {
 	public void deleteOfertaProyecto(OfertaProyecto o){
 		this.jdbcTemplate.update("DELETE FROM OfertaProyecto WHERE numero=?;", o.getNumero());
 	}
+	
+	public void visibilizaOfertas() {
+		this.jdbcTemplate.update("UPDATE OfertaProyecto SET estado = 6 WHERE estado = 4;");
+	}
 }

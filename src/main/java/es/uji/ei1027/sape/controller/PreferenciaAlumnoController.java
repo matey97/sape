@@ -25,6 +25,7 @@ import es.uji.ei1027.sape.model.UserDetails;
 public class PreferenciaAlumnoController {
 
 	private PreferenciaAlumnoDAO preferenciaalumnoDao;
+	private static int count=0;
 	
 	@Autowired
 	public void setPreferenciaAlumnoDao(PreferenciaAlumnoDAO preferenciaalumnoDao) {
@@ -33,6 +34,13 @@ public class PreferenciaAlumnoController {
 	
 	@RequestMapping("/list")
 	public String listPreferenciaAlumnos(Model model, HttpSession session) {
+		String result = (String)session.getAttribute("result");
+		if (result != null && count == 0) {
+			count++;
+		}else {
+			count = 0;
+			session.setAttribute("result", null);
+		}
 		model.addAttribute("preferenciaalumno", preferenciaalumnoDao.getPreferenciasAlumno(((UserDetails)session.getAttribute("user")).getDni()));
 		return "preferenciaalumno/list";
 	}
@@ -65,7 +73,7 @@ public class PreferenciaAlumnoController {
 		pref.setDni(((UserDetails)session.getAttribute("user")).getDni());
 		preferenciaalumnoDao.addPreferenciaAlumno(pref);
 		session.setAttribute("result", "ok");
-		return "redirect:/ofertaproyecto/list";
+		return "redirect:/preferenciaalumno/list";
 	}
 	
 	@RequestMapping(value="/update/{orden}", method=RequestMethod.GET)

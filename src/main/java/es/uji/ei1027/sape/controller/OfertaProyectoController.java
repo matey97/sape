@@ -43,7 +43,7 @@ public class OfertaProyectoController {
 	
 	@RequestMapping("/list")
 	public String listOfertaProyecto(Model model, HttpSession session) {
-		session.setAttribute("result", null);
+		//session.setAttribute("result", null);
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		if (user.getDni() != null) {
 			model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasParaEstudiante(user.getDni()));
@@ -65,6 +65,12 @@ public class OfertaProyectoController {
 		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(Integer.valueOf(numeroOferta)));
 		model.addAttribute("numeroOferta", numeroOferta);
 		return "ofertaproyecto/detalle";
+	}
+	
+	@RequestMapping("/visibiliza")
+	public String visibilizaOferta(Model model,  HttpSession session) {
+		ofertaproyectoDao.visibilizaOfertas();
+		return "redirect:/ofertaproyecto/list";
 	}
 	
 	@RequestMapping(value="/add")
