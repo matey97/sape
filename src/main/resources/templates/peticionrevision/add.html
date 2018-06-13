@@ -31,6 +31,7 @@
 			<div class="form-group">
 				<label>Peticion:</label>
 				<textarea class="form-control" rows="7" type="text" th:field="*{textoPeticion}"></textarea>
+				<div class="error" th:if="${#fields.hasErrors('textoPeticion')}" th:errors="*{textoPeticion}"></div>
 			</div>
 			<hr>
 			<div style="text-align:center;color:white">

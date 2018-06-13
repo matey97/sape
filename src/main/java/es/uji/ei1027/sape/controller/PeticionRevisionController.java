@@ -48,6 +48,8 @@ public class PeticionRevisionController {
 	@RequestMapping(value="/add/{numeroproyecto}", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("peticionrevision") PeticionRevision peticionrevision, BindingResult bindingResult, HttpSession session) {
 		session.setAttribute("result", null);
+		PeticionRevisionValidator validator = new PeticionRevisionValidator();
+		validator.validate(peticionrevision, bindingResult);
 		if (bindingResult.hasErrors()) {
 			session.setAttribute("result", "bad");
 			return "peticionrevision/add";
