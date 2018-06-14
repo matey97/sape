@@ -14,6 +14,7 @@ public class PreferenciaAlumno {
 	Date fechaUltimoCambio;
 	String estado;
 	String dni;
+	int numeroProyecto;
 	String tituloProyecto;
 
 	
@@ -57,6 +58,14 @@ public class PreferenciaAlumno {
 		this.dni = dni;
 	}
 
+	public int getNumeroProyecto() {
+		return numeroProyecto;
+	}
+
+	public void setNumeroProyecto(int numeroProyecto) {
+		this.numeroProyecto = numeroProyecto;
+	}
+	
 	public String getTituloProyecto() {
 		return tituloProyecto;
 	}

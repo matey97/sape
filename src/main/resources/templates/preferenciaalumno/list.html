@@ -60,11 +60,11 @@
 		<thead class="thead-dark">
 			<tr>
 				<th data-defaultsort="asc">Orden</th>
-				<th>Seleccionar</th>
 				<th>Titulo de Proyecto</th>
 				<th>Estado</th>
 				<th>Fecha de cambio</th>
-				<th style="text-align:center" th:if="*{user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/asignacion/add/{dni}(dni=${dni})}" class="btn btn-primary">Crear asignación</a></th>
+				<th>Seleccionar</th>
+				<th style="text-align:center" th:if="${session.user.type == 2}"  data-defaultsort="disabled"><a th:href="@{/asignacion/add/{dni}(dni=${dni})}" class="btn btn-primary">Crear asignación</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
@@ -84,7 +84,7 @@
 				  		<option value="6">6</option>
 					</select></td>
 			</tr>
-			<tr><td><input type="submit" value="Actualizar"/></td></tr>
+			<tr th:if="${session.user.type == 1}"><td><button type="submit" class="btn btn-primary">Actualizar</button></td></tr>
 		</tbody>
 		</table>
 		</form>

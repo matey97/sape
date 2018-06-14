@@ -40,34 +40,35 @@ public class PreferenciaAlumnoDAO {
 			preferenciaalumno.setFechaUltimoCambio(rs.getDate("fechaUltimoCambio"));
 			preferenciaalumno.setEstado(rs.getString("estado"));
 			preferenciaalumno.setDni(rs.getString("dni"));
+			preferenciaalumno.setNumeroProyecto(rs.getInt("numeroProyecto"));
 			preferenciaalumno.setTituloProyecto(rs.getString("titulo"));
 			return preferenciaalumno;
 		}
 	}
 	
 	public List<PreferenciaAlumno> getPreferenciaAlumnos(){
-		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);", new PreferenciaAlumnoMapper());
+		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);", new PreferenciaAlumnoMapper());
 	}
 	
 	public PreferenciaAlumno getPreferenciaAlumno(int orden){
-		return this.jdbcTemplate.queryForObject("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);"
+		return this.jdbcTemplate.queryForObject("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);"
 												+ " WHERE orden = ?;", new Object[]{orden}, new PreferenciaAlumnoMapper());
 	}
 	
 	public List<PreferenciaAlumno> getPreferenciasAlumno(String dni){
-		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, op.titulo FROM OfertaProyecto as op JOIN PreferenciaAlumno as pa ON(pa.numeroProyecto = op.numero)"
+		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM OfertaProyecto as op JOIN PreferenciaAlumno as pa ON(pa.numeroProyecto = op.numero)"
 				+ " WHERE dni = ?;", new Object[]{dni}, new PreferenciaAlumnoMapper());
 	}
 	
 	public List<PreferenciaAlumno> getPreferenciasFinalesAlumno(String dni){
-		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, op.titulo FROM OfertaProyecto as op JOIN PreferenciaAlumno as pa ON(pa.numeroProyecto = op.numero)"
+		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM OfertaProyecto as op JOIN PreferenciaAlumno as pa ON(pa.numeroProyecto = op.numero)"
 				+ " WHERE dni = ? AND (orden BETWEEN 1 AND 5) AND op.estado = 6 ORDER BY orden ASC;", new Object[]{dni}, new PreferenciaAlumnoMapper());
 	}
 	
 	public void addPreferenciaAlumno(PreferenciaAlumno p){
-		int numero = this.jdbcTemplate.queryForObject("SELECT numero FROM OfertaProyecto WHERE titulo = ?;", Integer.class, p.getTituloProyecto());
+		//String titulo = this.jdbcTemplate.queryForObject("SELECT titulo FROM OfertaProyecto WHERE numero = ?;", String.class, p.getNumeroProyecto());
 		this.jdbcTemplate.update("INSERT INTO PreferenciaAlumno(orden, fechaUltimoCambio, estado, dni, numeroProyecto) values (?,?,'abierta',?,?);",
-							p.getOrden(), p.getFechaUltimoCambio(), p.getDni(), numero);
+							p.getOrden(), p.getFechaUltimoCambio(), p.getDni(), p.getNumeroProyecto());
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('PreferenciaAlumno', 'id'))", Integer.class);
 		p.setId(id);;
 	}

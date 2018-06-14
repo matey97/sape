@@ -67,8 +67,8 @@ public class AsignacionDAO {
 	 * @param a -> Asignación a insertar en la BBDD
 	 */
 	public void addAsignacion(Asignacion a){
-		this.jdbcTemplate.update("INSERT INTO Asignacion(fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto) values (?,?,?,?,?,?,?,?,?);",
-							 a.getFechaPropuesta(), a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto());
+		this.jdbcTemplate.update("INSERT INTO Asignacion(fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto) values (now(),?,?,?,?,?,?,?,?);",
+							 a.getFechaAceptacion(), a.getFechaRechazo(), a.getFechaTraspasoIGLU(), a.getComentarioPetCambio(), a.getEstadoAceptadaRechazada(), a.getDni(), a.getIdTutor(), a.getNumeroProyecto());
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('Asignacion', 'id'))", Integer.class);
 		a.setId(id);
 	}

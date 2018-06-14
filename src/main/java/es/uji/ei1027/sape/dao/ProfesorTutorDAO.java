@@ -34,7 +34,7 @@ public class ProfesorTutorDAO {
 		@Override
 		public ProfesorTutor mapRow(ResultSet rs, int arg1) throws SQLException {
 			ProfesorTutor profesor = new ProfesorTutor();
-			profesor.setId(rs.getInt("id"));
+			profesor.setId(rs.getString("id"));
 			profesor.setNombre(rs.getString("nombre"));
 			profesor.setDepartamento(rs.getString("departamento"));
 			profesor.setDespacho(rs.getString("despacho"));
@@ -60,7 +60,7 @@ public class ProfesorTutorDAO {
 		this.jdbcTemplate.update("INSERT INTO ProfesorTutor(id,nombre,departamento,despacho,email) values (DEFAULT,?,?,?,?);",
 								p.getNombre(), p.getDepartamento(), p.getDespacho(), p.getEmail());
 		int id = this.jdbcTemplate.queryForObject("SELECT currval(pg_get_serial_sequence('ProfesorTutor', 'id'))", Integer.class);
-		p.setId(id);
+		p.setId(String.valueOf(id));
 	}
 	
 	public void updateProfesorTutor(ProfesorTutor p){

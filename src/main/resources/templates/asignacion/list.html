@@ -8,10 +8,12 @@
 <div layout:fragment="pagination">
 	<ul class="breadcrumb">
 	  <li class="breadcrumb-item"><a th:href="@{/custom_index}">Página principal</a></li>
-	  <li class="breadcrumb-item"><a th:href="@{/asignacion/index}">Asignaciones</a></li>
+	  <li th:unless="*{session.user.type == 1}" class="breadcrumb-item"><a th:href="@{/asignacion/index}">Asignaciones</a></li>
+	  <li th:if="*{session.user.type == 1}" class="breadcrumb-item active">Asignaciones</li>
 	  <li th:if="*{dni == null}"class="breadcrumb-item active">Listado de Asignaciones</li>
-	  <li th:unless="*{dni == null}"class="breadcrumb-item "><a th:href="@{/asignacion/list}">Listado de Asignaciones</a></li>
-	  <li th:unless="*{dni == null}"class="breadcrumb-item active"><span th:text="*{dni}"></span></li>
+	  <li th:if="*{session.user.type == 1}" th:unless="*{dni == null}"class="breadcrumb-item active">Listado de Asignaciones</li>
+	  <li th:if="*{session.user.type == 1}" th:unless="*{dni == null}"class="breadcrumb-item active"><span th:text="*{dni}"></span></li>
+	  <li th:unless="*{session.user.type == 1 && dni != null}" class="breadcrumb-item active"><span th:text="*{dni}"></span></li>
 	</ul>
 </div>
 <div layout:fragment="content">
@@ -21,11 +23,8 @@
 	<div style="text-align:center" th:if="${#lists.isEmpty(asignaciones)}">
    		<h2>No hay asignaciones en la base de datos</h2>
     </div>
-    <div style="text-align:center" th:if="${dni != null and not #lists.isEmpty(asignaciones) and #lists.isEmpty(asignaciones/dni)}" >
-   		<h2>No se te ha asignado todavia ninguna oferta.</h2>
-    </div>
     <hr>
-    <div th:unless="${#lists.isEmpty(asignaciones) and dni == null}" class="row">
+    <div th:unless="${#lists.isEmpty(asignaciones)}" class="row">
     <div class="col-sm-7">
      <div class="card">
 	    <div class="card-header">
@@ -38,8 +37,7 @@
 	        <ul>
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Haz click sobre una cabecera para ordenar alfabeticamente dicha columna, si está disponible</li>
-	        	<li>Pulsa el botón <i>Modificar</i> para modificar la asignacion</li>
-	        	<li>Pulsa el botón <i>Anular</i> para anular la asignacion</li>
+	        	<li>Pulsa el botón <i>Detalles</i> para ver más información de la asignación</li>
 	        </ul>
 	      </div>
 	    </div>
@@ -52,19 +50,13 @@
    </div>
   
   	<hr>
-    <div th:if="*{dni == null}" class="table-responsive">
+    <div class="table-responsive">
 	<table th:unless="${#lists.isEmpty(asignaciones)}" class="table table-striped table-bordered sortable">
 		<thead class="thead-dark">
 			<tr>
 				<th>DNI</th>
 				<th>ID del tutor</th>
 				<th>Numero del proyecto</th>
-				<th>Fecha Propuesta</th>
-				<th>Fecha Aceptacion</th>
-				<th>Fecha Rechazo</th>
-				<th>Fecha Traspaso IGLU</th>
-				<th>Peticion</th>
-				<th>Estado</th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
@@ -72,49 +64,11 @@
 				<td th:text="${asignacion.dni}"></td>
 				<td th:text="${asignacion.idTutor}"></td>
 				<td th:text="${asignacion.numeroProyecto}"></td>
-				<td th:text="${asignacion.fechaPropuesta}"></td>
-				<td th:text="${asignacion.fechaAceptacion}"></td>
-				<td th:text="${asignacion.fechaRechazo}"></td>
-				<td th:text="${asignacion.fechaTraspasoIGLU}"></td>
-				<td th:text="${asignacion.comentarioPetCambio}"></td>
-				<td th:text="${asignacion.estadoAceptadaRechazada}"></td>
-				<td><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}">Modificar</a></td>
-				<td><a th:href="@{/asignacion/delete/{id}(id=${asignacion.id})}">Anular</a></td>
+				<td style="text-align:center"><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}" class="btn btn-dark">Gestionar</a></td>
 			</tr>
 		</tbody>
 	</table>
 	</div>
-	
-    <div th:if="*{dni != null}" class="table-responsive">
-	<table th:unless="${#lists.isEmpty(asignaciones)}" class="table table-striped table-bordered sortable">
-		<thead class="thead-dark">
-			<tr>
-				<th>DNI</th>
-				<th>ID del tutor</th>
-				<th>Numero del proyecto</th>
-				<th>Fecha Propuesta</th>
-				<th>Fecha Aceptacion</th>
-				<th>Fecha Rechazo</th>
-				<th>Fecha Traspaso IGLU</th>
-				<th>Peticion</th>
-				<th>Estado</th>
-			</tr>
-		</thead>
-		<tbody id="myTable">
-			<tr th:each="asignacion: ${asignaciones/dni}">
-				<td th:text="${asignacion.dni}"></td>
-				<td th:text="${asignacion.idTutor}"></td>
-				<td th:text="${asignacion.numeroProyecto}"></td>
-				<td th:text="${asignacion.fechaPropuesta}"></td>
-				<td th:text="${asignacion.fechaAceptacion}"></td>
-				<td th:text="${asignacion.fechaRechazo}"></td>
-				<td th:text="${asignacion.fechaTraspasoIGLU}"></td>
-				<td th:text="${asignacion.comentarioPetCambio}"></td>
-				<td th:text="${asignacion.estadoAceptadaRechazada}"></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>	
 	
 </div>
 </body>

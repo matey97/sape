@@ -66,11 +66,12 @@ public class PreferenciaAlumnoController {
 		return "redirect:list.html";
 	}
 	
-	@RequestMapping("/add/{titulo}")
-	public String addPreferenciaAlumno(Model model, @PathVariable("titulo") String titulo, HttpSession session) {
+	@RequestMapping("/add/{numeroProyecto}")
+	public String addPreferenciaAlumno(Model model, @PathVariable("numeroProyecto") String numero, HttpSession session) {
 		PreferenciaAlumno pref = new PreferenciaAlumno();
-		pref.setTituloProyecto(titulo);
+		pref.setNumeroProyecto(Integer.valueOf(numero));
 		pref.setDni(((UserDetails)session.getAttribute("user")).getDni());
+		pref.setOrden(99);
 		preferenciaalumnoDao.addPreferenciaAlumno(pref);
 		session.setAttribute("result", "ok");
 		return "redirect:/preferenciaalumno/list";

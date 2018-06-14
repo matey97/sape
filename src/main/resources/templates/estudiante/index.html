@@ -25,7 +25,7 @@
 	<div class="list-group shadow p-4 mb-4 bg-white" style="text-align:center">
   		<a href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver las ofertas de proyectos</a>
   		<a href="/preferenciaalumno/list" th:href="@{/preferenciaalumno/list}" class="list-group-item list-group-item-action list-group-item-dark">Gestionar preferencias</a>
-  		<a href="/asignacion/list" th:href="@{/asignacion/list}" class="list-group-item list-group-item-action list-group-item-dark">Ver asignación</a>
+  		<a href="/asignacion/list{dni}" th:href="@{/asignacion/list/{dni}(dni=*{user.dni})}" class="list-group-item list-group-item-action list-group-item-dark">Ver asignación</a>
 	</div>
 	<hr>
 </div>

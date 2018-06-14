@@ -5,7 +5,7 @@
 	    <ul th:if="*{user.type == 1}"class="navbar-nav mr-auto">
 	    	<li class="nav-item"><a class="nav-link" href="/ofertaproyecto/list" th:href="@{/ofertaproyecto/list}" id="navfont">Ofertas</a></li>
 	    	<li class="nav-item"><a class="nav-link" href="/preferenciaalumno/list" th:href="@{/preferenciaalumno/list}" id="navfont" >Preferencias</a></li>
-	    	<li class="nav-item"><a class="nav-link" href="/asignacion/list" th:href="@{/asignacion/list}" id="navfont">Asignación</a></li>
+	    	<li class="nav-item"><a class="nav-link" href="/asignacion/list/{dni}" th:href="@{/asignacion/list/{dni}(dni=*{user.dni})}" id="navfont">Asignación</a></li>
 	    </ul>
 	    <ul th:if="*{user.type == 2 || user.type == 3}"class="navbar-nav mr-auto">
 	    	<li class="nav-item"><a class="nav-link" href="/empresa/list" th:href="@{/empresa/list}" id="navfont">Empresas</a></li>

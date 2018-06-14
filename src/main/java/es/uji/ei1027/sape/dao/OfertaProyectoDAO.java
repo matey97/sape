@@ -92,4 +92,12 @@ public class OfertaProyectoDAO {
 	public void visibilizaOfertas() {
 		this.jdbcTemplate.update("UPDATE OfertaProyecto SET estado = 6 WHERE estado = 4;");
 	}
+	
+	public void ofertaAsignada(int id) {
+		this.jdbcTemplate.update("UPDATE OfertaProyecto SET estado = 7 WHERE numero = ?", id);
+	}
+	
+	public void ofertaDesasginada(int id) {
+		this.jdbcTemplate.update("UPDATE OfertaProyecto SET estado = 6 WHERE numero = ?", id);
+	}
 }

@@ -19,6 +19,10 @@ h2 {
    color: rgb(0,56,101);
 }
 
+h6 {
+	color: rgb(0,56,101);
+}
+
 /* Classe CSS error */
 .error {
      color: red;

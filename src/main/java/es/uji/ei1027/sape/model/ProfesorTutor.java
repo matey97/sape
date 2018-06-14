@@ -7,16 +7,16 @@ package es.uji.ei1027.sape.model;
  */
 public class ProfesorTutor {
 	
-	int id;
+	String id;
 	String nombre;
 	String departamento;
 	String despacho;
 	String email;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNombre() {

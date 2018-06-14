@@ -11,6 +11,7 @@ import es.uji.ei1027.sape.model.EstadoOferta;
 import es.uji.ei1027.sape.model.Estancia;
 import es.uji.ei1027.sape.model.Estudiante;
 import es.uji.ei1027.sape.model.OfertaProyecto;
+import es.uji.ei1027.sape.model.ProfesorTutor;
 import es.uji.ei1027.sape.model.UserDetails;
 
 @Repository
@@ -22,6 +23,8 @@ public class DataInsertDAO {
 	private static final boolean INSERT_ESTADOS = false;
 	private static final boolean INSERT_ESTUDIANTES = false;
 	private static final boolean INSERT_USUARIOS = false;
+	private static final boolean INSERT_TUTORES = false;
+	
 	private String[][] empresas= new String[][] {{"Cantón, Amaya and Llopis","G90423351","C/ Cantón Nº4","Castelló","792804601"},
 										{"Pinto Inc","A24092579","C/ Vilavella Nº24","Castelló","728420369"},
 										{"Rius-Giménez","H28869931","C/ Hernan Cortes Nº14","Burriana","664584177"},
@@ -66,6 +69,18 @@ public class DataInsertDAO {
 													{"silvia", "silvia", "35717650F", "1"},
 													{"btc", "btc", null, "2"},
 													{"dcc", "dcc", null, "3"}};
+													
+	private String[][] tutores = new String[][] {{"Daniel David Campuzano", "Sistemas y Lenguajes Informáticos", "TI2001", "ddavid@uji.es"},
+													{"Josep Torrecilla Pradas", "Ingeniería y Ciencia de los Computadores", "TI2002", "jtorrez@uji.es"},
+													{"Nicolás Rodenas Mauri", "Sistemas y Lenguajes Informáticos", "TI2003", "nrodenas@uji.es"},
+													{"Alberto Sendra Parejo", "Ingeniería y Ciencia de los Computadores", "TI2004", "asendra@uji.es"},
+													{"Eduardo Lacalle Matilla", "Sistemas y Lenguajes Informáticos", "TI2005", "elacalle@uji.es"},
+													{"Maria Elena Nieto Dios", "Ingeniería y Ciencia de los Computadores", "TI2006", "mnieto@uji.es"},
+													{"Inés Palma Lacalle", "Sistemas y Lenguajes Informáticos", "TI2007", "ipalma@uji.es"},
+													{"Sandra Bertran Sendra", "Sistemas y Lenguajes Informáticos", "TI2008", "sbertran@uji.es"},
+													{"Carolina Poza Cerro", "Ingeniería y Ciencia de los Computadores", "TI2009", "cpoza@uji.es"},
+													{"Nerea Medina MArtinez", "Ingeniería y Ciencia de los Computadores", "TI2010", "nmedina@uji.es"}};
+	
 	@Autowired
 	private EmpresaDAO empresaDAO;
 	@Autowired
@@ -78,6 +93,8 @@ public class DataInsertDAO {
 	private EstudianteDAO estudianteDAO;
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private ProfesorTutorDAO tutorDao;
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -99,6 +116,8 @@ public class DataInsertDAO {
 			insertEstudiantes();
 		if (INSERT_USUARIOS)
 			insertUsuarios();
+		if (INSERT_TUTORES)
+			insertTutores();
 	}
 	
 	private void insertEmpresas() {
@@ -174,6 +193,18 @@ public class DataInsertDAO {
 			userDAO.addUser(u);
 		}
 		System.out.println("Usuarios añadidos.");
+	}
+	
+	private void insertTutores() {
+		for (String[] tutor : tutores) {
+			ProfesorTutor t = new ProfesorTutor();
+			t.setNombre(tutor[0]);
+			t.setDepartamento(tutor[1]);
+			t.setDespacho(tutor[2]);
+			t.setEmail(tutor[3]);
+			tutorDao.addProfesorTutor(t);
+		}
+		System.out.println("Tutores añadidos.");
 	}
 
 }

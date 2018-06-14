@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uji.ei1027.sape.dao.AsignacionDAO;
+import es.uji.ei1027.sape.dao.OfertaProyectoDAO;
 import es.uji.ei1027.sape.dao.PreferenciaAlumnoDAO;
 import es.uji.ei1027.sape.dao.ProfesorTutorDAO;
 import es.uji.ei1027.sape.model.Asignacion;
@@ -29,6 +30,7 @@ public class AsignacionController {
 	private AsignacionDAO asignacionDao;
 	private PreferenciaAlumnoDAO preferenciaalumnoDao;
 	private ProfesorTutorDAO tutorDao;
+	private OfertaProyectoDAO ofertaDao;
 	
 	@Autowired
 	public void setAsignacionDao(AsignacionDAO asignacionDao) {
@@ -43,6 +45,11 @@ public class AsignacionController {
 	@Autowired
 	public void setProfesorTutorDao(ProfesorTutorDAO tutorDao) {
 		this.tutorDao = tutorDao;
+	}
+	
+	@Autowired
+	public void setOfertaProyectoDao(OfertaProyectoDAO ofertaDao) {
+		this.ofertaDao = ofertaDao;
 	}
 	
 	@RequestMapping("/index")
@@ -77,12 +84,13 @@ public class AsignacionController {
 		return "asignacion/add";
 	}
 	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/add/{dni}", method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("asignacion") Asignacion asignacion, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "asignacion/add";
 		asignacionDao.addAsignacion(asignacion);
-		return "redirect:list.html";
+		ofertaDao.ofertaAsignada(asignacion.getNumeroProyecto());
+		return "redirect:/asignacion/list";
 	}
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
