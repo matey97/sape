@@ -32,6 +32,8 @@ public class AsignacionController {
 	private ProfesorTutorDAO tutorDao;
 	private OfertaProyectoDAO ofertaDao;
 	
+	private static int count=0;
+	
 	@Autowired
 	public void setAsignacionDao(AsignacionDAO asignacionDao) {
 		this.asignacionDao = asignacionDao;
@@ -61,13 +63,27 @@ public class AsignacionController {
 	}
 	
 	@RequestMapping("/list")
-	public String listAsignacion(Model model) {
+	public String listAsignacion(Model model, HttpSession session) {
+		String result = (String)session.getAttribute("result");
+		if (result != null && count == 0) {
+			count++;
+		}else {
+			count = 0;
+			session.setAttribute("result", null);
+		}
 		model.addAttribute("asignaciones", asignacionDao.getAsignacions());
 		return "asignacion/list";
 	}
 	
 	@RequestMapping("/list/{dni}")
-	public String listAsignacionByDni(Model model, @PathVariable String dni) {
+	public String listAsignacionByDni(Model model, @PathVariable String dni, HttpSession session) {
+		String result = (String)session.getAttribute("result");
+		if (result != null && count == 0) {
+			count++;
+		}else {
+			count = 0;
+			session.setAttribute("result", null);
+		}
 		model.addAttribute("asignaciones", asignacionDao.getAsignacionByDni(dni));
 		model.addAttribute("dni", dni);
 		return "asignacion/list";
@@ -85,11 +101,12 @@ public class AsignacionController {
 	}
 	
 	@RequestMapping(value="/add/{dni}", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("asignacion") Asignacion asignacion, BindingResult bindingResult) {
+	public String processAddSubmit(@ModelAttribute("asignacion") Asignacion asignacion, BindingResult bindingResult, HttpSession session) {
 		if (bindingResult.hasErrors())
 			return "asignacion/add";
 		asignacionDao.addAsignacion(asignacion);
 		ofertaDao.ofertaAsignada(asignacion.getNumeroProyecto());
+		session.setAttribute("result", "ok");
 		return "redirect:/asignacion/list";
 	}
 	

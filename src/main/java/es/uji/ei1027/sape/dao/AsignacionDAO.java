@@ -43,23 +43,26 @@ public class AsignacionDAO {
 			asignacion.setComentarioPetCambio(rs.getString("comentarioPetCambio"));
 			asignacion.setEstadoAceptadaRechazada(rs.getString("estadoAceptadaRechazada"));
 			asignacion.setDni(rs.getString("dni"));
+			asignacion.setNombreEstudiante(rs.getString("nombreA"));
 			asignacion.setIdTutor(rs.getInt("idTutor"));
+			asignacion.setNombreTutor(rs.getString("nombreT"));
 			asignacion.setNumeroProyecto(rs.getInt("numeroProyecto"));
+			asignacion.setTitulo(rs.getString("titulo"));
 			return asignacion;
 		}
 	}
 	
 	public List<Asignacion> getAsignacions(){
-		return this.jdbcTemplate.query("SELECT id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto FROM Asignacion;", new AsignacionMapper());
+		return this.jdbcTemplate.query("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero);", new AsignacionMapper());
 	}
 	
 	public Asignacion getAsignacion(int id){
-		return this.jdbcTemplate.queryForObject("SELECT id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, dni, idTutor, numeroProyecto FROM Asignacion"
+		return this.jdbcTemplate.queryForObject("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero)"
 												+ " WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
 	}
 	
 	public List<Asignacion> getAsignacionByDni(String dni){
-		return this.jdbcTemplate.query("SELECT * FROM Asignacion WHERE dni=?;", new Object[] {dni},new AsignacionMapper());
+		return this.jdbcTemplate.query("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero) WHERE dni=?;", new Object[] {dni},new AsignacionMapper());
 	}
 	
 	/**

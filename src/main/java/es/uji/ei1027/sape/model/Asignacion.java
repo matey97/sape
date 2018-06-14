@@ -17,8 +17,11 @@ public class Asignacion {
 	String comentarioPetCambio;
 	String estadoAceptadaRechazada;
 	String dni;
+	String nombreEstudiante;
 	int idTutor;
+	String nombreTutor;
 	int numeroProyecto;
+	String titulo;
 	
 	public int getId() {
 		return id;
@@ -100,6 +103,30 @@ public class Asignacion {
 
 	public void setNumeroProyecto(int numeroProyecto) {
 		this.numeroProyecto = numeroProyecto;
+	}
+
+	public String getNombreEstudiante() {
+		return nombreEstudiante;
+	}
+
+	public void setNombreEstudiante(String nombreEstudiante) {
+		this.nombreEstudiante = nombreEstudiante;
+	}
+
+	public String getNombreTutor() {
+		return nombreTutor;
+	}
+
+	public void setNombreTutor(String nombreTutor) {
+		this.nombreTutor = nombreTutor;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	@Override

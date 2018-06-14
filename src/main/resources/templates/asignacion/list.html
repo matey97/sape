@@ -23,7 +23,14 @@
 	<div style="text-align:center" th:if="${#lists.isEmpty(asignaciones)}">
    		<h2>No hay asignaciones en la base de datos</h2>
     </div>
+    
     <hr>
+    
+    <div th:if="*{result == 'ok'}" class="alert alert-success alert-dismissible fade show">
+	    	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	  		<strong>Éxito!</strong> La acción se ha completado correctamente.
+	</div>
+    
     <div th:unless="${#lists.isEmpty(asignaciones)}" class="row">
     <div class="col-sm-7">
      <div class="card">
@@ -55,15 +62,15 @@
 		<thead class="thead-dark">
 			<tr>
 				<th>DNI</th>
-				<th>ID del tutor</th>
-				<th>Numero del proyecto</th>
+				<th>Tutor</th>
+				<th>Proyecto</th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
 			<tr th:each="asignacion: ${asignaciones}">
-				<td th:text="${asignacion.dni}"></td>
-				<td th:text="${asignacion.idTutor}"></td>
-				<td th:text="${asignacion.numeroProyecto}"></td>
+				<td th:text="${asignacion.nombreEstudiante}"></td>
+				<td th:text="${asignacion.nombreTutor}"></td>
+				<td th:text="${asignacion.titulo}"></td>
 				<td style="text-align:center"><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}" class="btn btn-dark">Gestionar</a></td>
 			</tr>
 		</tbody>
