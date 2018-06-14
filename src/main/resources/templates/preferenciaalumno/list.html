@@ -55,10 +55,12 @@
 	   <hr>
 	   
 	   <div class="table-responsive">
+	   <form action="#" th:action="@{/preferenciaalumno/update/{orden}}" th:object="${preferenciaalumno}" method="post">
 		<table th:unless="${#lists.isEmpty(preferenciaalumno)}" class="table table-striped table-bordered sortable">
 		<thead class="thead-dark">
 			<tr>
 				<th data-defaultsort="asc">Orden</th>
+				<th>Seleccionar</th>
 				<th>Titulo de Proyecto</th>
 				<th>Estado</th>
 				<th>Fecha de cambio</th>
@@ -71,9 +73,21 @@
 				<td th:text="${preferencia.tituloProyecto}"></td>
 				<td th:text="${preferencia.estado}"></td>
 				<td th:text="${preferencia.fechaUltimoCambio}"></td>
+				<td>
+					<select id="orden" name="orden">
+				  		<option value="${preferencia.orden}" selected="selected">selecciona</option>
+				  		<option value="1">1</option>
+				  		<option value="2">2</option>
+				  		<option value="3">3</option>
+				  		<option value="4">4</option>
+				  		<option value="5">5</option>
+				  		<option value="6">6</option>
+					</select></td>
 			</tr>
+			<tr><td><input type="submit" value="Actualizar"/></td></tr>
 		</tbody>
 		</table>
+		</form>
 		</div>
 	</div>
 </body>
