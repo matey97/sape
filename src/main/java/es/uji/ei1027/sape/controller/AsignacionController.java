@@ -130,4 +130,18 @@ public class AsignacionController {
 		asignacionDao.deleteAsignacion(asignacion);
 		return "redirect:../list";
 	}
+	
+	@RequestMapping("/aceptar/{id}")
+	public String acepta(@PathVariable String id,HttpSession session) {
+		asignacionDao.aceptaAsignacion(Integer.valueOf(id));
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		return "redirect:/asignacion/list/"+user.getDni();
+	}
+	
+	@RequestMapping("/rechazar/{id}")
+	public String rechaza(@PathVariable String id,HttpSession session) {
+		asignacionDao.rechazaAsignacion(Integer.valueOf(id));
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		return "redirect:/asignacion/list/"+user.getDni();
+	}
 }

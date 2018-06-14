@@ -62,7 +62,7 @@ public class AsignacionDAO {
 	}
 	
 	public List<Asignacion> getAsignacionByDni(String dni){
-		return this.jdbcTemplate.query("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero) WHERE dni=?;", new Object[] {dni},new AsignacionMapper());
+		return this.jdbcTemplate.query("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero) WHERE a.dni=?;", new Object[] {dni},new AsignacionMapper());
 	}
 	
 	/**
@@ -83,5 +83,13 @@ public class AsignacionDAO {
 	
 	public void deleteAsignacion(Asignacion a){
 		this.jdbcTemplate.update("DELETE FROM Asignacion WHERE id=?;", a.getId());
+	}
+	
+	public void aceptaAsignacion(int id) {
+		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'aceptada' WHERE id = ?;", id);
+	}
+	
+	public void rechazaAsignacion(int id) {
+		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'rechazada' WHERE id = ?;", id);
 	}
 }

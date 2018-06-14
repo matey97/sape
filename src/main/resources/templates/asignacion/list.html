@@ -64,6 +64,7 @@
 				<th>DNI</th>
 				<th>Tutor</th>
 				<th>Proyecto</th>
+				<th th:if="*{dni == null}" style="text-align:center"><a th:href="@{/}" class="btn btn-warning">Traspasar a IGLU</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
@@ -71,7 +72,14 @@
 				<td th:text="${asignacion.nombreEstudiante}"></td>
 				<td th:text="${asignacion.nombreTutor}"></td>
 				<td th:text="${asignacion.titulo}"></td>
-				<td style="text-align:center"><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}" class="btn btn-dark">Gestionar</a></td>
+				<div th:if="${asignacion.estadoAceptadaRechazada == null}">
+					<td th:if="${session.user.type == 1}" style="text-align:center"><a class="btn btn-primary" th:href="@{/asignacion/aceptar/{id}(id=${asignacion.id})}">Aceptar</a></td>
+					<td th:if="${session.user.type == 1}" style="text-align:center"><a class="btn btn-danger" th:href="@{/asignacion/rechazar/{id}(id=${asignacion.id})}">Rechazar</a></td>
+				</div>
+				<div th:unless="${asignacion.estadoAceptadaRechazada == null}">
+					<td th:if="${session.user.type == 1}"><span th:text="${asignacion.estadoAceptadaRechazada}"></span></td>
+				</div>
+				<td th:if="${session.user.type == 2}" style="text-align:center"><a th:href="@{/asignacion/update/{id}(id=${asignacion.id})}" class="btn btn-dark">Gestionar</a></td>
 			</tr>
 		</tbody>
 	</table>
