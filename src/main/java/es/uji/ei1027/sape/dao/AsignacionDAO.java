@@ -58,7 +58,7 @@ public class AsignacionDAO {
 	
 	public Asignacion getAsignacion(int id){
 		return this.jdbcTemplate.queryForObject("SELECT a.id, fechaPropuesta, fechaAceptacion, fechaRechazo, fechaTraspasoIGLU, comentarioPetCambio, estadoAceptadaRechazada, a.dni, e.nombre AS nombreA, idTutor, t.nombre AS nombreT, numeroProyecto, op.titulo FROM Asignacion AS a JOIN Estudiante AS e ON(a.dni=e.dni) JOIN ProfesorTutor AS t ON(a.idTutor=t.id) JOIN OfertaProyecto AS op ON(a.numeroProyecto=op.numero)"
-												+ " WHERE id = ?;", new Object[]{id}, new AsignacionMapper());
+												+ " WHERE a.id = ?;", new Object[]{id}, new AsignacionMapper());
 	}
 	
 	public List<Asignacion> getAsignacionByDni(String dni){
@@ -86,10 +86,10 @@ public class AsignacionDAO {
 	}
 	
 	public void aceptaAsignacion(int id) {
-		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'aceptada' WHERE id = ?;", id);
+		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'aceptada', fechaaceptacion = now() WHERE id = ?;", id);
 	}
 	
 	public void rechazaAsignacion(int id) {
-		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'rechazada' WHERE id = ?;", id);
+		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'rechazada' fecharechazo = now() WHERE id = ?;", id);
 	}
 }

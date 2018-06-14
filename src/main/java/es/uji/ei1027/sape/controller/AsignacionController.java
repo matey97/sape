@@ -112,22 +112,31 @@ public class AsignacionController {
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
 	public String editAsignacion(Model model, @PathVariable String id) {
-		model.addAttribute("asignacion", asignacionDao.getAsignacion(Integer.valueOf(id)));
+		Asignacion a = asignacionDao.getAsignacion(Integer.valueOf(id));
+		model.addAttribute("asignacion", a);
+		model.addAttribute("preferencias", preferenciaalumnoDao.getPreferenciasFinalesAlumno(a.getDni()));
+		model.addAttribute("tutores", tutorDao.getProfesoresTutores());
 		return "asignacion/update";
 	}
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable String id,
-									@ModelAttribute("asignacion") Asignacion asignacion, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
+									@ModelAttribute("asignacion") Asignacion asignacion, BindingResult bindingResult, HttpSession session) {
+		if (bindingResult.hasErrors()) {
+			session.setAttribute("result", "bad");
 			return "asignacion/update";
+		}
 		asignacionDao.updateAsignacion(asignacion);
+		session.setAttribute("result", "ok");
 		return "redirect:../list";
 	}
 	
 	@RequestMapping(value="/delete/{id}")
-	public String processDelete(@PathVariable String id, @ModelAttribute("asignacion") Asignacion asignacion) {
-		asignacionDao.deleteAsignacion(asignacion);
+	public String processDelete(@PathVariable String id) {
+		Asignacion a = asignacionDao.getAsignacion(Integer.valueOf(id));
+		asignacionDao.deleteAsignacion(a);
+		System.out.println(a.getNumeroProyecto());
+		ofertaDao.ofertaDesasginada(a.getNumeroProyecto());
 		return "redirect:../list";
 	}
 	

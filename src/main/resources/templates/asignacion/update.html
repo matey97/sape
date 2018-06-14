@@ -1,59 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-   <title>Actualizar datos de asignacion</title>
-   <meta charset="UTF-8" />
-   <link rel="stylesheet"       
-     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+   <title>Asignación</title>
+
 </head>
 <body>
-	<h2>Nueva asignacion</h2>
-	<form action="#" th:action="@{/asignacion/update/{id}}" th:object="${asignacion}" method="post">
-		<table>
-			<tr>
-				<td><label>ID</label></td>
-				<td><input type="number" th:field="*{id}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Propuesta</label></td>
-				<td><input type="text" th:field="*{fechaPropuesta}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Aceptacion</label></td>
-				<td><input type="text" th:field="*{fechaAceptacion}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Rechazo</label></td>
-				<td><input type="text" th:field="*{fechaRechazo}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha Traspaso IGLU</label></td>
-				<td><input type="text" th:field="*{fechaTraspasoIGLU}"/></td>
-			</tr>
-			<tr>
-				<td><label>Peticion</label></td>
-				<td><input type="text" th:field="*{comentarioPetCambio}"/></td>
-			</tr>
-			<tr>
-				<td><label>Estado</label></td>
-				<td><input type="text" th:field="*{estadoAceptadaRechazada}"/></td>
-			</tr>
-			<tr>
-				<td><label>DNI</label></td>
-				<td><input type="text" th:field="*{dni}"/></td>
-			</tr>
-			<tr>
-				<td><label>ID del tutor</label></td>
-				<td><input type="number" th:field="*{idTutor}"/></td>
-			</tr>
-			<tr>
-				<td><label>Numero del proyecto</label></td>
-				<td><input type="number" th:field="*{numeroProyecto}"/></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Actualizar asignacion"/></td>
-			</tr>
-		</table>
+	<div layout:fragment="pagination">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a th:href="@{/custom_index}">Página principal</a></li>
+	  <li th:unless="*{session.user.type == 1}" class="breadcrumb-item"><a th:href="@{/asignacion/index}">Asignaciones</a></li>
+	  <li th:if="*{session.user.type == 1}" class="breadcrumb-item active">Asignaciones</li>
+	  <li th:if="*{dni == null}"class="breadcrumb-item"><a th:href="@{/asignacion/list}">Listado de Asignaciones</a></li>
+	  <li th:if="*{session.user.type == 1}" th:unless="*{dni == null}"class="breadcrumb-item active">Listado de Asignaciones</li>
+	  <li th:if="*{session.user.type == 1}" th:unless="*{dni == null}"class="breadcrumb-item active"><span th:text="*{dni}"></span></li>
+	  <li class="breadcrumb-item active"><span th:text="${asignacion.id}"></span></li>
+	</ul>
+	</div>
+	
+	<div layout:fragment="content" th:object="${session}">
+	
+	<div class="card" style="width:500px;margin:0 auto">
+	<div class="card-body">
+		<h2 class="card-title"  style="text-align:center">Datos de la asignacion</h2>
+		<div  th:if="*{result == 'bad'}" class="alert alert-danger alert-dismissible fade show">
+    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Ups!</strong> Algo ha ido mal.
+   		</div>
+		<form class="card-body" th:action="@{/asignacion/update/{id}(id=${asignacion.id})}"  th:object="${asignacion}" method="post">
+			<div class="form-group">
+				<label>ID:</label>
+				<input class="form-control" type="text" th:field="${asignacion.id}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Estudiante:</label>
+				<input class="form-control" type="text" th:field="*{nombreEstudiante}"  readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Proyecto:</label>
+				<input class="form-control" type="text" th:field="*{titulo}"  readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Tutor:</label>
+				<select class="form-control" th:field=*{nombreTutor}>
+	   				<div th:each="tutor: ${tutores}">
+	   					<option th:value="${tutor.id}"><span th:text="${tutor.nombre}"></span></option>
+	   				</div>
+	   			</select>
+			</div>
+			<div class="form-group">
+				<label>Estado:</label>
+				<input class="form-control" type="text" th:field="*{estadoAceptadaRechazada}"  readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha de propuesta:</label>
+				<input class="form-control" type="text" th:field="*{fechaPropuesta}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha aceptación:</label>
+				<input class="form-control" type="text" th:field="*{fechaAceptacion}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Fecha de rechazo:</label>
+				<input class="form-control" type="text" th:field="*{fechaRechazo}"  readonly="readonly"/>
+					
+			</div>
+			<div class="form-group">
+				<label>Fecha de traspaso a IGLU</label>
+				<input class="form-control" type="text" th:field="*{fechaTraspasoIGLU}" readonly="readonly"/>
+			</div>
+			<hr>
+			<div style="text-align:center;color:white">
+			 <button type="submit" class="btn btn-primary">Actualizar</button>
+			 <a href="/asignacion/delete/{numeroProyecto}" th:href="@{/asignacion/delete/{id}(id=${asignacion.id})}" class="btn btn-danger">Anular</a>
+			</div>
+			
 	</form>
+	</div>
+	</div>
+	<br>
+	</div>
 </body>
 </html>

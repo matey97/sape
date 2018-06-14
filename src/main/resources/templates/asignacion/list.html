@@ -44,7 +44,9 @@
 	        <ul>
 	        	<li>Usa la caja de texto para filtrar sobre los resultados</li>
 	        	<li>Haz click sobre una cabecera para ordenar alfabeticamente dicha columna, si está disponible</li>
-	        	<li>Pulsa el botón <i>Detalles</i> para ver más información de la asignación</li>
+	        	<li th:if="${session.user.type == 1}">Pulsa <i>Aceptar</i> o <i>Rechazar</i> para aceptar o rechazar la asignacion.</li>
+	        	<li th:if="${session.user.type == 2}">Pulsa el botón <i>Gestionar</i> para ver más información de la asignación</li>
+	        	<li th:if="${session.user.type == 2}">Pulsa el botón <i>Traspasar a IGLU</i> para enviar las asignaciones aceptadas al IGLU.</li>
 	        </ul>
 	      </div>
 	    </div>
@@ -61,10 +63,10 @@
 	<table th:unless="${#lists.isEmpty(asignaciones)}" class="table table-striped table-bordered sortable">
 		<thead class="thead-dark">
 			<tr>
-				<th>DNI</th>
+				<th>Nombre</th>
 				<th>Tutor</th>
 				<th>Proyecto</th>
-				<th th:if="*{dni == null}" style="text-align:center"><a th:href="@{/}" class="btn btn-warning">Traspasar a IGLU</a></th>
+				<th th:if="*{dni == null && session.user.type == 2}" style="text-align:center"><a th:href="@{/}" class="btn btn-warning">Traspasar a IGLU</a></th>
 			</tr>
 		</thead>
 		<tbody id="myTable">
