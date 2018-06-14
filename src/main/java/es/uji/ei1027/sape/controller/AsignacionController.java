@@ -135,7 +135,6 @@ public class AsignacionController {
 	public String processDelete(@PathVariable String id) {
 		Asignacion a = asignacionDao.getAsignacion(Integer.valueOf(id));
 		asignacionDao.deleteAsignacion(a);
-		System.out.println(a.getNumeroProyecto());
 		ofertaDao.ofertaDesasginada(a.getNumeroProyecto());
 		return "redirect:../list";
 	}

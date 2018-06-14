@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+   <title>Nosotros</title>
+</head>
+<body>
+	<div layout:fragment="pagination">
+		<ul class="breadcrumb">
+	  		<li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  	</ul>
+	</div>
+	<div layout:fragment="content" th:object="${session}">
+	<div class="card bg-dark text-white">
+	<div class="card-body" align="justify">
+		<p>Hola! Somos Miguel Matey Sanz y José Ignacio Mestre Miravet, estudiantes del Grado en Ingeniería Informática y del Grado en Matemática Computacional respectivamente,
+		en la Universitat Jaume I (UJI) de Castellón.</p>
+		
+		<p>Esta web es un proyecto desarrollado en la asignatura EI1027-Diseño e Implementación de Sistemas de Información del Grado de Ingeniería Informática. Para el 
+		desarrollo se ha empleado Spring Framework como contenedor de inversion de control, Bootstrap 4 para el diseño, y Thymeleaf para las plantillas de las vistas.</p>
+	</div>
+	</div>
+	<hr>
+	</div>
+</body>
+</html>

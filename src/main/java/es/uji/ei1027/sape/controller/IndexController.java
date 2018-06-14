@@ -21,4 +21,9 @@ public class IndexController {
 			return "estudiante/index";
 		return "btc/index"; //BTC and DCC share index
 	}
+	
+	@RequestMapping("/nosotros")
+	public String nosotros() {
+		return "nosotros";
+	}
 }
