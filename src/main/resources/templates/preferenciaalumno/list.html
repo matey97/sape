@@ -55,7 +55,7 @@
 	   <hr>
 	   
 	   <div class="table-responsive">
-	   <form action="#" onsubmit="return validate()" th:action="@{/preferenciaalumno/update/{orden}}" th:object="${preferenciaalumno}" method="post">
+	   <form action="#" id="prefform" onsubmit="return validate()" th:action="@{/preferenciaalumno/update/{orden}}" th:object="${preferenciaalumno}" method="post">
 		<table th:unless="${#lists.isEmpty(preferenciaalumno)}" class="table table-striped table-bordered sortable">
 		<thead class="thead-dark">
 			<tr>
@@ -71,7 +71,7 @@
 			<tr th:each="preferencia: ${preferenciaalumno}">
 				<td th:text="${preferencia.orden}"></td>
 				<td>
-					<input type="number" id="orden" min="1" max="99" th:field="${preferencia.orden}" th:text="${preferencia.orden}" value="${preferencia.orden}">
+					<input type="number" class="orden" min="1" max="99" th:field="${preferencia.orden}" th:text="${preferencia.orden}" value="${preferencia.orden}">
 				</td>
 				<td th:text="${preferencia.tituloProyecto}"></td>
 				<td th:text="${preferencia.estado}"></td>
@@ -87,7 +87,7 @@
 	</div>
 	<script>
 	function validate() {
-		var x = document.querySelectorAll("[id='orden']"););
+		var x = document.getElementById("prefform").querySelectorAll(".orden");
 		for(i=0; i<x.length; i++){
 			for(j=i; j<x.length; j++){
 				if(x[i]==x[j]){
