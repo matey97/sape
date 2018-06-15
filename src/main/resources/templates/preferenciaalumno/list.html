@@ -89,8 +89,8 @@
 	function validate() {
 		var x = document.getElementById("prefform").querySelectorAll(".orden");
 		for(i=0; i<x.length; i++){
-			for(j=i; j<x.length; j++){
-				if(x[i]==x[j]){
+			for(j=i+1; j<x.length; j++){
+				if(x[i].value == x[j].value){
 					alert("Varias preferencias tienen el mismo orden de prioridad");
 					return false;
 				}
