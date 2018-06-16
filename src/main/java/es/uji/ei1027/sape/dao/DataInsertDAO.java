@@ -29,6 +29,11 @@ public class DataInsertDAO {
 										{"Pinto Inc","A24092579","C/ Vilavella Nº24","Castelló","728420369"},
 										{"Rius-Giménez","H28869931","C/ Hernan Cortes Nº14","Burriana","664584177"},
 										{"Haro, Llobet and Sabater","J8637345C","Plaza de España","Villareal","791650761"}};
+	private String[][] empresas2fase= new String[][] {{"Donoso, Hierro and Cárdenas","U9634313B", "C/ España Nº23", "Nules", "651328490"},
+										{"Cuéllar-Abascal", "F8938291E", "C/ el mirador Nº53", "Villareal", "641258031"},
+										{"Carretero-Hoz", "H88223318", "C/ de la resurrección Nº32", "Castelló", "632584109"},
+										{"Hervás-Coloma", "J1961298E", "Plaza de la paz", "Onda", "685493217"},
+										{"Perez, Puente and Fiol", "G55775035", "Av/ del Mar", "Castelló", "695743280"}};
 										
 	private String[][] estancias = new String[][] {{"G90423351", "Juan José de Calatayud", "jjose@gmail.com", "Innovar aplicacions d'e-business"},
 													{"A24092579", "Margarita Lamas Aroca", "mlamas@gmail.com", "Condueix usuaris personalitzats"},
@@ -37,6 +42,21 @@ public class DataInsertDAO {
 													{"J8637345C", "Luis Miguel Macias Guitart", "lmiguel@gmail.com", "Capacitar vortals de classe mundial"},
 													{"J8637345C", "Luis Miguel Macias Guitart", "lmiguel@gmail.com", "Capacitar vortals de classe mundial"},
 													{"J8637345C", "Luis Miguel Macias Guitart", "lmiguel@gmail.com", "Capacitar vortals de classe mundial"}};
+	private String[][] estancias2fase = new String[][] {{"U9634313B","Alicia Lerma Gimenez", "al341802@uji.es", "Innovar els mercats clau en mà"},
+													{"U9634313B","Alicia Lerma Gimenez", "al341802@uji.es", "Innovar els mercats clau en mà"},
+													{"U9634313B","Alicia Lerma Gimenez", "al341802@uji.es", "Innovar els mercats clau en mà"},
+													{"F8938291E", "Inmaculada Luz Aliaga Caparrós", "al341802@uji", "Tornar a contextualitzar el contingut sinèrgic"},
+													{"F8938291E", "Inmaculada Luz Aliaga Caparrós", "al341802@uji", "Tornar a contextualitzar el contingut sinèrgic"},
+													{"F8938291E", "Inmaculada Luz Aliaga Caparrós", "al341802@uji", "Tornar a contextualitzar el contingut sinèrgic"},
+													{"H88223318", "Aurora Ariño-Bilbao", "al341802@uji", "Implementació portals extensibles"},
+													{"H88223318", "Aurora Ariño-Bilbao", "al341802@uji", "Implementació portals extensibles"},
+													{"H88223318", "Aurora Ariño-Bilbao", "al341802@uji", "Implementació portals extensibles"},
+													{"J1961298E", "Lorenzo Campillo Rodríguez", "al341802@uji", "Millorar els lliuraments virtuals"},
+													{"J1961298E", "Lorenzo Campillo Rodríguez", "al341802@uji", "Millorar els lliuraments virtuals"},
+													{"J1961298E", "Lorenzo Campillo Rodríguez", "al341802@uji", "Millorar els lliuraments virtuals"},
+													{"G55775035", "Josep Herrero Cal", "al341802@uji", "Metodologies distribuïdes a escala"},
+													{"G55775035", "Josep Herrero Cal", "al341802@uji", "Metodologies distribuïdes a escala"},
+													{"G55775035", "Josep Herrero Cal", "al341802@uji", "Metodologies distribuïdes a escala"}};
 	
 	private String[][] ofertas = new String[][] {{"Organització de la tercera generació","Objetivo...","2","Tecnologías de la Información","1"},
 												{"Iniciativa direccional implementada","Objetivo...","2","Ingeniería del Software","2"},
@@ -45,6 +65,21 @@ public class DataInsertDAO {
 												{"Orquestració asíncrona preventiva","Objetivo...","2","Tecnologías de la Información","5"},
 												{"Aplicació sistèmica autònoma","Objetivo...","2","Ingeniería de computadores","6"},
 												{"Força de treball coherent distribuïda","Objetivo...","2","Ingeniería del Software","7"}};
+	private String[][] ofertas2fase = new String[][] {{"Centre òptim commutable", "Objetivo...", "2", "Tecnologías de la Información", "8", "Innovar els mercats clau en mà"},
+												{"Moderador neutre en fases", "Objetivo...", "2", "Sistemas de Información", "9", "Innovar els mercats clau en mà"},
+												{"Sinergia interactiva monitoritzada", "Objetivo...", "2", "Sistemas de Información", "10", "Innovar els mercats clau en mà"},
+												{"Total flexibilitat logística", "Objetivo...", "2", "Ingeniería del Software", "11", "Tornar a contextualitzar el contingut sinèrgic"},
+												{"Emulació ecocéntrica integrada", "Objetivo...", "2", "Ingeniería del Software", "12", "Tornar a contextualitzar el contingut sinèrgic"},
+												{"Nucli uniforme descentralitzat", "Objetivo...", "2", "Ingeniería de computadores", "13", "Tornar a contextualitzar el contingut sinèrgic"},
+												{"Previsió radical progressiva", "Objetivo...", "2", "Tecnologías de la Información", "14", "Implementació portals extensibles"},
+												{"Marc basat en continguts multiplataforma", "Objetivo...", "2", "Sistemas de Información", "15", "Implementació portals extensibles"},
+												{"Conglomeració d'alt nivell enfocada", "Objetivo...", "2", "Ingeniería de computadores", "16", "Implementació portals extensibles"},
+												{"Contingència global orgànica", "Objetivo...", "2", "Ingeniería de computadores", "17", "Millorar els lliuraments virtuals"},
+												{"Matrius ecocèntriques centrades en el negoci", "Objetivo...", "2", "Sistemas de Información", "18", "Millorar els lliuraments virtuals"},
+												{"Iniciativa asimètrica personalitzable", "Objetivo...", "2", "Ingeniería del Software", "19", "Millorar els lliuraments virtuals"},
+												{"Definició regional de mida dreta", "Objetivo...", "2", "Ingeniería del Software", "20", "Metodologies distribuïdes a escala"},
+												{"Implementació multiestatal orientada a la visió", "Objetivo...", "2", "Ingeniería de computadores", "21", "Metodologies distribuïdes a escala"},
+												{"Marc organitzat de lideratge", "Objetivo...", "2", "Sistemas de Información", "22", "Metodologies distribuïdes a escala"}};
 												
 	private String[] estados = new String[] {"Sin Definir",
 												"Introducida",
@@ -121,7 +156,7 @@ public class DataInsertDAO {
 	}
 	
 	private void insertEmpresas() {
-		for (String[] empresa:empresas) {
+		for (String[] empresa:empresas2fase) {
 			Empresa e = new Empresa();
 			e.setCif(empresa[1]);
 			e.setNombre(empresa[0]);
@@ -134,7 +169,7 @@ public class DataInsertDAO {
 	}
 	
 	private void insertEstancias() {
-		for (String[] estancia:estancias) {
+		for (String[] estancia:estancias2fase) {
 			Estancia e = new Estancia();
 			e.setCifEmpresa(estancia[0]);
 			e.setContactPerson(estancia[1]);
@@ -155,9 +190,10 @@ public class DataInsertDAO {
 	}
 	
 	private void insertOfertas() {
-		for (String[] oferta:ofertas) {
+		for (String[] oferta:ofertas2fase) {
 			OfertaProyecto o = new OfertaProyecto();
-			o.setTarea(oferta[0]);
+			o.setTitulo(oferta[0]);
+			o.setTarea(oferta[5]);
 			o.setObjetivo(oferta[1]);
 			o.setEstado(oferta[2]);
 			o.setItinerario(oferta[3]);
