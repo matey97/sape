@@ -23,21 +23,33 @@
     		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Ups!</strong> Algo ha ido mal.
    		</div>
-		<form class="card-body" action="/peticionrevision/add/{numeroproyecto}" th:action="@{/peticionrevision/add/{numeroproyecto}(numeroproyecto=${peticionrevision.numeroProyecto})}"  th:object="${peticionrevision}" method="post">
+		<form id="peticion" class="card-body"  th:object="${peticionrevision}" method="post">
 			<div class="form-group">
 				<label>Número:</label>
 				<input class="form-control" type="text" th:field="*{numeroProyecto}" readonly="readonly"/>
 			</div>
 			<div class="form-group">
 				<label>Peticion:</label>
-				<textarea class="form-control" rows="7" type="text" th:field="*{textoPeticion}"></textarea>
+				<textarea id="textoPet" class="form-control" rows="7" type="text" th:field="*{textoPeticion}"></textarea>
 				<div class="error" th:if="${#fields.hasErrors('textoPeticion')}" th:errors="*{textoPeticion}"></div>
 			</div>
 			<hr>
 			<div style="text-align:center;color:white">
-			 <button type="submit" class="btn btn-primary">Enviar</button>		 
+			 <input type="button" class="btn btn-primary" onClick="javascript: return enviaEmailYGuardaPeticion()" value="Enviar">	 
 			</div>		
 		</form>
+		<script type="text/javascript">
+			function enviaEmailYGuardaPeticion()
+			{
+				var numeroProyecto = [[${peticionrevision.numeroProyecto}]];
+				var textoPeticion = document.getElementById('textoPet').value;
+				document.forms['peticion'].action='mailto:al341802@uji.es?subject=Peticion de revision de oferta ' + numeroProyecto +'&body=Se ha solicitado la siguiente peticion: '+ textoPeticion;
+				document.forms['peticion'].submit();
+				document.forms['peticion'].action='/peticionrevision/add/'+numeroProyecto;
+				document.forms['peticion'].submit();
+						
+			}
+		</script>
 	</div>
 	</div>
 	<br>
