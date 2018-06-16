@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import es.uji.ei1027.services.OfertaProyectoService;
+import es.uji.ei1027.services.PreferenciaAlumnoService;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -29,4 +30,8 @@ public class SapeConfiguration {
 		return new OfertaProyectoService();
 	}
 	
+	@Bean
+	public PreferenciaAlumnoService preferenciaAlumnoService() {
+		return new PreferenciaAlumnoService();
+	}
 }

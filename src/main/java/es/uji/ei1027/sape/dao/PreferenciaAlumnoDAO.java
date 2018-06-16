@@ -50,9 +50,9 @@ public class PreferenciaAlumnoDAO {
 		return this.jdbcTemplate.query("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);", new PreferenciaAlumnoMapper());
 	}
 	
-	public PreferenciaAlumno getPreferenciaAlumno(int orden){
-		return this.jdbcTemplate.queryForObject("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero);"
-												+ " WHERE orden = ?;", new Object[]{orden}, new PreferenciaAlumnoMapper());
+	public PreferenciaAlumno getPreferenciaAlumno(int id){
+		return this.jdbcTemplate.queryForObject("SELECT id, orden, pa.fechaUltimoCambio, pa.estado, dni, pa.numeroProyecto, op.titulo FROM PreferenciaAlumno as pa JOIN OfertaProyecto as op ON(pa.numeroProyecto = op.numero)"
+												+ " WHERE id = ?;", new Object[]{id}, new PreferenciaAlumnoMapper());
 	}
 	
 	public List<PreferenciaAlumno> getPreferenciasAlumno(String dni){
@@ -75,8 +75,8 @@ public class PreferenciaAlumnoDAO {
 	
 	public void updatePreferenciaAlumno(PreferenciaAlumno p){
 		int numero = this.jdbcTemplate.queryForObject("SELECT numero FROM OfertaProyecto WHERE titulo = ?;", Integer.class, p.getTituloProyecto());
-		this.jdbcTemplate.update("UPDATE PreferenciaAlumno SET orden=?, fechaUltimoCambio=?, estado=?, dni=?, numeroProyecto=? WHERE id=?;",
-				p.getOrden(), p.getFechaUltimoCambio(), p.getEstado(), p.getDni(), numero, p.getId());
+		this.jdbcTemplate.update("UPDATE PreferenciaAlumno SET orden=?, fechaUltimoCambio=now() WHERE id=?;",
+				p.getOrden(), p.getId());
 	}
 	
 	public void deletePreferenciaAlumno(PreferenciaAlumno p){

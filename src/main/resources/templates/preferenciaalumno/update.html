@@ -1,39 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<html layout:decorate="~{fragments/base}" xmlns:th="http://www.thymeleaf.org"> 
 <head>
-   <title>Actualizar preferencia</title>
-   <meta charset="UTF-8" />
-   <link rel="stylesheet"       
-     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+   <title>Preferencia</title>
+
 </head>
 <body>
-	<h2>Nueva peticion de revision</h2>
-	<form action="#" th:action="@{/preferenciaalumno/update/{orden}}" th:object="${preferenciaalumno}" method="post">
-		<table>
-			<tr>
-				<td><label>Orden</label></td>
-				<td><input type="number" th:field="*{orden}"/></td>
-			</tr>
-			<tr>
-				<td><label>Fecha ultimo cambio</label></td>
-				<td><input type="text" th:field="*{fechaUltimoCambio}"/></td>
-			</tr>
-			<tr>
-				<td><label>Estado</label></td>
-				<td><input type="text" th:field="*{estado}"/></td>
-			</tr>
-			<tr>
-				<td><label>Dni</label></td>
-				<td><input type="text" th:field="*{dni}"/></td>
-			</tr>
-			<tr>
-				<td><label>Numero de proyecto</label></td>
-				<td><input type="number" th:field="*{numeroProyecto}"/></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Actualizar preferencia"/></td>
-			</tr>
-		</table>
+	
+	<div layout:fragment="pagination" th:object="${ofertaproyecto}">
+	<ul class="breadcrumb">
+	  <li class="breadcrumb-item"><a href="/custom_index" th:href="@{/custom_index}">Página principal</a></li>
+	  <li class="breadcrumb-item"><a href="/preferenciaalumno/list" th:href="@{/preferenciaalumno/list}">Preferencias</a></li>
+	  <li class="breadcrumb-item active"><span th:text="${preferencia.id}"></span>
+	</ul> 	
+	</div>
+	<div layout:fragment="content" th:object="${session}">
+	
+	<div class="card" style="width:500px;margin:0 auto">
+	<div class="card-body">
+		<h2 class="card-title"  style="text-align:center">Datos de la preferencia</h2>
+		<div  th:if="*{result == 'bad'}" class="alert alert-danger alert-dismissible fade show">
+    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>Ya tienes alguna preferencia con ese orden!</strong> Debes cambiar esa preferencia antes de cambiar esta.
+   		</div>
+		<form class="card-body" action="#" th:action="@{/preferenciaalumno/update/{id}(id=${preferencia.id})}"  th:object="${preferencia}" method="post">
+			<div class="form-group">
+				<label>Orden:</label>
+				<input class="form-control" type="number" min="1" max="100" th:field="*{orden}" />
+			</div>
+			<div class="form-group">
+				<label>DNI:</label>
+				<input class="form-control" type="text" th:field="*{dni}" readonly="readonly"/>
+			</div>
+			<div class="form-group">
+				<label>Titulo de proyecto:</label>
+				<input class="form-control" type="text" th:field="*{tituloProyecto}" readonly="readonly"/>
+			</div>
+			
+			<hr>
+			<div style="text-align:center;color:white">
+			 <button type="submit" class="btn btn-primary">Actualizar</button>
+			 <a href="#" th:href="@{/preferenciaalumno/delete/{id}(id=${preferencia.id})}" class="btn btn-danger">Eliminar</a>
+			</div>
+			
 	</form>
+	</div>
+	</div>
+	<br>
+	</div>
 </body>
 </html>
