@@ -31,6 +31,7 @@ public class OfertaProyectoController {
 
 	private OfertaProyectoDAO ofertaproyectoDao;
 	private OfertaProyectoService ofertaproyectoService;
+	private static int count = 0;
 	
 	@Autowired
 	public void setOfertaProyectoDao(OfertaProyectoDAO ofertaProyectoDao) {
@@ -44,7 +45,13 @@ public class OfertaProyectoController {
 	
 	@RequestMapping("/list")
 	public String listOfertaProyecto(Model model, HttpSession session) {
-		//session.setAttribute("result", null);
+		String result = (String)session.getAttribute("result");
+		if (result != null && count == 0) {
+			count++;
+		}else {
+			count = 0;
+			session.setAttribute("result", null);
+		}
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		if (user.getDni() != null) {
 			model.addAttribute("ofertaproyectos", ofertaproyectoService.getOfertasParaEstudiante(user.getDni()));
@@ -88,13 +95,20 @@ public class OfertaProyectoController {
 		return "redirect:list.html";
 	}
 	
-	@RequestMapping(value="/update/{numero}", method=RequestMethod.GET)
-	public String editOfertaProyecto(Model model, @PathVariable String numero) {
-		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(Integer.valueOf(numero)));
+	@RequestMapping(value="/update/{num}", method=RequestMethod.GET)
+	public String editOfertaProyecto(Model model, @PathVariable String num, HttpSession session) {
+		String result = (String)session.getAttribute("result");
+		if (result != null && count == 0) {
+			count++;
+		}else {
+			count = 0;
+			session.setAttribute("result", null);
+		}
+		model.addAttribute("ofertaproyecto", ofertaproyectoDao.getOfertaProyecto(Integer.valueOf(num)));
 		return "ofertaproyecto/update";
 	}
 	
-	@RequestMapping(value="/update/{numero}", method=RequestMethod.POST)
+	@RequestMapping(value="/update/{num}", method=RequestMethod.POST)
 	public String processUpdateSubmit(@ModelAttribute("ofertaproyecto") OfertaProyecto ofertaproyecto, BindingResult bindingResult, HttpSession session) {
 		session.setAttribute("result", null);
 		if (bindingResult.hasErrors()) {

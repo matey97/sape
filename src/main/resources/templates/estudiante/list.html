@@ -14,7 +14,7 @@
 <div layout:fragment="content">
 	<br>
 	<h1>Listado de estudiantes</h1>
-	<div style="text-align:center" th:if="${#lists.isEmpty(estudiantes)}">
+	<div class="centrado" th:if="${#lists.isEmpty(estudiantes)}">
    		<h2>No hay estudiantes en la base de datos</h2>
     </div>
     <hr>

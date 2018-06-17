@@ -148,6 +148,8 @@ public class AsignacionController {
 	
 	@RequestMapping("/rechazar/{id}")
 	public String rechaza(@PathVariable String id,HttpSession session) {
+		Asignacion a = asignacionDao.getAsignacion(Integer.valueOf(id));
+		ofertaDao.ofertaDesasginada(a.getNumeroProyecto());
 		asignacionDao.rechazaAsignacion(Integer.valueOf(id));
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		return "redirect:/asignacion/list/"+user.getDni();

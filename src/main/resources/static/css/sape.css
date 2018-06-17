@@ -1,38 +1,37 @@
 @CHARSET "UTF-8";
 /* Estil aplicat al cos de la pàgina */
 body {
-   font-family:'Roboto', sans-serif; 
-   background-color: white;
-   
+	font-family: 'Roboto', sans-serif;
+	background-color: white;
 }
 
 /* Capçalera de nivell 1 */
 h1 {
-   font-size: x-large; 
-   color: rgb(0,56,101);
-   text-align:center
+	font-size: x-large;
+	color: rgb(0, 56, 101);
+	text-align: center
 }
 
 /* Capçalera de nivell 2 */
 h2 {
-   font-size: large; 
-   color: rgb(0,56,101);
+	font-size: large;
+	color: rgb(0, 56, 101);
 }
 
 h6 {
-	color: rgb(0,56,101);
+	color: rgb(0, 56, 101);
 }
 
 /* Classe CSS error */
 .error {
-     color: red;
-     font-size:80%
+	color: red;
+	font-size: 80%
 }
 
 /* Classe CSS per atributs erronis */
 .needcorrection {
-     color: red;
-     background-color:yellow;
+	color: red;
+	background-color: yellow;
 }
 
 .loggeduser {
@@ -41,20 +40,23 @@ h6 {
 	margin-right: 10pt;
 }
 
-#formulario{
-    margin: 0 auto;
-    text-align: center;
-    width:500px
-    
+#formulario {
+	margin: 0 auto;
+	text-align: center;
+	width: 500px
 }
 
-#navfont{
-	color:white;
+#navfont {
+	color: white;
 }
 
-div.vertical-line{
+div.vertical-line {
 	width: 1px;
 	background-color: black;
 	height: 100%;
 	float: right;
+}
+
+.centrado {
+	text-align: center;
 }

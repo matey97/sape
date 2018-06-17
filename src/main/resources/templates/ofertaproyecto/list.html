@@ -17,7 +17,7 @@
 	<br>
 	<h1 th:if="*{cif == null}">Listado de ofertas de proyectos</h1>
 	<h1 th:unless="*{cif == null}">Listado de ofertas de empresa <span th:text="*{cif}"></span></h1>
-	<div style="text-align:center" th:if="${#lists.isEmpty(ofertaproyectos)}">
+	<div class="centrado" th:if="${#lists.isEmpty(ofertaproyectos)}">
    		<h2>No hay ofertas en la base de datos</h2>
     </div>
     <hr>
@@ -71,8 +71,8 @@
 				<td th:text="${ofertaproyecto.empresa}"></td>
 				<td th:text="${ofertaproyecto.ciudad}"></td>
 				<td th:unless="*{user.type == 1}" th:text="${ofertaproyecto.itinerario}"></td>
-				<td th:unless="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
-				<td style="text-align:center" th:if="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Detalles</a></td>
+				<td th:unless="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/update/{num}(num=${ofertaproyecto.numero})}" class="btn btn-dark">Gestionar</a></td>
+				<td class="centrado" th:if="*{user.type == 1}"><a  th:href="@{/ofertaproyecto/{numero}(numero=${ofertaproyecto.numero})}" class="btn btn-dark">Detalles</a></td>
 			</tr>
 		</tbody>
 	</table>

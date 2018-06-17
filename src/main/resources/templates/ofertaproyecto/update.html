@@ -16,7 +16,7 @@
 	
 	<div class="card" style="width:500px;margin:0 auto">
 	<div class="card-body">
-		<h2 class="card-title"  style="text-align:center">Datos de la oferta</h2>
+		<h2 class="card-title centrado">Datos de la oferta</h2>
 		<div  th:if="*{result == 'bad'}" class="alert alert-danger alert-dismissible fade show">
     		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Ups!</strong> Algo ha ido mal.
@@ -25,7 +25,7 @@
     		<button type="button" class="close" data-dismiss="alert">&times;</button>
   			<strong>Éxito!</strong> Se ha registrado la petición.
    		</div>
-		<form class="card-body" action="/ofertaproyecto/update/{numero}" th:action="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}"  th:object="${ofertaproyecto}" method="post">
+		<form class="card-body" action="#" th:action="@{/ofertaproyecto/update/{numero}(numero=${ofertaproyecto.numero})}"  th:object="${ofertaproyecto}" method="post">
 			<div class="form-group">
 				<label>Número:</label>
 				<input class="form-control" type="text" th:field="*{numero}" readonly="readonly"/>
@@ -50,6 +50,8 @@
 					<option value="Pendiente revision">Pendiente de revisión</option>
 					<option value="Aceptada">Aceptada</option>
 					<option value="Rechazada">Rechazada</option>
+					<option value="Asignada" disabled>Asignada</option>
+					<option value="Visible a alumnos" disabled>Visible a alumnos</option>
 				</select>
 			</div>
 			<div class="form-group">

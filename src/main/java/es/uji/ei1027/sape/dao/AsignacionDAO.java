@@ -90,6 +90,6 @@ public class AsignacionDAO {
 	}
 	
 	public void rechazaAsignacion(int id) {
-		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'rechazada' fecharechazo = now() WHERE id = ?;", id);
+		this.jdbcTemplate.update("UPDATE Asignacion SET estadoaceptadarechazada = 'rechazada', fecharechazo = now() WHERE id = ?;", id);
 	}
 }
