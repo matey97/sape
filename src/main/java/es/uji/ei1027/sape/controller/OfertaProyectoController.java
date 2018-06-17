@@ -18,7 +18,7 @@ import es.uji.ei1027.sape.model.OfertaProyecto;
 import es.uji.ei1027.sape.model.PeticionRevision;
 import es.uji.ei1027.sape.model.PreferenciaAlumno;
 import es.uji.ei1027.sape.model.UserDetails;
-import es.uji.ei1027.services.OfertaProyectoService;
+import es.uji.ei1027.sape.services.OfertaProyectoService;
 
 /**
  * Controlador para las ofertas de proyectos

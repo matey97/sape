@@ -17,7 +17,7 @@ import es.uji.ei1027.sape.dao.PreferenciaAlumnoDAO;
 import es.uji.ei1027.sape.model.ListaPreferencias;
 import es.uji.ei1027.sape.model.PreferenciaAlumno;
 import es.uji.ei1027.sape.model.UserDetails;
-import es.uji.ei1027.services.PreferenciaAlumnoService;
+import es.uji.ei1027.sape.services.PreferenciaAlumnoService;
 
 /**
  * Controlador para las preferencias de los alumnos

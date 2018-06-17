@@ -7,8 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import es.uji.ei1027.services.OfertaProyectoService;
-import es.uji.ei1027.services.PreferenciaAlumnoService;
+import es.uji.ei1027.sape.services.OfertaProyectoService;
+import es.uji.ei1027.sape.services.PreferenciaAlumnoService;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
